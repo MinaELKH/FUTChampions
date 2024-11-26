@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>FUT</title>
+    <style>
+        body{
+            color: rgba(43, 41, 41, 0.858);
+        }
+        .badge_gold{
+            display: flex;
+            flex-direction: column;
+            gap :4px;
+            background-size: contain;
+            background-image: url('img/badge_gold.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            width:180px;
+            height:240px;
+         
+        }  
+        .ST_G{
+            grid-column-start: 2;
+
+        }   
+        .nom{
+            font-weight: 900;
+            font-size : 16px ;
+            text-align: center;  
+        }
+        .statistique{
+            display:flex;
+            font-weight: 700;
+            font-size : 8px ;
+            justify-content: center;
+            gap:8px;
+        }
+
+        .statistique div{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .flag{
+            display: flex;
+            justify-content: center;
+            gap:8px;
+            align-items: center;
+
+        }
+        .flag img{
+            width: 16px;
+            height: 16px;
+        }
+        .photo{
+           /* w-full h-3/5  mx-auto flex  justify-center ;*/
+            display: flex;
+            width: 100%;
+            height:60%;
+            margin: 0 auto;
+            justify-content: center;
+
+        }
+
+         @media(max-width:760px){
+            .badge_gold{
+            width:90px;
+            height:120px;
+            gap:2px ; 
+         
+        } 
+
+            .photo{
+           /* w-full h-3/5  mx-auto flex  justify-center ;*/
+            display: flex;
+            width: 40%;
+            height:30%;
+            margin: 0 auto;
+            justify-content: center;
+
+        }
+        .nom{
+            font-weight: 800;
+            font-size : 12px ;
+            text-align: center;  
+        }
+        .statistique{
+            flex-wrap: wrap;
+            gap:2px;
+            font-size: 6px;
+        }
+         }
+    </style>
+</head>
+<body>
+  <header class="bg-[#7F020F] flex justify-between ">
+      <img src="img/logo.png" class="w-16 h-16" alt="Logo">
+      <nav class="flex gap-10 items-center justify-evenly">
+          <div>ajout</div>
+          <div>ajout</div>
+      </nav>
+  </header>
+  <section>
+    <div class="bg-white grid   items-center">
+        <!-- menu -->
+        <div class=" bg-white flex  gap-5  m-8  p-2 border-b-2 border-y-indigo-300 text-red-900  cursor-pointer  hover:text-green-500 ">
+          
+            <span id="btnOpenAjoutForm" class="material-symbols-outlined ">
+              add_task
+            </span>
+            <span id="btnOpenAjoutMultipForm"  class="material-symbols-outlined">
+              playlist_add_check_circle
+            </span>
+          <span id="btn_statistic"
+            class="material-symbols-outlined ">
+            bar_chart_4_bars
+          </span>
+          <span id="btn_tri" class="material-symbols-outlined">
+              sort_by_alpha
+            </span>
+          <span id="btn_filtre"
+            class="   material-symbols-outlined"> tune
+          </span>
+        
+        </div>
+  </section>
+  <!-- terrain -->
+  <section>
+  <div class="bg-[length:100%_100%] grid grid-cols-4 gap-2.5 w-[100%] h-[80vh] bg-center bg-no-repeat lg:h-[120vh] lg:w-[100%] bg-[url('img/stadium_background.webp')]">
+        
+ <div class="ST_G"> 
+<div class="badge_gold" >
+    <div class="photo">
+        <img src="https://cdn.sofifa.net/players/158/023/25_120.png" class=" " alt="joueur">
+    </div>
+    <h4 class="nom">Messi</h4>
+    <div class="statistique">
+       
+            <div>
+                <h5>PAC</h5> 
+                <h4>80</h4>
+            </div>
+            <div >
+                <h5>SHO</h5> 
+                <h4>80</h4>
+            </div>
+            <div >
+                <h5>PAS</h5> 
+                <h4>80</h4>
+            </div>
+            <div >
+                <h5>DRI</h5> 
+                <h4>80</h4>
+            </div>
+            <div >
+                <h5>DEF</h5> 
+                <h4>80</h4>
+            </div>
+            <div >
+                <h5>PHY</h5> 
+                <h4>64</h4>
+            </div>
+        
+    </div>
+    <div class="flag">
+        <img src="https://cdn.sofifa.net/flags/ar.png" alt="nationalite">
+        <img src="https://cdn.sofifa.net/flags/ar.png"  alt="flag">
+        <img src="https://cdn.sofifa.net/meta/team/239235/120.png"  alt="logoJr">
+    </div>
+</div>
+</div>    
+  
+        <div class="col-span-1 col-start-3 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 col-start-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+     
+
+
+        <div class="col-span-4 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+      </div>
+      
+      <form>
+          <!-- Form content here -->
+      </form>
+  </section>
+
+
+  <!-- form -->
+  <section>
+       <div class=" fixed inset-0 items-center flex items-center z-50 bg-white bg-opacity-30">
+           <div class="relative p-5 shadow-xl rounded-lg bg-[url('img/terrain.jpg')]  bg-cover bg-opacity-50 text-white lg:w-1/4 sm:w-full ">
+               <span class="absolute right-5 material-symbols-outlined">cancel</span>
+               <h2 class="text-xl font-bold mb-4 text"> Ajouter Un joueur</h2>
+               <p id="pargErreur"
+               class="hidden  text-sm  font-semibold px-4 m-2 text-red-900  border  bg-gray-200 bg-opacity-70  border-red-400 ">
+               </p>
+            <form class="flex flex-col gap-2">
+               <label for="nom">Nom</label>
+               <input  id="nom" type="text" placeholder="Nom"  class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:ring-indigo-300">
+               <label for="position">Position</label>
+               <select id="position" class="bg-gray-50 border border-blue-300 text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400">
+                   <option value="LW">Ailier Gauche (LW)</option>
+                   <option value="ST">Attaquant Central (ST)</option>
+                   <option value="RW">Alier Droit (RW) </option>
+                   <option value="CMG">Milieu central (CM) : gauche</option>
+                   <option value="CMM">Milieu central (CM) : milieu</option>
+                   <option value="CMD">Milieu central (CM) : droit</option>
+                   <option value="LB">Latéral gauche (LB)</option>
+                   <option value="CBD">Défenseur Central (CB) : Droit</option>
+                   <option value="CBG">Défenseur Central (CB) : Gauche</option>
+                   <option value="RB">Latéral droit (RB)</option>
+                   <option value="GK">Goal Keeper (GK)</option>
+               </select>
+               <label>Nationalite</label>
+               <input type="url" placeholder="https://cdn.sofifa.net/flags/no.png"  required>
+
+            </form>
+           </div>
+       </div>
+  </section>
+</body>
+</html>
