@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,296 +9,332 @@
     <title>FUT</title>
     <script src="main.js" defer></script>
     <style>
-        body{
+        body {
             color: rgba(43, 41, 41, 0.858);
         }
-        .ST_G{
+
+        .ST_G {
             grid-column-start: 2;
-        }  
-        .badge_gold{
+        }
+
+        .badge_gold {
             display: flex;
             flex-direction: column;
-            gap :4px;
+            gap: 4px;
             background-size: contain;
             background-image: url('img/badge_gold.png');
             background-position: center;
             background-repeat: no-repeat;
-            width:180px;
-            height:240px;
-         
-        }  
-        
-        .nom{
-            font-weight: 900;
-            font-size : 16px ;
-            text-align: center;  
-        }
-        .statistique{
-            display:flex;
-            font-weight: 700;
-            font-size : 8px ;
-            justify-content: center;
-            gap:8px;
+            width: 180px;
+            height: 240px;
+
         }
 
-        .statistique div{
-            display:flex;
+        .nom {
+            font-weight: 900;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .statistique {
+            display: flex;
+            font-weight: 700;
+            font-size: 8px;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .statistique div {
+            display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .flag{
+
+        .flag {
             display: flex;
             justify-content: center;
-            gap:8px;
+            gap: 8px;
             align-items: center;
 
         }
-        .flag img{
+
+        .flag img {
             width: 16px;
             height: 16px;
         }
-        .photo{
-           /* w-full h-3/5  mx-auto flex  justify-center ;*/
+
+        .photo {
+            /* w-full h-3/5  mx-auto flex  justify-center ;*/
             display: flex;
             width: 100%;
-            height:60%;
+            height: 60%;
             margin: 0 auto;
             justify-content: center;
 
         }
 
-         @media(max-width:760px){
-            .badge_gold{
-            width:90px;
-            height:120px;
-            gap:2px ; 
-         
-        } 
+        @media(max-width:760px) {
+            .badge_gold {
+                width: 90px;
+                height: 120px;
+                gap: 2px;
 
-            .photo{
-           /* w-full h-3/5  mx-auto flex  justify-center ;*/
-            display: flex;
-            width: 40%;
-            height:30%;
-            margin: 0 auto;
-            justify-content: center;
+            }
 
+            .photo {
+                /* w-full h-3/5  mx-auto flex  justify-center ;*/
+                display: flex;
+                width: 40%;
+                height: 30%;
+                margin: 0 auto;
+                justify-content: center;
+
+            }
+
+            .nom {
+                font-weight: 800;
+                font-size: 12px;
+                text-align: center;
+            }
+
+            .statistique {
+                flex-wrap: wrap;
+                gap: 2px;
+                font-size: 6px;
+            }
         }
-        .nom{
-            font-weight: 800;
-            font-size : 12px ;
-            text-align: center;  
-        }
-        .statistique{
-            flex-wrap: wrap;
-            gap:2px;
-            font-size: 6px;
-        }
-         }
     </style>
 </head>
+
 <body>
-  <header class="bg-[#7F020F] flex justify-between ">
-      <img src="img/logo.png" class="w-16 h-16" alt="Logo">
-      <nav class="flex gap-10 items-center justify-evenly">
-          <div>ajout</div>
-          <div>ajout</div>
-      </nav>
-  </header>
-  <section>
-    <div class="bg-white grid   items-center">
-        <!-- menu -->
-        <div class=" bg-white flex  gap-5  m-8  p-2 border-b-2 border-y-indigo-300 text-red-900  cursor-pointer  hover:text-green-500 ">
-          
-            <span id="btnOpenAddForm" class="material-symbols-outlined ">
-              add_task
-            </span>
-            <span id="btnOpenAjoutMultipForm"  class="material-symbols-outlined">
-              playlist_add_check_circle
-            </span>
-          <span id="btn_statistic"
-            class="material-symbols-outlined ">
-            bar_chart_4_bars
-          </span>
-          <span id="btn_tri" class="material-symbols-outlined">
-              sort_by_alpha
-            </span>
-          <span id="btn_filtre"
-            class="   material-symbols-outlined"> tune
-          </span>
-        
+    <header class="bg-[#7F020F] flex justify-between ">
+        <img src="img/logo.png" class="w-16 h-16" alt="Logo">
+        <nav class="flex gap-10 items-center justify-evenly">
+            <div>ajout</div>
+            <div>ajout</div>
+        </nav>
+    </header>
+    <section>
+        <div class="bg-white grid   items-center">
+            <!-- menu -->
+            <div
+                class=" bg-white flex  gap-5  m-8  p-2 border-b-2 border-y-indigo-300 text-red-900  cursor-pointer  hover:text-green-500 ">
+
+                <span id="btnOpenAddForm" class="material-symbols-outlined ">
+                    add_task
+                </span>
+                <span id="btnImport" class="material-symbols-outlined">
+                    playlist_add_check_circle
+                </span>
+                <span id="btn_statistic" class="material-symbols-outlined ">
+                    bar_chart_4_bars
+                </span>
+                <span id="btn_tri" class="material-symbols-outlined">
+                    sort_by_alpha
+                </span>
+                <span id="btn_filtre" class="   material-symbols-outlined"> tune
+                </span>
+
+            </div>
+    </section>
+    <!--main-->
+    <section>
+        <div class="grid grid-cols-4">
+            <div class="col-span-1 px-2.5  bg-gray-200   relative">
+
+                <div  >
+                    <ul id="ulPlayers" class=" grid grid-cols-2" >
+                 
+                    </ul>
+                    
+                </div>
+               <div>
+                <div id="modalFormAjout" class=" p-2.5 mx-auto 0">
+                    <div class="relative p-5 shadow-xl rounded-lg bg-[#7F020F] text-[#7F020F] w-full ">
+                        <span id="closeFormAdd"
+                            class="absolute right-5 text-white  material-symbols-outlined cursor-pointer">cancel</span>
+                        <h2 class="text-xl font-bold mb-4 text"> ADD</h2>
+                        <p id="pargErreur"
+                            class="hidden  text-sm  font-semibold px-4 m-2 text-red-900  border  bg-gray-200 bg-opacity-70  border-red-400 ">
+                        </p>
+                        <form class="flex flex-col gap-4 p-4 bg-white shadow-lg rounded-lg border border-gray-300">
+                            <div class="flex flex-col">
+                                <label for="name" class="font-semibold text-gray-700">Name</label>
+                                <input id="name" type="text" placeholder="Name"
+                                    class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:ring-indigo-300"
+                                    required>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label for="note" class="font-semibold text-gray-700">Note</label>
+                                <input id="note" type="text" placeholder="Note" required
+                                    class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label for="position" class="font-semibold text-gray-700">Position</label>
+                                <select id="position"
+                                    class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400"
+                                    required>
+                                    <option value="LW">Ailier Gauche (LW)</option>
+                                    <option value="ST">Attaquant Central (ST)</option>
+                                    <option value="RW">Ailier Droit (RW)</option>
+                                    <option value="RCM">Milieu central (CM) : Right</option>
+                                    <option value="milieu-central-M">Milieu central (CM) : Milieu</option>
+                                    <option value="LCM">Milieu central (CM) : Left</option>
+                                    <option value="LB">Latéral gauche (LB)</option>
+                                    <option value="LCB">Défenseur Central (CB) : Left</option>
+                                    <option value="RCB">Défenseur Central (CB) : Right</option>
+                                    <option value="RB">Latéral droit (RB)</option>
+                                    <option value="GK">Goal Keeper (GK)</option>
+                                </select>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col">
+                                    <label for="photo" class="font-semibold text-gray-700">Photo</label>
+                                    <input id="photo" type="url" placeholder="https://exemple/nat.png" required
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="nationality" class="font-semibold text-gray-700">Nationality</label>
+                                    <input id="nationality" type="url" placeholder="https://exemple/nat.png" required
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                                </div>
+
+                                <div class="flex flex-col">
+                                    <label for="flag" class="font-semibold text-gray-700">Flag</label>
+                                    <input id="flag" type="url" placeholder="https://exemple/flag.png" required
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                                </div>
+
+                                <div class="flex flex-col">
+                                    <label for="club" class="font-semibold text-gray-700">Club</label>
+                                    <input id="club" type="url" placeholder="https://exemple/club.png" required
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                                </div>
+                            </div>
+
+                            <div
+                                class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
+                                <div class="flex flex-col">
+                                    <label for="rating" class="font-semibold text-gray-700">Rating</label>
+                                    <input id="rating" type="text" placeholder="Rating"
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="pace" class="font-semibold text-gray-700">Pace</label>
+                                    <input id="pace" type="text" placeholder="Pace"
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="shooting" class="font-semibold text-gray-700">Shooting</label>
+                                    <input id="shooting" type="text" placeholder="Shooting"
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="passing" class="font-semibold text-gray-700">Passing</label>
+                                    <input id="passing" type="text" placeholder="Passing"
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="dribbling" class="font-semibold text-gray-700">Dribbling</label>
+                                    <input id="dribbling" type="text" placeholder="Dribbling"
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="defending" class="font-semibold text-gray-700">Defending</label>
+                                    <input id="defending" type="text" placeholder="Defending"
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="physical" class="font-semibold text-gray-700">Physical</label>
+                                    <input id="physical" type="text" placeholder="Physical"
+                                        class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="btnAddplayer"
+                                class="rounded-lg bg-[#7F020F]  text-white p-3 text-lg hover:bg-red-800 transition">
+                                Add Player
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div
+                class=" col-span-3  px-2.5[length:100%_100%] grid flex- gap-2.5 w-[100%] h-[80vh] bg-center bg-no-repeat lg:h-[100vh] lg:w-full bg-[url('img/stadium_background.webp')]">
+                <div class="ST_G">
+                    <div class="badge_gold">
+                        <div class="photo">
+                            <img src="https://cdn.sofifa.net/players/158/023/25_120.png" class="" alt="joueur">
+                        </div>
+                        <h4 class="nom">Messi</h4>
+                        <div class="statistique">
+
+                            <div>
+                                <h5>PAC</h5>
+                                <h4>80</h4>
+                            </div>
+                            <div>
+                                <h5>SHO</h5>
+                                <h4>80</h4>
+                            </div>
+                            <div>
+                                <h5>PAS</h5>
+                                <h4>80</h4>
+                            </div>
+                            <div>
+                                <h5>DRI</h5>
+                                <h4>80</h4>
+                            </div>
+                            <div>
+                                <h5>DEF</h5>
+                                <h4>80</h4>
+                            </div>
+                            <div>
+                                <h5>PHY</h5>
+                                <h4>64</h4>
+                            </div>
+
+                        </div>
+                        <div class="flag">
+                            <img src="https://cdn.sofifa.net/flags/ar.png" alt="nationalite">
+                            <img src="https://cdn.sofifa.net/flags/ar.png" alt="flag">
+                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="logoJr">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 col-start-3 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]">
+                </div>
+                <div class="col-span-1 col-start-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]">
+                </div>
+                <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+                <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+                <div class="col-span-1   bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+                <div class="col-span-1   col-start-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]">
+                </div>
+                <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+                <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+                <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+                <div class="col-span-4 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
+            </div>
+
+
+
+
         </div>
-  </section>
-  <!--main-->
-   <section>
-<div class="grid grid-cols-4">
-
-    <div class="col-span-1 px-2.5  bg-gray-200   relative">
-  
-        <div id="modalFormAjout"  class=" p-2.5 mx-auto 0">
-            <div class="relative p-5 shadow-xl rounded-lg bg-[#7F020F] text-[#7F020F] w-full ">
-                <span id="closeFormAdd"  class="absolute right-5  material-symbols-outlined cursor-pointer">cancel</span>
-                <h2 class="text-xl font-bold mb-4 text"> ADD</h2>
-                <p id="pargErreur"
-                class="hidden  text-sm  font-semibold px-4 m-2 text-red-900  border  bg-gray-200 bg-opacity-70  border-red-400 ">
-                </p>
-                <form class="flex flex-col gap-4 p-4 bg-white shadow-lg rounded-lg border border-gray-300">
-                    <div class="flex flex-col">
-                        <label for="name" class="font-semibold text-gray-700">Name</label>
-                        <input id="name" type="text" placeholder="Name" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:ring-indigo-300" required>
-                    </div>
-                
-                    <div class="flex flex-col">
-                        <label for="note" class="font-semibold text-gray-700">Note</label>
-                        <input id="note" type="text" placeholder="Note" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                    </div>
-                
-                    <div class="flex flex-col">
-                        <label for="position" class="font-semibold text-gray-700">Position</label>
-                        <select id="position" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400" required>
-                            <option value="LW">Ailier Gauche (LW)</option>
-                            <option value="ST">Attaquant Central (ST)</option>
-                            <option value="RW">Ailier Droit (RW)</option>
-                            <option value="RCM">Milieu central (CM) : Right</option>
-                            <option value="milieu-central-M">Milieu central (CM) : Milieu</option>
-                            <option value="LCM">Milieu central (CM) : Left</option>
-                            <option value="LB">Latéral gauche (LB)</option>
-                            <option value="LCB">Défenseur Central (CB) : Left</option>
-                            <option value="RCB">Défenseur Central (CB) : Right</option>
-                            <option value="RB">Latéral droit (RB)</option>
-                            <option value="GK">Goal Keeper (GK)</option>
-                        </select>
-                    </div>
-                
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="flex flex-col">
-                            <label for="photo" class="font-semibold text-gray-700">Photo</label>
-                            <input id="photo" type="url" placeholder="https://exemple/nat.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="nationality" class="font-semibold text-gray-700">Nationality</label>
-                            <input id="nationality" type="url" placeholder="https://exemple/nat.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                        </div>
-                
-                        <div class="flex flex-col">
-                            <label for="flag" class="font-semibold text-gray-700">Flag</label>
-                            <input id="flag" type="url" placeholder="https://exemple/flag.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                        </div>
-                
-                        <div class="flex flex-col">
-                            <label for="club" class="font-semibold text-gray-700">Club</label>
-                            <input id="club" type="url" placeholder="https://exemple/club.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                        </div>
-                    </div>
-                
-                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
-                        <div class="flex flex-col">
-                            <label for="rating" class="font-semibold text-gray-700">Rating</label>
-                            <input id="rating" type="text" placeholder="Rating" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="pace" class="font-semibold text-gray-700">Pace</label>
-                            <input id="pace" type="text" placeholder="Pace" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="shooting" class="font-semibold text-gray-700">Shooting</label>
-                            <input id="shooting" type="text" placeholder="Shooting" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="passing" class="font-semibold text-gray-700">Passing</label>
-                            <input id="passing" type="text" placeholder="Passing" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="dribbling" class="font-semibold text-gray-700">Dribbling</label>
-                            <input id="dribbling" type="text" placeholder="Dribbling" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="defending" class="font-semibold text-gray-700">Defending</label>
-                            <input id="defending" type="text" placeholder="Defending" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="physical" class="font-semibold text-gray-700">Physical</label>
-                            <input id="physical" type="text" placeholder="Physical" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                        </div>
-                    </div>
-                
-                    <button type="submit" id="btnAddplayer" class="rounded-lg bg-[#7F020F]  text-white p-3 text-lg hover:bg-red-800 transition">
-                        Add Player
-                    </button>
-                </form>
-                
-            </div>
-        </div>
- 
-  
-  
-  
-    </div>
-     
-  <div class=" col-span-3  px-2.5[length:100%_100%] grid flex- gap-2.5 w-[100%] h-[80vh] bg-center bg-no-repeat lg:h-[100vh] lg:w-full bg-[url('img/stadium_background.webp')]">
-        
- <div class="ST_G"> 
-<div class="badge_gold" >
-    <div class="photo">
-        <img src="https://cdn.sofifa.net/players/158/023/25_120.png" class="" alt="joueur">
-    </div>
-    <h4 class="nom">Messi</h4>
-    <div class="statistique">
-       
-            <div>
-                <h5>PAC</h5> 
-                <h4>80</h4>
-            </div>
-            <div >
-                <h5>SHO</h5> 
-                <h4>80</h4>
-            </div>
-            <div >
-                <h5>PAS</h5> 
-                <h4>80</h4>
-            </div>
-            <div >
-                <h5>DRI</h5> 
-                <h4>80</h4>
-            </div>
-            <div >
-                <h5>DEF</h5> 
-                <h4>80</h4>
-            </div>
-            <div >
-                <h5>PHY</h5> 
-                <h4>64</h4>
-            </div>
-        
-    </div>
-    <div class="flag">
-        <img src="https://cdn.sofifa.net/flags/ar.png" alt="nationalite">
-        <img src="https://cdn.sofifa.net/flags/ar.png"  alt="flag">
-        <img src="https://cdn.sofifa.net/meta/team/239235/120.png"  alt="logoJr">
-    </div>
-</div>
-</div>    
-        <div class="col-span-1 col-start-3 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1 col-start-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1   bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1   col-start-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-1 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-        <div class="col-span-4 bg-contain bg-no-repeat bg-center bg-[url('img/badge_gold.png')]"></div>
-  </div>
-
-
-
-
-</div>
-</section>
+    </section>
 
 
 
 </body>
+
 </html>
-
-
