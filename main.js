@@ -1,9 +1,30 @@
 
   
 let erreurForm = document.getElementById("pargErreur");
-let FormAddPlayer = document.getElementById("modalFormAddPlayer");
+let FormPlayer = document.getElementById("modalFormPlayer");
 let modalSelectPlayer= document.getElementById("modalSelectPlayer");
 let ulPlayers = document.getElementById("ulPlayers");
+
+let id_input = document.getElementById("id_input"); //, input type hidden utliisable lors de modification 
+let name_p = document.getElementById("name_input")
+let rating = document.getElementById("rating")
+let photo = document.getElementById("photo")
+let nationality = document.getElementById("nationality")
+let flag = document.getElementById("flag")
+let club = document.getElementById("club")
+let pace = document.getElementById("pace")
+let shooting = document.getElementById("shooting")
+let passing = document.getElementById("passing")
+let dribbling = document.getElementById("dribbling")
+let defending = document.getElementById("defending")
+let physical = document.getElementById("physical")
+let position = document.getElementById("position")
+let statistique_GK = document.getElementById("statistique_GK");
+let statistique_player = document.getElementById("statistique_player");
+
+
+
+
 /******************************************* */
 let  players  = []  
 let id=1 ; 
@@ -17,20 +38,19 @@ if(localStorage.getItem("players") && JSON.parse(localStorage.getItem("players")
         players = JSON.parse(localStorage.getItem("players")) ; 
         id= localStorage.getItem("id") ;
         players.forEach(player => {
-            console.log("hhh");
             addPlayerToList(player);    
         });
     } 
     else {
-        players = data_players; // taches contient des valeur aletoire juste pour avoir des donnees a manipluer
-        localStorage.setItem("players", JSON.stringify(players)); //stock taches fictitives dans local storage
+        players = data_players; 
+        localStorage.setItem("players", JSON.stringify(players)); //stock players fictitives dans local storage
       }
 
-document.getElementById("btnOpenAddForm").addEventListener("click", function () {
-    FormAddPlayer.classList.remove("hidden");
+document.getElementById("btnOpenForm").addEventListener("click", function () {
+    FormPlayer.classList.remove("hidden");
   });
-document.getElementById("closeFormAdd").addEventListener("click", function () {
-    FormAddPlayer.classList.add("hidden");
+document.getElementById("closeForm").addEventListener("click", function () {
+    FormPlayer.classList.add("hidden");
  // erreurForm1.classList.add("hidden");
  // erreurForm1.innerHTML = "";
 });
@@ -38,21 +58,6 @@ document.getElementById("closeSelectPlayer").addEventListener("click", function 
     modalSelectPlayer.classList.add("hidden");
 });
 
-const name_p = document.getElementById("name").value.trim();
-const rating = document.getElementById("rating").value.trim();
-const photo = document.getElementById("photo").value.trim();
-const nationality = document.getElementById("nationality").value.trim();
-const flag = document.getElementById("flag").value.trim();
-const club = document.getElementById("club").value.trim();
-const pace = document.getElementById("pace").value.trim();
-const shooting = document.getElementById("shooting").value.trim();
-const passing = document.getElementById("passing").value.trim();
-const dribbling = document.getElementById("dribbling").value.trim();
-const defending = document.getElementById("defending").value.trim();
-const physical = document.getElementById("physical").value.trim();
-const position = document.getElementById("position").value.trim();
-const statistique_GK = document.getElementById("statistique_GK");
-const statistique_player = document.getElementById("statistique_player");
 
 document.getElementById("position").addEventListener("change" , function(){
     console.log(this.value);
@@ -63,9 +68,23 @@ document.getElementById("position").addEventListener("change" , function(){
      }
 })
 //ajout player
-document.getElementById("btnAddplayer").addEventListener("click", AddPlayer);
+document.getElementById("submitplayer").addEventListener("click", AddPlayer);
+
 function AddPlayer(event){
     event.preventDefault();
+    name_p = name_p.value.trim();
+    rating = rating.value.trim();
+    photo = photo.value.trim();
+    nationality = nationality.value.trim();
+    flag = flag.value.trim();
+    club = club.value.trim();
+    pace = pace.value.trim();
+    shooting = shooting.value.trim();
+    passing = passing.value.trim();
+    dribbling = dribbling.value.trim();
+    defending = defending.value.trim();
+    physical = physical.value.trim();
+    position = position.value.trim(); 
 
 
    
@@ -84,30 +103,61 @@ function AddPlayer(event){
 
     console.log("Formulaire validé avec succès !");
 
-    id++;
-    let player = {};
-    player.id = id; 
-    player.name = name_p; 
-    player.rating = rating;  
-    player.photo = photo ; 
-    player.position=position ; 
-    player.nationality = nationality;
-    player.flag = flag;  
-    player.club = club;
-    player.pace = pace;
-    player.shooting = shooting;
-    player.passing = passing;
-    player.dribbling = dribbling;
-    player.defending = defending;
-    player.physical = physical;
-    player.isActif = false ; 
-    players.push(player);
+    
+    let newplayer = {};
+   
+    newplayer.name = name_p; 
+    newplayer.rating = rating;  
+    newplayer.photo = photo ; 
+    newplayer.position=position ; 
+    newplayer.nationality = nationality;
+    newplayer.flag = flag;  
+    newplayer.club = club;
+    newplayer.pace = pace;
+    newplayer.shooting = shooting;
+    newplayer.passing = passing;
+    newplayer.dribbling = dribbling;
+    newplayer.defending = defending;
+    newplayer.physical = physical;
+    newplayer.isActif = false ;
+    console.log(id_input);  
+    if (id_input.value.trim() == "-1") {  // Si l'ID est vide
+        console.log("id vide :");
+        console.log(id_input.value);
+        id++;
+        newplayer.id = id;   // Incrémente l'ID puis ajoute
+        players.push(newplayer);
+        localStorage.setItem("id", id);
+        addPlayerToList(newplayer);
+    } else {  // Si l'ID n'est pas vide
+        let index = players.findIndex(p => p.id == id_input.value); 
+        players.splice(index, 1, newplayer); // Modifie le joueur existant
+        addALLPlayersToList(players);
+        console.log("id pas vide :");
+        console.log(id_input.value);
+    }
+
+    
     localStorage.setItem("players" ,JSON.stringify(players) ) ; 
-    localStorage.setItem("id" ,id) ;
-    addPlayerToList(player);
+
+
+
+
+
+
+
+
+
+
+
     
 }
-
+function addALLPlayersToList(players){
+    ulPlayers.innerHTML=``; 
+    players.forEach(player => {
+        addPlayerToList(player);    
+    });
+}
 function addPlayerToList(player){
     let li = document.createElement("li") ;
     li.innerHTML = playerCodeHtml(player) 
@@ -115,10 +165,10 @@ function addPlayerToList(player){
 }
 function playerCodeHtml(player){
     codeHtml=`  
-        <div id="${player.id}" class="badge_gold"  onclick="showEdit(${player.id})">
-     <div  class=" absolutflex felx-col justify-center items-center gap-2 text-center h-45 w-20"> 
-       <span  onclick="SupprimerTache(this)" class=" material-symbols-outlined   cursor-pointer text-red-500 hover:text-red-400  h-4 w-4 "> X </span> 
-       <span   onclick="showformEdit(this)"  name_form="btnEdit" class="  material-symbols-outlined  cursor-pointer  text-yellow-300 h-4 w-4 ">border_color</span>
+        <div id="${player.id}" class="badge_gold"  >
+     <div  class=" absolute right-0 top-5 bg-gray-400 flex flex-col  p-[4px] text-center  rounded-full "> 
+       <span  onclick="deletedPlayerStad(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold "> X </span> 
+       <span   onclick="showformEdit(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
       </div>
          <div class="note">
                             <h4>${player.rating}</h4>
@@ -184,7 +234,7 @@ function getPlayer(id){
 //add player to stadium
 let selectPlayer = document.getElementById("selectplayer")
 
-const All_icon = document.querySelectorAll('.iconAddPlayerStd');
+let All_icon = document.querySelectorAll('.iconAddPlayerStd');
  let divParent =""
 All_icon.forEach((AddPlayerStd, index) => {
     AddPlayerStd.addEventListener("click", function () {
@@ -208,6 +258,8 @@ All_icon.forEach((AddPlayerStd, index) => {
             });
         });
 });
+
+
 selectPlayer.addEventListener("change" , function(){
     let player = getPlayer(this.value);
     divParent.innerHTML=`` ;  
@@ -215,15 +267,42 @@ selectPlayer.addEventListener("change" , function(){
 
 })
 
-function deletedPlayerStad(){
-
-}
 
 
-function showEdit(id){
-        
 
-}
+
+function deletedPlayerStad(idplayer){
+    // let player  = getPlayer(id) ;
+     players = players.filter(p=>p.id!=idplayer) ; 
+     addALLPlayersToList(players);
+     localStorage.setItem("players", JSON.stringify(players)) ; 
+ }
+ 
+ 
+ function showformEdit(idplayer){
+    console.log(idplayer);
+   document.getElementById("modalFormPlayer").classList.remove("hidden");
+   let player = getPlayer(idplayer); 
+   console.log(player);
+   //remplir les inputs de formulaire a partir de player 
+    name_p.value = player.name; 
+    id_input.value = player.id;
+    rating.value = player.rating;
+    photo.value = player.photo;
+    position.value = player.position;
+    nationality.value = player.nationality;
+    flag.value = player.flag;
+    club.value = player.club;
+    pace.value = player.pace;
+    shooting.value = player.shooting;
+    passing.value = player.passing;
+    dribbling.value = player.dribbling;
+    defending.value = player.defending;
+    physical.value = player.physical;
+
+ }
+ 
+
 
 
 
