@@ -26,8 +26,12 @@ let statistique_player = document.getElementById("statistique_player");
 
 
 /******************************************* */
-let  players  = []  
-let id=1 ; 
+let  players  = []  ;
+let id=1 ;
+
+
+let playerReserve = [] ;
+let playerStad = [] ; 
 /*************************** */
 /*    local storage          */
 /*************************** */
@@ -169,7 +173,8 @@ function playerCodeHtml(player){
      <div  class=" absolute right-0 top-5 bg-gray-400 flex flex-col  p-[4px] text-center  rounded-full "> 
        <span  onclick="deletedPlayerStad(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold "> X </span> 
        <span   onclick="showformEdit(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
-      </div>
+       <span   onclick="goPlayerOutStad(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
+       </div>
          <div class="note">
                             <h4>${player.rating}</h4>
                             <h5>${player.position}</h5>
@@ -232,23 +237,28 @@ function getPlayer(id){
     return player ; 
 }
 //add player to stadium
-let selectPlayer = document.getElementById("selectplayer")
+let selectPlayer = document.getElementById("selectplayer")  // select list contient le nom d players
 
-let All_icon = document.querySelectorAll('.iconAddPlayerStd');
- let divParent =""
+let All_icon = document.querySelectorAll('.iconAddPlayerStd'); // recupere les icons + qui se trouve dans l badge
+ let divParent =""   // badge
 All_icon.forEach((AddPlayerStd, index) => {
     AddPlayerStd.addEventListener("click", function () {
         modalSelectPlayer.classList.remove("hidden");     
-        divParent= All_icon[index].parentNode; 
-        console.log("divparent");
-        console.log(divParent.parentNode);
+        divParent= All_icon[index].parentNode;  // recupere badge de + cliqué
+        //console.log("divparent");
+        //console.log(divParent.parentNode);
         let x = divParent.parentNode;
         let pos = x.getAttribute("id") ;
 
-        console.log("position  : ");
-        console.log(pos);
         selectPlayer.innerHTML=`` ;
+        let option = document.createElement("option") ;
+        option.value =""; 
+        option.textContent= "Choisir Joueur";
+        selectPlayer.appendChild(option) ;
 
+
+        
+        selectPlayer.
         players.forEach(p => {
             if(p.position == pos){
             let option = document.createElement("option") ;
@@ -299,6 +309,11 @@ function deletedPlayerStad(idplayer){
     dribbling.value = player.dribbling;
     defending.value = player.defending;
     physical.value = player.physical;
+
+ }
+
+
+ function goPlayerOutStad(idplayer){
 
  }
  

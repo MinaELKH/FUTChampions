@@ -120,9 +120,13 @@
                 width: 90px;
                 height: 120px;
                 gap: 2px;
+            }
+            .badge_black {
+                width: 90px;
+                height: 120px;
+                gap: 2px;
 
             }
-
             .photo {
                 /* w-full h-3/5  mx-auto flex  justify-center ;*/
                 display: flex;
@@ -181,11 +185,7 @@
     </section>
     <!--main-->
     <section>
-        <div class="grid grid-cols-4 relative">
-
-
-
-
+        <div class="grid lg:grid-cols-4 relative">
             <div id="modalFormPlayer" class="hidden fixed inset-0 top-40 flex items-center z-50 bg-white bg-opacity-50">
                 <div class="relative p-5 shadow-xl rounded-lg bg-[#7F020F] text-[#7F020F] w-full lg:w-1/3 max-h-[80vh] overflow-y-auto">
                     <span id="closeForm" class="absolute right-5 text-white material-symbols-outlined cursor-pointer">cancel</span>
@@ -355,7 +355,9 @@
           
 
             <div
-                class="stade  col-span-3 px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full h-[80vh]">
+                class="stade  col-span-3 px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full ">
+
+                
                 <div id='LST' class="ST_G col-start-2">
                     <div class="badge_black">
                         <span   class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
