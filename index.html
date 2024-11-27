@@ -15,12 +15,31 @@
 
         .stade { 
             width: 100%;
+            height: 1600px;
+        
             background-size: 100% 100%;
-            background-image: url('img/stadium_background.webp');
+            /*background-image: url('img/stadium_background.webp');*/
+            background-image: url('img/terrain1.jpg');
             background-position: center;
             background-repeat: no-repeat;
             }
 
+        .badge_black {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background-size: contain;
+            background-image: url('img/badgeBlack.webp');
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 180px;
+            height: 200px;
+            position: relative;
+            justify-content: center;
+            justify-items: center;
+            justify-content: center;
+
+        }
         .badge_gold {
             display: flex;
             flex-direction: column;
@@ -37,7 +56,6 @@
             justify-content: center;
 
         }
-
 
         .note{
           position: absolute;
@@ -322,13 +340,25 @@
             </div>
 
 
+            
+            <!--show player -->
+            <div id="modalShowPlayer" class="hidden fixed inset-0 top-40 flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
+                <div class="relative p-5 shadow-xl rounded-lg bg-white w-full ">
+                    <span id="closeShowPlayer" class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
+                    
+                    <h2 class="text-xl font-bold mb-4 text-center">Player</h2>
+                     <div id="ShowPlayer">
+
+                     </div>
+                </div>
+            </div>
+
             <div class="col-span-1 px-2.5  bg-gray-200   relative">
 
                 <div>
                     <ul id="ulPlayers" class=" grid grid-cols-2" >
                  
                     </ul>
-                    
                 </div>
                
               
@@ -342,7 +372,7 @@
             <div
                 class="stade  col-span-3 px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full h-[80vh]">
                 <div id='LST' class="ST_G col-start-2">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span   class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -350,7 +380,7 @@
                 </div>
               
                 <div id='RST' class="ST_D ">
-                    <div class="badge_gold ">
+                    <div class="badge_black ">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -359,7 +389,7 @@
 
 
                 <div id="LM" class="LM col-start-1">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -367,7 +397,7 @@
                 </div>
 
                 <div id="LCM">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -376,7 +406,7 @@
 
 
                 <div id="RCM">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -385,7 +415,7 @@
 
 
                 <div id="RM">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -395,7 +425,7 @@
 
 
                 <div id="LB" class="col-start-1">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -405,7 +435,7 @@
 
 
                 <div id="LCB">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -415,7 +445,7 @@
 
 
                 <div id="RCB">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -424,7 +454,7 @@
 
 
                 <div id="RB">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
@@ -435,7 +465,7 @@
        
                 
                 <div id="GK" class="GK col-span-4 flex justify-center items-center h-full">
-                    <div class="badge_gold">
+                    <div class="badge_black">
                         <span class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </span>
