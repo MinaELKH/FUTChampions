@@ -173,7 +173,7 @@ function playerCodeHtml(player){
      <div  class=" absolute right-0 top-5 bg-gray-400 flex flex-col  p-[4px] text-center  rounded-full "> 
        <span  onclick="deletedPlayerStad(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold "> X </span> 
        <span   onclick="showformEdit(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
-       <span   onclick="goPlayerOutStad(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
+       <span   onclick="goPlayerOutStad(${player.id} , this)"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">.</span>
        </div>
          <div class="note">
                             <h4>${player.rating}</h4>
@@ -221,6 +221,10 @@ function playerCodeHtml(player){
         return codeHtml ; 
 
 }
+
+
+
+
 function isValidURL(string) {
     try{
         new URL(string) ;
@@ -239,8 +243,8 @@ function getPlayer(id){
 //add player to stadium
 let selectPlayer = document.getElementById("selectplayer")  // select list contient le nom d players
 
-let All_icon = document.querySelectorAll('.iconAddPlayerStd'); // recupere les icons + qui se trouve dans l badge
- let divParent =""   // badge
+/*let All_icon = document.querySelectorAll('.iconAddPlayerStd'); // recupere les icons + qui se trouve dans l badge
+let divParent =""   // badge
 All_icon.forEach((AddPlayerStd, index) => {
     AddPlayerStd.addEventListener("click", function () {
         modalSelectPlayer.classList.remove("hidden");     
@@ -253,12 +257,9 @@ All_icon.forEach((AddPlayerStd, index) => {
         selectPlayer.innerHTML=`` ;
         let option = document.createElement("option") ;
         option.value =""; 
-        option.textContent= "Choisir Joueur";
+        option.textContent= "Choisir joueur";
         selectPlayer.appendChild(option) ;
 
-
-        
-        selectPlayer.
         players.forEach(p => {
             if(p.position == pos){
             let option = document.createElement("option") ;
@@ -268,18 +269,53 @@ All_icon.forEach((AddPlayerStd, index) => {
             });
         });
 });
+*/
+let All_icon = document.querySelectorAll('.iconAddPlayerStd'); // Récupérer les icônes "+"
+let divParent = ""; // Badge
+
+function AddPlayerToStad(event) {
+    modalSelectPlayer.classList.remove("hidden");
+
+
+    divParent = event.target.parentNode;
+    let x = divParent.parentNode;
+    let pos = x.getAttribute("id");
+
+  
+    selectPlayer.innerHTML = ``;
+    let option = document.createElement("option");
+    option.value = "";
+    option.textContent = "Choisir joueur";
+    selectPlayer.appendChild(option);
+
+
+    players.forEach(p => {
+        if (p.position === pos) {
+            let option = document.createElement("option");
+            option.value = p.id;
+            option.textContent = p.name;
+            selectPlayer.appendChild(option);
+        }
+    });
+}
+
+// Ajouter les écouteurs d'événements à chaque icône
+All_icon.forEach(AddPlayerStd => {
+    AddPlayerStd.addEventListener("click", AddPlayerToStad);
+});
+
+
+
+
+
+
 
 
 selectPlayer.addEventListener("change" , function(){
     let player = getPlayer(this.value);
-    divParent.innerHTML=`` ;  
-    divParent.innerHTML = playerCodeHtml(player) ;
+    divParent.parentNode.innerHTML = playerCodeHtml(player) ;
 
 })
-
-
-
-
 
 function deletedPlayerStad(idplayer){
     // let player  = getPlayer(id) ;
@@ -287,7 +323,6 @@ function deletedPlayerStad(idplayer){
      addALLPlayersToList(players);
      localStorage.setItem("players", JSON.stringify(players)) ; 
  }
- 
  
  function showformEdit(idplayer){
     console.log(idplayer);
@@ -311,10 +346,21 @@ function deletedPlayerStad(idplayer){
     physical.value = player.physical;
 
  }
+ 
 
-
- function goPlayerOutStad(idplayer){
-
+ function goPlayerOutStad(idplayer , el){
+    divPositi = el.parentNode.parentNode.parentNode ;
+    badgetGold = el.parentNode.parentNode ; 
+    console.log(badgetGold);
+    badgetGold.remove();
+    codehtml = `<div class="badge_black">
+    <span onclick="AddPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+        health_and_safety
+    </span>
+     </div>`
+     divPositi.innerHTML =codehtml ;
+     console.log("last");
+     console.log(divPositi);
  }
  
 
