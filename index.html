@@ -178,29 +178,11 @@
                         </div>
             
                         <div class="flex flex-col">
-                            <label for="note" class="font-semibold text-gray-700">Note</label>
-                            <input id="note" type="text" placeholder="Note" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                            <label for="rating" class="font-semibold text-gray-700">Note</label>
+                            <input id="rating" type="text" placeholder="rating" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
                         </div>
             
-                        <div class="flex flex-col">
-                            <label for="position" class="font-semibold text-gray-700">Position</label>
-                            <select id="position" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400" required>
-                                <option value="GK">Gardien (GK)</option>
-                                <option value="LB">Latéral gauche (LB)</option>
-                                <option value="RB">Latéral droit (RB)</option>
-                                <option value="LCB">Défenseur central (CB) : Gauche</option>
-                                <option value="RCB">Défenseur central (CB) : Droit</option>
-                                <option value="CM">Milieu central (CM)</option>
-                                <option value="LCM">Milieu central (CM) : Gauche</option>
-                                <option value="RCM">Milieu central (CM) : Droit</option>
-                                <option value="LM">Milieu gauche (LM)</option>
-                                <option value="RM">Milieu droit (RM)</option>
-                                <option value="LW">Ailier gauche (LW)</option>
-                                <option value="RW">Ailier droit (RW)</option>
-                                <option value="LST">Attaquant (ST) : Gauche</option>
-                                <option value="LST">Attaquant (ST) : Droit</option>
-                            </select>
-                        </div>
+                      
             
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex flex-col">
@@ -222,12 +204,28 @@
                                 <input id="club" type="url" placeholder="https://exemple/club.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
                             </div>
                         </div>
-            
-                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
-                            <div class="flex flex-col">
-                                <label for="rating" class="font-semibold text-gray-700">Rating</label>
-                                <input id="rating" type="text" placeholder="Rating" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                            </div>
+                        <div class="flex flex-col">
+                            <label for="position" class="font-semibold text-gray-700">Position</label>
+                            <select id="position" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:outline-none focus:ring focus:ring-blue-400" required>
+                                <option value="" >Position</option>
+                                <option value="GK">Gardien (GK)</option>
+                                <option value="LB">Latéral gauche (LB)</option>
+                                <option value="RB">Latéral droit (RB)</option>
+                                <option value="LCB">Défenseur central (CB) : Gauche</option>
+                                <option value="RCB">Défenseur central (CB) : Droit</option>
+                                <option value="CM">Milieu central (CM)</option>
+                                <option value="LCM">Milieu central (CM) : Gauche</option>
+                                <option value="RCM">Milieu central (CM) : Droit</option>
+                                <option value="LM">Milieu gauche (LM)</option>
+                                <option value="RM">Milieu droit (RM)</option>
+                                <option value="LW">Ailier gauche (LW)</option>
+                                <option value="RW">Ailier droit (RW)</option>
+                                <option value="LST">Attaquant (ST) : Gauche</option>
+                                <option value="LST">Attaquant (ST) : Droit</option>
+                            </select>
+                        </div>
+
+                        <div id="statistique_player" class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
                             <div class="flex flex-col">
                                 <label for="pace" class="font-semibold text-gray-700">Pace</label>
                                 <input id="pace" type="text" placeholder="Pace" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
@@ -254,6 +252,53 @@
                             </div>
                         </div>
             
+
+                        <div id="statistique_GK" class="  hidden grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
+                            <div class="flex flex-col">
+                                <label for="diving" class="font-semibold text-gray-700">Diving</label>
+                                <input id="diving" type="text" value="81" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                            </div>
+                            
+                            <div class="flex flex-col">
+                                <label for="handling" class="font-semibold text-gray-700">Handling</label>
+                                <input id="handling" type="text" value="82" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                            </div>
+                            
+                            <div class="flex flex-col">
+                                <label for="kicking" class="font-semibold text-gray-700">Kicking</label>
+                                <input id="kicking" type="text" value="77" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                            </div>
+                            
+                            <div class="flex flex-col">
+                                <label for="reflexes" class="font-semibold text-gray-700">Reflexes</label>
+                                <input id="reflexes" type="text" value="86" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                            </div>
+                            
+                            <div class="flex flex-col">
+                                <label for="speed" class="font-semibold text-gray-700">Speed</label>
+                                <input id="speed" type="text" value="38" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                            </div>
+                            
+                            <div class="flex flex-col">
+                                <label for="positioning" class="font-semibold text-gray-700">Positioning</label>
+                                <input id="positioning" type="text" value="83" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                            </div>
+                            
+                       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <button type="submit" id="btnAddplayer" class="rounded-lg bg-[#7F020F] text-white p-3 text-lg hover:bg-red-800 transition">
                             Add Player
                         </button>
