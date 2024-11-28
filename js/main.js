@@ -29,7 +29,7 @@ let playerStad = [];
 /*************************** */
 /*    local storage          */
 /*************************** */
-
+/******  local storage liste de joueurs */
 if (
   localStorage.getItem("players") &&
   JSON.parse(localStorage.getItem("players").length) > 0
@@ -43,6 +43,19 @@ if (
   players = data_players;
   localStorage.setItem("players", JSON.stringify(players)); //stock players fictitives dans local storage
 }
+/******  local storage joueur sur terrain */
+
+if (localStorage.getItem("playerStad") && JSON.parse(localStorage.getItem("playerStad").length) > 0) {
+  playerStad = JSON.parse(localStorage.getItem("playerStad"));
+  playerStad.forEach((pl) => {
+        document.getElementById(pl.position).innerHTML = playerCodeHtml(pl);   
+  });
+} 
+
+
+/************************************* */
+
+
 
 document.getElementById("btnOpenForm").addEventListener("click", function () {
   FormPlayer.classList.remove("hidden");
@@ -236,12 +249,20 @@ function playerCodeHtml(player) {
   }
 
   codeHtml = `  
-    <div id="${player.id}" class="badge_gold"  >
-    <div  class=" absolute right-0 top-5 bg-gray-400 flex flex-col  p-[4px] text-center  rounded-full "> 
-   <span  onclick="deletedPlayerStad(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold "> X </span> 
-   <span   onclick="showformEdit(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
-   <span   onclick="goPlayerOutStad(${player.id} , this)"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">.</span>
-   </div>
+ <div id="${player.id}" class="badge_gold">
+
+<div  class="barre"  class=" absolute right-0 top-5 bg-green-400  flex flex-col  p-[4px] text-center  rounded-full "> 
+  <span  onclick="deletedPlayerStad(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold "> X </span> 
+  <span   onclick="showformEdit(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
+  <span   onclick="goPlayerOutStad(${player.id} , this)"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">.</span>
+</div>
+
+
+    
+  
+    
+
+
      <div class="Score">
                         <h4>${player.rating}</h4>
                         <h5>${player.position}</h5>
@@ -261,6 +282,13 @@ function playerCodeHtml(player) {
       `;
 
   return codeHtml;
+}
+document.querySelector('.badge_gold').onmouseenter = function(){
+  document.getElementById('barre').classList.toggle('hidden');
+  const firstChild = document.getElementById('elementId').firstChild;
+  document.querySelector('.badge_gold').onmouseleave = function(){
+    document.getElementById('barre').classList.toggle('hidden');
+  }
 }
 
 function isValidURL(string) {
@@ -283,13 +311,11 @@ let selectPlayer = document.getElementById("selectplayer"); // select list conti
 let All_icon = document.querySelectorAll(".iconAddPlayerStd"); // Récupérer les icônes "+"
 let divParent = ""; // Badge
 
-function AddPlayerToStad(event) {
+function ShowSelectPlayerToStad(event) {
   modalSelectPlayer.classList.remove("hidden");
-
   divParent = event.target.parentNode;
   let x = divParent.parentNode;
   let pos = x.getAttribute("id");
-
   selectPlayer.innerHTML = ``;
   let option = document.createElement("option");
   option.value = "";
@@ -312,19 +338,28 @@ function AddPlayerToStad(event) {
 
 
 All_icon.forEach((AddPlayerStd) => {
-  AddPlayerStd.addEventListener("click", AddPlayerToStad);
+  AddPlayerStd.addEventListener("click", ShowSelectPlayerToStad);
 });
 
 /************ qjout local storage herrrrrrre */
 // ajout player to stadium
+// addplayertostad
 selectPlayer.addEventListener("change", function () {
   let player = getPlayer(this.value);
   playerStad.push(player);
-  console.log(divParent.parentNode);
+
+  p =  divParent.parentNode
+  player.positionSurTerrain = p.getAttribute("id") ;
+
+ // ajout de badge gold de joueur dans le stade 
   divParent.parentNode.innerHTML = playerCodeHtml(player);
-  player.positionSurTerrain = divParent.parentNode.parentNode.getAttribute("id") ;
+
+
   localStorage.setItem("playerStad" , JSON.stringify(playerStad) );
 });
+
+
+
 
 function deletedPlayerStad(idplayer) {
   // let player  = getPlayer(id) ;
@@ -361,7 +396,7 @@ function goPlayerOutStad(idplayer, el) {
   console.log(badgetGold);
   badgetGold.remove();
   codehtml = `<div class="badge_black">
-    <span onclick="AddPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+    <span onclick="ShowSelectPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
         health_and_safety
     </span>
      </div>`;
