@@ -48,7 +48,7 @@ if (
 if (localStorage.getItem("playerStad") && JSON.parse(localStorage.getItem("playerStad").length) > 0) {
   playerStad = JSON.parse(localStorage.getItem("playerStad"));
   playerStad.forEach((pl) => {
-        document.getElementById(pl.position).innerHTML = playerCodeHtml(pl);   
+       // document.getElementById(pl.position).innerHTML = playerCodeHtml(pl);   
   });
 } 
 
@@ -170,19 +170,20 @@ function AddPlayer(event) {
     // Si l'ID n'est pas vide
     let index = players.findIndex((p) => p.id == id_input.value);
     players.splice(index, 1, newplayer); // Modifie le joueur existant
-    addALLPlayersToList(players);
+    Affiche(players);
     console.log("id pas vide :");
     console.log(id_input.value);
   }
 
   localStorage.setItem("players", JSON.stringify(players));
 }
-function addALLPlayersToList(players) {
+function Affiche(players) {
   ulPlayers.innerHTML = ``;
   players.forEach((player) => {
     addPlayerToList(player);
   });
 }
+
 function addPlayerToList(player) {
   let li = document.createElement("li");
   li.innerHTML = playerCodeHtml(player);
@@ -250,11 +251,10 @@ function playerCodeHtml(player) {
 
   codeHtml = `  
  <div id="${player.id}" class="badge_gold">
-
-<div  class="barre"  class=" absolute right-0 top-5 bg-green-400  flex flex-col  p-[4px] text-center  rounded-full "> 
-  <span  onclick="deletedPlayerStad(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold "> X </span> 
-  <span   onclick="showformEdit(${player.id})"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
-  <span   onclick="goPlayerOutStad(${player.id} , this)"  name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">.</span>
+<div class="barre absolute right-0 top-5 bg-green-400 flex flex-col p-[4px] text-center rounded-full"> 
+  <span onclick="deletedPlayer(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold"> X </span> 
+  <span onclick="showformEdit(${player.id})" name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
+  <span onclick="goPlayerOutStad(${player.id} , this)" name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">.</span>
 </div>
 
 
@@ -315,21 +315,52 @@ function ShowSelectPlayerToStad(event) {
   modalSelectPlayer.classList.remove("hidden");
   divParent = event.target.parentNode;
   let x = divParent.parentNode;
-  let pos = x.getAttribute("id");
+  let positionINstad = x.getAttribute("id");
   selectPlayer.innerHTML = ``;
   let option = document.createElement("option");
   option.value = "";
   option.textContent = "Choisir joueur";
   selectPlayer.appendChild(option);
 
-  players.forEach((p) => {
-    if (p.position === pos) {
-      let option = document.createElement("option");
-      option.value = p.id;
-      option.textContent = p.name;
-      selectPlayer.appendChild(option);
-    }
-  });
+        if( positionINstad=="RST" || positionINstad=="LST"){
+          players.forEach((p) => {
+            if (p.position == "ST" ) {
+              let option = document.createElement("option");
+              option.value = p.id;
+              option.textContent = p.name;
+              selectPlayer.appendChild(option);
+            }
+          });
+        } else if( positionINstad=="LCM" || positionINstad=="RCM"){
+          players.forEach((p) => {
+            if (p.position == "CM" ) {
+              let option = document.createElement("option");
+              option.value = p.id;
+              option.textContent = p.name;
+              selectPlayer.appendChild(option);
+            }
+          });
+         } else if( positionINstad=="LCB" || positionINstad=="RCB"){
+          players.forEach((p) => {
+            if (p.position == "CB" ) {
+              let option = document.createElement("option");
+              option.value = p.id;
+              option.textContent = p.name;
+              selectPlayer.appendChild(option);
+            }
+          });
+         }
+         else if(  positionINstad=="LM" ||  positionINstad=="RM" || positionINstad=="LB" || positionINstad=="RB" || positionINstad=="GK"   ){
+          players.forEach((p) => {
+            if (p.position == positionINstad ) {
+              let option = document.createElement("option");
+              option.value = p.id;
+              option.textContent = p.name;
+              selectPlayer.appendChild(option);
+            }
+          });
+         }
+
 
 
   
@@ -361,11 +392,14 @@ selectPlayer.addEventListener("change", function () {
 
 
 
-function deletedPlayerStad(idplayer) {
+function deletedPlayer(idplayer) {
   // let player  = getPlayer(id) ;
   players = players.filter((p) => p.id != idplayer);
-  addALLPlayersToList(players);
+  playerStad = playerStad.filter((p) => p.id != idplayer);
+  Affiche(players);
+  goPlayerOutStad(idplayer, el)
   localStorage.setItem("players", JSON.stringify(players));
+  localStorage.setItem("playerstad", JSON.stringify(playerstad));
 }
 
 function showformEdit(idplayer) {
