@@ -23,8 +23,7 @@ let statistique_player = document.getElementById("statistique_player");
 /******************************************* */
 let players = [];
 let id = 1;
-
-let playerReserve = [];
+let playersReserve = [];
 let playerStad = [];
 /*************************** */
 /*    local storage          */
@@ -36,6 +35,7 @@ if (
 ) {
   players = JSON.parse(localStorage.getItem("players"));
   id = localStorage.getItem("id");
+ // playersReserve = players.slice(1,8) ; 
   players.forEach((player) => {
     addPlayerToList(player);
   });
@@ -48,7 +48,7 @@ if (
 if (localStorage.getItem("playerStad") && JSON.parse(localStorage.getItem("playerStad").length) > 0) {
   playerStad = JSON.parse(localStorage.getItem("playerStad"));
   playerStad.forEach((pl) => {
-       // document.getElementById(pl.position).innerHTML = playerCodeHtml(pl);   
+       document.getElementById(pl.positionInStade).innerHTML = playerCodeHtml(pl);   
   });
 } 
 
@@ -62,6 +62,11 @@ document.getElementById("btnOpenForm").addEventListener("click", function () {
 });
 document.getElementById("closeForm").addEventListener("click", function () {
   FormPlayer.classList.add("hidden");
+  // erreurForm1.classList.add("hidden");
+  // erreurForm1.innerHTML = "";
+});
+document.getElementById("closeShowPlayer").addEventListener("click", function () {
+  document.getElementById('modalShowPlayer').classList.add("hidden");
   // erreurForm1.classList.add("hidden");
   // erreurForm1.innerHTML = "";
 });
@@ -179,9 +184,11 @@ function AddPlayer(event) {
 }
 function Affiche(players) {
   ulPlayers.innerHTML = ``;
+ // players = players.slice(1,8) ; 
   players.forEach((player) => {
     addPlayerToList(player);
   });
+
 }
 
 function addPlayerToList(player) {
@@ -250,19 +257,15 @@ function playerCodeHtml(player) {
   }
 
   codeHtml = `  
- <div id="${player.id}" class="badge_gold">
-<div class="barre absolute right-0 top-5 bg-green-400 flex flex-col p-[4px] text-center rounded-full"> 
-  <span onclick="deletedPlayer(${player.id})" class="cursor-pointer text-white hover:text-red-400 text-l font-semibold"> X </span> 
-  <span onclick="showformEdit(${player.id})" name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">...</span>
-  <span onclick="goPlayerOutStad(${player.id} , this)" name_form="btnEdit" class="cursor-pointer text-white hover:text-red-400 text-xl font-semibold">.</span>
-</div>
-
-
-    
-  
-    
-
-
+ <div id="${player.id}" class="badge_gold"  >
+<div class="barre absolute right-0 top-5 bg-white flex flex-col  text-center "> 
+  <span onclick="deletedPlayer(${player.id} , this)" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-l font-semibold border border-b-red-800"> close </span> 
+  <span onclick="showformEdit(${player.id})" name_form="btnEdit" class=" text-red-800  material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold border border-b-red-800">edit</span>
+  <span onclick="goPlayerOutStad(${player.id} , this)" name_form="btnEdit" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold  border border-b-red-800">move_item</span>
+<span onclick="ChangePosition(${player.id} , this)" name_form="btnEdit" class="  text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold ">
+swap_horiz
+</span>
+  </div>
      <div class="Score">
                         <h4>${player.rating}</h4>
                         <h5>${player.position}</h5>
@@ -272,7 +275,7 @@ function playerCodeHtml(player) {
                         <img  class ="nation" src="${player.flag}"  alt="flag">
                         <img class ="logoClub" src="${player.logo}" alt="nationalite">
     </div> 
-        <div class="photo">
+        <div class="photo" onclick="afficheOnePlayer(${player.id} , this)">
             <img src=${player.photo} class="" alt="joueur">
         </div>
         <h4 class="nom">${player.name} </h4>
@@ -283,13 +286,31 @@ function playerCodeHtml(player) {
 
   return codeHtml;
 }
-document.querySelector('.badge_gold').onmouseenter = function(){
-  document.getElementById('barre').classList.toggle('hidden');
-  const firstChild = document.getElementById('elementId').firstChild;
-  document.querySelector('.badge_gold').onmouseleave = function(){
-    document.getElementById('barre').classList.toggle('hidden');
-  }
+
+function afficheOnePlayer(idplayer , el){
+  
+            document.getElementById('modalShowPlayer').classList.remove('hidden');  
+            let player = getPlayer(idplayer);
+            document.getElementById("div_1_ShowbadgetPlayer").innerHTML=playerCodeHtml(player) ;
+            document.getElementById("div_2_ShowbadgetPlayer").innerHTML=`
+            
+            
+            
+            ` ;
 }
+
+
+document.querySelector('.badge_gold').addEventListener('mouseenter', function() {
+  this.querySelector('.barre').classList.remove('hidden'); // Afficher la barre
+});
+
+// Lorsque l'on sort de l'élément 'badge_gold'
+document.querySelector('.badge_gold').addEventListener('mouseleave', function() {
+  this.querySelector('.barre').classList.add('hidden'); // Masquer la barre
+});
+
+
+  
 
 function isValidURL(string) {
   try {
@@ -305,12 +326,12 @@ function getPlayer(id) {
   let player = players[index];
   return player;
 }
-//add player to stadium
+//select  player to stadium
 let selectPlayer = document.getElementById("selectplayer"); // select list contient le nom d players
 
 let All_icon = document.querySelectorAll(".iconAddPlayerStd"); // Récupérer les icônes "+"
 let divParent = ""; // Badge
-
+ // remplir le select html avec les joueurs adequat avec position
 function ShowSelectPlayerToStad(event) {
   modalSelectPlayer.classList.remove("hidden");
   divParent = event.target.parentNode;
@@ -372,16 +393,27 @@ All_icon.forEach((AddPlayerStd) => {
   AddPlayerStd.addEventListener("click", ShowSelectPlayerToStad);
 });
 
-/************ qjout local storage herrrrrrre */
-// ajout player to stadium
-// addplayertostad
+
+// ajout player to stadium : et supprime le de reserve  addplayertostad
 selectPlayer.addEventListener("change", function () {
-  let player = getPlayer(this.value);
+   idvalue = this.value
+  let player = getPlayer(idvalue);
   playerStad.push(player);
-
   p =  divParent.parentNode
-  player.positionSurTerrain = p.getAttribute("id") ;
+  console.log("--------------")
+  console.log(player);
+  // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
+  console.log(p.getAttribute("id"));
+  player.positionInStade = p.getAttribute("id") ;
 
+  //supprimer le joueur de la list de reserve : 
+  index  =  players.findIndex(p=>( p.id == idvalue )) // si le joueur exist au reserve on le supprime du reserve
+  if(index>-1){
+    players.splice(index , 1) ; 
+    Affiche(players);
+  }
+  
+  
  // ajout de badge gold de joueur dans le stade 
   divParent.parentNode.innerHTML = playerCodeHtml(player);
 
@@ -391,8 +423,8 @@ selectPlayer.addEventListener("change", function () {
 
 
 
-
-function deletedPlayer(idplayer) {
+/**********  Supprimer le joueur de la liste et de stade ************ */
+function deletedPlayer(idplayer , el) {
   // let player  = getPlayer(id) ;
   players = players.filter((p) => p.id != idplayer);
   playerStad = playerStad.filter((p) => p.id != idplayer);
@@ -423,7 +455,7 @@ function showformEdit(idplayer) {
   defending.value = player.defending;
   physical.value = player.physical;
 }
-
+/********   mettre le joueur hors terrain *********  */
 function goPlayerOutStad(idplayer, el) {
   divPositi = el.parentNode.parentNode.parentNode;
   badgetGold = el.parentNode.parentNode;
@@ -441,4 +473,12 @@ function goPlayerOutStad(idplayer, el) {
   playerStad.splice(index , 1) ;
   localStorage.setItem("playerStad" , JSON.stringify(playerStad) );
 
+}
+
+/********* change position de joueur *** */
+
+function ChangePosition(idplayer , el){
+        goPlayerOutStad(idplayer, el);
+
+      return true 
 }
