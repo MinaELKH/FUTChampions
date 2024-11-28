@@ -35,10 +35,12 @@ if (
 ) {
   players = JSON.parse(localStorage.getItem("players"));
   id = localStorage.getItem("id");
- // playersReserve = players.slice(1,8) ; 
+ 
   players.forEach((player) => {
-    addPlayerToList(player);
-  });
+    console.log(player);
+
+          addPlayerToList(player);
+        });
 } else {
   players = data_players;
   localStorage.setItem("players", JSON.stringify(players)); //stock players fictitives dans local storage
@@ -102,7 +104,7 @@ function AddPlayer(event) {
   defending = defending.value.trim();
   physical = physical.value.trim();
   position = position.value.trim();
-
+   
   if (
     !name_p ||
     !rating ||
@@ -197,6 +199,7 @@ function addPlayerToList(player) {
   ulPlayers.appendChild(li);
 }
 function playerCodeHtml(player) {
+  console.log(player)
   if (player.position == "GK") {
     static = `<div class="statistique"> 
         <div>
@@ -258,7 +261,7 @@ function playerCodeHtml(player) {
 
   codeHtml = `  
  <div id="${player.id}" class="badge_gold"  >
-<div class="barre absolute right-0 top-5 bg-white flex flex-col  text-center "> 
+<div class="barre  hidden absolute right-0 top-5 bg-white flex flex-col  text-center "> 
   <span onclick="deletedPlayer(${player.id} , this)" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-l font-semibold border border-b-red-800"> close </span> 
   <span onclick="showformEdit(${player.id})" name_form="btnEdit" class=" text-red-800  material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold border border-b-red-800">edit</span>
   <span onclick="goPlayerOutStad(${player.id} , this)" name_form="btnEdit" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold  border border-b-red-800">move_item</span>
@@ -291,24 +294,27 @@ function afficheOnePlayer(idplayer , el){
   
             document.getElementById('modalShowPlayer').classList.remove('hidden');  
             let player = getPlayer(idplayer);
+            console.log("---pfficheOnePlayer---" ) ; 
+            console.log(player ) ; 
             document.getElementById("div_1_ShowbadgetPlayer").innerHTML=playerCodeHtml(player) ;
-            document.getElementById("div_2_ShowbadgetPlayer").innerHTML=`
-            
-            
-            
-            ` ;
+            document.getElementById("div_2_ShowbadgetPlayer").innerHTML=`            ` ;
 }
 
 
-document.querySelector('.badge_gold').addEventListener('mouseenter', function() {
-  this.querySelector('.barre').classList.remove('hidden'); // Afficher la barre
-});
+const badges = document.querySelectorAll('.badge_gold');
 
-// Lorsque l'on sort de l'élément 'badge_gold'
-document.querySelector('.badge_gold').addEventListener('mouseleave', function() {
-  this.querySelector('.barre').classList.add('hidden'); // Masquer la barre
-});
+// Pour chaque badge, ajouter les événements de survol
+badges.forEach(badge => {
+  // Lorsque la souris entre dans le badge
+  badge.addEventListener('mouseenter', function() {
+    this.querySelector('.barre').classList.remove('hidden'); // Afficher la barre
+  });
 
+  // Lorsque la souris quitte le badge
+  badge.addEventListener('mouseleave', function() {
+    this.querySelector('.barre').classList.add('hidden'); // Masquer la barre
+  });
+});
 
   
 
@@ -321,11 +327,40 @@ function isValidURL(string) {
     return false;
   }
 }
+
+
+function getPlayer(id) {
+
+  let player = players.find((p) => p.id == id);
+  if (!player) {
+    player = playerStad.find((p) => p.id == id && p.isActif === true);
+  }
+  if (!player) {
+    alert("Pas de joueur trouvé");
+  }
+
+  return player;
+}
+/*function getPlayer(id) {
+  let index = players.findIndex((p) => p.id == id);
+  let index1 = playerStad.findIndex((p) => (p.id == id &&  p.isActif==true));
+  let player;
+  if (index > -1 ) {
+    player = players[index];
+  } else if (index1 > -1 ) {
+    player = playerStad[index];
+  } else {
+    alert("pas de getplayer");
+  }
+
+  return player;
+}*/
+/*
 function getPlayer(id) {
   index = players.findIndex((p) => p.id == id);
   let player = players[index];
   return player;
-}
+}*/
 //select  player to stadium
 let selectPlayer = document.getElementById("selectplayer"); // select list contient le nom d players
 
@@ -398,19 +433,24 @@ All_icon.forEach((AddPlayerStd) => {
 selectPlayer.addEventListener("change", function () {
    idvalue = this.value
   let player = getPlayer(idvalue);
+
+    // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
+    p =  divParent.parentNode ; 
+    console.log(p.getAttribute("id"));
+    player.positionInStade = p.getAttribute("id") ;
+    player.isActif=true
   playerStad.push(player);
-  p =  divParent.parentNode
-  console.log("--------------")
+    console.log("-------player in stad-------")
   console.log(player);
-  // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
-  console.log(p.getAttribute("id"));
-  player.positionInStade = p.getAttribute("id") ;
+
 
   //supprimer le joueur de la list de reserve : 
   index  =  players.findIndex(p=>( p.id == idvalue )) // si le joueur exist au reserve on le supprime du reserve
   if(index>-1){
     players.splice(index , 1) ; 
+    localStorage.setItem("players" , JSON.stringify(players))
     Affiche(players);
+    console.log("-------supp reserve player-------")
   }
   
   
@@ -461,24 +501,51 @@ function goPlayerOutStad(idplayer, el) {
   badgetGold = el.parentNode.parentNode;
   console.log(badgetGold);
   badgetGold.remove();
+  pl= getPlayer(idplayer) ; 
+  pl.isActif = false ; 
   codehtml = `<div class="badge_black">
     <span onclick="ShowSelectPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
         health_and_safety
     </span>
      </div>`;
   divPositi.innerHTML = codehtml;
-  console.log("last");
-  console.log(divPositi);
   index = playerStad.findIndex(p=>(p.id = idplayer))
   playerStad.splice(index , 1) ;
   localStorage.setItem("playerStad" , JSON.stringify(playerStad) );
-
+  localStorage.setItem("players" , JSON.stringify(players) );
+  Affiche(players)
 }
 
 /********* change position de joueur *** */
 
 function ChangePosition(idplayer , el){
         goPlayerOutStad(idplayer, el);
-
-      return true 
+  // meme code que ajout player au staduim  
+        idvalue = idplayer
+        let player = getPlayer(idvalue);
+          // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
+          p =  divParent.parentNode ; 
+          console.log(p.getAttribute("id"));
+          player.positionInStade = p.getAttribute("id") ;
+          player.isActif=true
+        playerStad.push(player);
+          console.log("-------player in stad-------")
+        console.log(player);
+      
+      
+        //supprimer le joueur de la list de reserve : 
+        index  =  players.findIndex(p=>( p.id == idvalue )) // si le joueur exist au reserve on le supprime du reserve
+        if(index>-1){
+          players.splice(index , 1) ; 
+          localStorage.setItem("players" , JSON.stringify(players))
+          Affiche(players);
+          console.log("-------supp reserve player-------")
+        }
+        
+        
+       // ajout de badge gold de joueur dans le stade 
+        divParent.parentNode.innerHTML = playerCodeHtml(player);
+      
+      
+        localStorage.setItem("playerStad" , JSON.stringify(playerStad) );
 }
