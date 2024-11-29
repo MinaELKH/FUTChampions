@@ -10,15 +10,21 @@ let photo = document.getElementById("photo");
 let nationality = document.getElementById("nationality");
 let club = document.getElementById("club");
 
-
+// static plyer
 let pace = document.getElementById("pace");
 let shooting = document.getElementById("shooting");
 let passing = document.getElementById("passing");
 let dribbling = document.getElementById("dribbling");
 let defending = document.getElementById("defending");
 let physical = document.getElementById("physical");
+// static goal
 
-
+let diving = document.getElementById("diving");
+let handling = document.getElementById("handling");
+let kicking = document.getElementById("kicking");
+let reflexes = document.getElementById("reflexes");
+let speed = document.getElementById("speed");
+let positioning = document.getElementById("positioning");
 
 let position = document.getElementById("position");
 let statistique_GK = document.getElementById("statistique_GK");
@@ -38,30 +44,30 @@ if (
   JSON.parse(localStorage.getItem("players").length) > 0
 ) {
   players = JSON.parse(localStorage.getItem("players"));
-  id = localStorage.getItem("id");
- 
+  id = players.length
+  
+
   players.forEach((player) => {
     console.log(player);
-
-          addPlayerToList(player);
-        });
+    addPlayerToList(player);
+  });
 } else {
   players = data_players;
   localStorage.setItem("players", JSON.stringify(players)); //stock players fictitives dans local storage
 }
 /******  local storage joueur sur terrain */
 
-if (localStorage.getItem("playerStad") && JSON.parse(localStorage.getItem("playerStad").length) > 0) {
+if (
+  localStorage.getItem("playerStad") &&
+  JSON.parse(localStorage.getItem("playerStad").length) > 0
+) {
   playerStad = JSON.parse(localStorage.getItem("playerStad"));
   playerStad.forEach((pl) => {
-       document.getElementById(pl.positionInStade).innerHTML = playerCodeHtml(pl);   
+    document.getElementById(pl.positionInStade).innerHTML = playerCodeHtml(pl);
   });
-} 
-
+}
 
 /************************************* */
-
-
 
 document.getElementById("btnOpenForm").addEventListener("click", function () {
   FormPlayer.classList.remove("hidden");
@@ -71,11 +77,13 @@ document.getElementById("closeForm").addEventListener("click", function () {
   // erreurForm1.classList.add("hidden");
   // erreurForm1.innerHTML = "";
 });
-document.getElementById("closeShowPlayer").addEventListener("click", function () {
-  document.getElementById('modalShowPlayer').classList.add("hidden");
-  // erreurForm1.classList.add("hidden");
-  // erreurForm1.innerHTML = "";
-});
+document
+  .getElementById("closeShowPlayer")
+  .addEventListener("click", function () {
+    document.getElementById("modalShowPlayer").classList.add("hidden");
+    // erreurForm1.classList.add("hidden");
+    // erreurForm1.innerHTML = "";
+  });
 document
   .getElementById("closeSelectPlayer")
   .addEventListener("click", function () {
@@ -88,7 +96,7 @@ document.getElementById("position").addEventListener("change", function () {
     console.log(this.value);
     statistique_GK.classList.remove("hidden");
     statistique_player.classList.add("hidden");
-  }else{
+  } else {
     statistique_GK.classList.add("hidden");
     statistique_player.classList.remove("hidden");
   }
@@ -98,50 +106,83 @@ document.getElementById("submitplayer").addEventListener("click", AddPlayer);
 
 function AddPlayer(event) {
   event.preventDefault();
- 
-
-const staticplayer = [pace, shooting, passing, dribbling, defending, physical];
-
-staticplayer.forEach(input => {
-  console.log("validddd")
-  console.log(input)
-  if (isNaN(input.value) || input.value < 0 || input.value > 100) {
-    input.classList.add('ring-2', 'ring-red-700', 'p-2');
-  }
-});
-
-name_p = name_p.value.trim();
- photo = photo.value.trim();
- nationality = nationality.value.trim();
- club = club.value.trim();
- pace = pace.value.trim();
- shooting = shooting.value.trim();
- passing = passing.value.trim();
- dribbling = dribbling.value.trim();
- defending = defending.value.trim();
- physical = physical.value.trim();
- position = position.value.trim();
-
-
-  console.log("Formulaire validé avec succès !");
-
   let newplayer = {};
+  if (position.value == "GK") {
+    let staticGK = [diving, handling, kicking, reflexes, speed, positioning];
+      staticGK.forEach((input) => {
+      console.log("validddd");
+      console.log(input);
+      if (isNaN(input.value) || input.value < 0 || input.value > 100) {
+        input.classList.add("ring-2", "ring-red-700", "p-2");
+      }
+    });
 
-  newplayer.name = name_p;
-  newplayer.rating =  parseInt(((pace +shooting + passing +  dribbling + defending + physical))/6) ;
-  newplayer.photo = photo;
-  newplayer.position = position;
-  newplayer.nationality = nationality;
+    console.log("Formulaire validé avec succès !");
+    newplayer.name = name_p.value.trim();
+    newplayer.rating = parseInt((
+      parseFloat(diving.value) + 
+      parseFloat(handling.value) + 
+      parseFloat(kicking.value) + 
+      parseFloat(reflexes.value) + 
+      parseFloat(speed.value) + 
+      parseFloat(positioning.value)
+    ) / 6);
 
-  newplayer.club = club;
-  newplayer.pace = pace;
-  newplayer.shooting = shooting;
-  newplayer.passing = passing;
-  newplayer.dribbling = dribbling;
-  newplayer.defending = defending;
-  newplayer.physical = physical;
-  newplayer.isActif = false;
-  console.log(id_input);
+    newplayer.photo = photo.value.trim();
+    newplayer.position = position.value;
+    newplayer.nationality = nationality.value.trim();
+    newplayer.club = club.value.trim();
+    newplayer.diving = diving.value.trim();
+    newplayer.handling = handling.value.trim();
+    newplayer.kicking = kicking.value.trim();
+    newplayer.reflexes = reflexes.value.trim();
+    newplayer.speed = speed.value.trim();
+    newplayer.positioning = positioning.value.trim();
+    newplayer.isActif = false;
+    console.log(id_input);
+  } else {
+    const staticplayer = [
+      pace,
+      shooting,
+      passing,
+      dribbling,
+      defending,
+      physical,
+    ];
+    staticplayer.forEach((input) => {
+      console.log("validddd");
+      console.log(input);
+      if (isNaN(input.value) || input.value < 0 || input.value > 100) {
+        input.classList.add("ring-2", "ring-red-700", "p-2");
+      }
+    });
+
+    console.log("Formulaire validé avec succès !");
+    
+    newplayer.name = name_p.value.trim();
+    newplayer.rating = parseInt((
+      parseFloat(pace.value) + 
+      parseFloat(shooting.value) + 
+      parseFloat(passing.value) + 
+      parseFloat(dribbling.value) + 
+      parseFloat(defending.value) + 
+      parseFloat(physical.value)
+    ) / 6);
+    newplayer.photo = name_p.value.trim();
+    newplayer.position = position.value.trim();
+    newplayer.nationality = nationality.value.trim();
+    newplayer.club = club.value.trim();
+    newplayer.pace = pace.value.trim();
+    newplayer.shooting = shooting.value.trim();
+    newplayer.passing = passing.value.trim();
+    newplayer.dribbling = dribbling.value.trim();
+    newplayer.defending = defending.value.trim();
+    newplayer.physical = physical.value.trim();
+    newplayer.isActif = false;
+    console.log(id_input);
+  }
+
+  // gestio entre edit et ajout
   if (id_input.value.trim() == "-1") {
     // Si l'ID est vide
     console.log("id vide :");
@@ -162,13 +203,13 @@ name_p = name_p.value.trim();
 
   localStorage.setItem("players", JSON.stringify(players));
 }
+
 function Affiche(players) {
   ulPlayers.innerHTML = ``;
- // players = players.slice(1,8) ; 
+  // players = players.slice(1,8) ;
   players.forEach((player) => {
     addPlayerToList(player);
   });
-
 }
 
 function addPlayerToList(player) {
@@ -177,7 +218,7 @@ function addPlayerToList(player) {
   ulPlayers.appendChild(li);
 }
 function playerCodeHtml(player) {
-  console.log(player)
+  console.log(player);
   if (player.position == "GK") {
     static = `<div class="statistique"> 
         <div>
@@ -268,33 +309,30 @@ swap_horiz
   return codeHtml;
 }
 
-function afficheOnePlayer(idplayer , el){
-  
-            document.getElementById('modalShowPlayer').classList.remove('hidden');  
-            let player = getPlayer(idplayer);
-            console.log("---pfficheOnePlayer---" ) ; 
-            console.log(player ) ; 
-            document.getElementById("div_1_ShowbadgetPlayer").innerHTML=playerCodeHtml(player) ;
-            document.getElementById("div_2_ShowbadgetPlayer").innerHTML=`            ` ;
+function afficheOnePlayer(idplayer, el) {
+  document.getElementById("modalShowPlayer").classList.remove("hidden");
+  let player = getPlayer(idplayer);
+  console.log("---pfficheOnePlayer---");
+  console.log(player);
+  document.getElementById("div_1_ShowbadgetPlayer").innerHTML =
+    playerCodeHtml(player);
+  document.getElementById("div_2_ShowbadgetPlayer").innerHTML = `            `;
 }
 
-
-const badges = document.querySelectorAll('.badge_gold');
+const badges = document.querySelectorAll(".badge_gold");
 
 // Pour chaque badge, ajouter les événements de survol
-badges.forEach(badge => {
+badges.forEach((badge) => {
   // Lorsque la souris entre dans le badge
-  badge.addEventListener('mouseenter', function() {
-    this.querySelector('.barre').classList.remove('hidden'); // Afficher la barre
+  badge.addEventListener("mouseenter", function () {
+    this.querySelector(".barre").classList.remove("hidden"); // Afficher la barre
   });
 
   // Lorsque la souris quitte le badge
-  badge.addEventListener('mouseleave', function() {
-    this.querySelector('.barre').classList.add('hidden'); // Masquer la barre
+  badge.addEventListener("mouseleave", function () {
+    this.querySelector(".barre").classList.add("hidden"); // Masquer la barre
   });
 });
-
-  
 
 function isValidURL(string) {
   try {
@@ -306,9 +344,7 @@ function isValidURL(string) {
   }
 }
 
-
 function getPlayer(id) {
-
   let player = players.find((p) => p.id == id);
   if (!player) {
     player = playerStad.find((p) => p.id == id && p.isActif === true);
@@ -344,7 +380,7 @@ let selectPlayer = document.getElementById("selectplayer"); // select list conti
 
 let All_icon = document.querySelectorAll(".iconAddPlayerStd"); // Récupérer les icônes "+"
 let divParent = ""; // Badge
- // remplir le select html avec les joueurs adequat avec position
+// remplir le select html avec les joueurs adequat avec position
 function ShowSelectPlayerToStad(event) {
   modalSelectPlayer.classList.remove("hidden");
   divParent = event.target.parentNode;
@@ -356,98 +392,91 @@ function ShowSelectPlayerToStad(event) {
   option.textContent = "Choisir joueur";
   selectPlayer.appendChild(option);
 
-        if( positionINstad=="RST" || positionINstad=="LST"){
-          players.forEach((p) => {
-            if (p.position == "ST" ) {
-              let option = document.createElement("option");
-              option.value = p.id;
-              option.textContent = p.name;
-              selectPlayer.appendChild(option);
-            }
-          });
-        } else if( positionINstad=="LCM" || positionINstad=="RCM"){
-          players.forEach((p) => {
-            if (p.position == "CM" ) {
-              let option = document.createElement("option");
-              option.value = p.id;
-              option.textContent = p.name;
-              selectPlayer.appendChild(option);
-            }
-          });
-         } else if( positionINstad=="LCB" || positionINstad=="RCB"){
-          players.forEach((p) => {
-            if (p.position == "CB" ) {
-              let option = document.createElement("option");
-              option.value = p.id;
-              option.textContent = p.name;
-              selectPlayer.appendChild(option);
-            }
-          });
-         }
-         else if(  positionINstad=="LM" ||  positionINstad=="RM" || positionINstad=="LB" || positionINstad=="RB" || positionINstad=="GK"   ){
-          players.forEach((p) => {
-            if (p.position == positionINstad ) {
-              let option = document.createElement("option");
-              option.value = p.id;
-              option.textContent = p.name;
-              selectPlayer.appendChild(option);
-            }
-          });
-         }
-
-
-
-  
-
+  if (positionINstad == "RST" || positionINstad == "LST") {
+    players.forEach((p) => {
+      if (p.position == "ST") {
+        let option = document.createElement("option");
+        option.value = p.id;
+        option.textContent = p.name;
+        selectPlayer.appendChild(option);
+      }
+    });
+  } else if (positionINstad == "LCM" || positionINstad == "RCM") {
+    players.forEach((p) => {
+      if (p.position == "CM") {
+        let option = document.createElement("option");
+        option.value = p.id;
+        option.textContent = p.name;
+        selectPlayer.appendChild(option);
+      }
+    });
+  } else if (positionINstad == "LCB" || positionINstad == "RCB") {
+    players.forEach((p) => {
+      if (p.position == "CB") {
+        let option = document.createElement("option");
+        option.value = p.id;
+        option.textContent = p.name;
+        selectPlayer.appendChild(option);
+      }
+    });
+  } else if (
+    positionINstad == "LM" ||
+    positionINstad == "RM" ||
+    positionINstad == "LB" ||
+    positionINstad == "RB" ||
+    positionINstad == "GK"
+  ) {
+    players.forEach((p) => {
+      if (p.position == positionINstad) {
+        let option = document.createElement("option");
+        option.value = p.id;
+        option.textContent = p.name;
+        selectPlayer.appendChild(option);
+      }
+    });
+  }
 }
-
 
 All_icon.forEach((AddPlayerStd) => {
   AddPlayerStd.addEventListener("click", ShowSelectPlayerToStad);
 });
 
-
 // ajout player to stadium : et supprime le de reserve  addplayertostad
 selectPlayer.addEventListener("change", function () {
-   idvalue = this.value
+  idvalue = this.value;
   let player = getPlayer(idvalue);
 
-    // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
-    p =  divParent.parentNode ; 
-    console.log(p.getAttribute("id"));
-    player.positionInStade = p.getAttribute("id") ;
-    player.isActif=true
+  // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
+  p = divParent.parentNode;
+  console.log(p.getAttribute("id"));
+  player.positionInStade = p.getAttribute("id");
+  player.isActif = true;
   playerStad.push(player);
-    console.log("-------player in stad-------")
+  console.log("-------player in stad-------");
   console.log(player);
 
-
-  //supprimer le joueur de la list de reserve : 
-  index  =  players.findIndex(p=>( p.id == idvalue )) // si le joueur exist au reserve on le supprime du reserve
-  if(index>-1){
-    players.splice(index , 1) ; 
-    localStorage.setItem("players" , JSON.stringify(players))
+  //supprimer le joueur de la list de reserve :
+  index = players.findIndex((p) => p.id == idvalue); // si le joueur exist au reserve on le supprime du reserve
+  if (index > -1) {
+    players.splice(index, 1);
+    localStorage.setItem("players", JSON.stringify(players));
     Affiche(players);
-    console.log("-------supp reserve player-------")
+    console.log("-------supp reserve player-------");
   }
-  
-  
- // ajout de badge gold de joueur dans le stade 
+
+  // ajout de badge gold de joueur dans le stade
   divParent.parentNode.innerHTML = playerCodeHtml(player);
 
-
-  localStorage.setItem("playerStad" , JSON.stringify(playerStad) );
+  localStorage.setItem("playerStad", JSON.stringify(playerStad));
 });
 
-
-
 /**********  Supprimer le joueur de la liste et de stade ************ */
-function deletedPlayer(idplayer , el) {
+function deletedPlayer(idplayer, el) {
   // let player  = getPlayer(id) ;
   players = players.filter((p) => p.id != idplayer);
   playerStad = playerStad.filter((p) => p.id != idplayer);
   Affiche(players);
-  goPlayerOutStad(idplayer, el)
+  goPlayerOutStad(idplayer, el);
   localStorage.setItem("players", JSON.stringify(players));
   localStorage.setItem("playerstad", JSON.stringify(playerstad));
 }
@@ -478,51 +507,49 @@ function goPlayerOutStad(idplayer, el) {
   badgetGold = el.parentNode.parentNode;
   console.log(badgetGold);
   badgetGold.remove();
-  pl= getPlayer(idplayer) ; 
-  pl.isActif = false ; 
+  pl = getPlayer(idplayer);
+  pl.isActif = false;
+  players.push(pl);
   codehtml = `<div class="badge_black">
     <span onclick="ShowSelectPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
         health_and_safety
     </span>
      </div>`;
   divPositi.innerHTML = codehtml;
-  index = playerStad.findIndex(p=>(p.id = idplayer))
-  playerStad.splice(index , 1) ;
-  localStorage.setItem("playerStad" , JSON.stringify(playerStad) );
-  localStorage.setItem("players" , JSON.stringify(players) );
-  Affiche(players)
+  index = playerStad.findIndex((p) => (p.id = idplayer));
+  playerStad.splice(index, 1);
+  localStorage.setItem("playerStad", JSON.stringify(playerStad));
+  localStorage.setItem("players", JSON.stringify(players));
+  Affiche(players);
 }
 
 /********* change position de joueur *** */
 
-function ChangePosition(idplayer , el){
-        goPlayerOutStad(idplayer, el);
-  // meme code que ajout player au staduim  
-        idvalue = idplayer
-        let player = getPlayer(idvalue);
-          // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
-          p =  divParent.parentNode ; 
-          console.log(p.getAttribute("id"));
-          player.positionInStade = p.getAttribute("id") ;
-          player.isActif=true
-        playerStad.push(player);
-          console.log("-------player in stad-------")
-        console.log(player);
-      
-      
-        //supprimer le joueur de la list de reserve : 
-        index  =  players.findIndex(p=>( p.id == idvalue )) // si le joueur exist au reserve on le supprime du reserve
-        if(index>-1){
-          players.splice(index , 1) ; 
-          localStorage.setItem("players" , JSON.stringify(players))
-          Affiche(players);
-          console.log("-------supp reserve player-------")
-        }
-        
-        
-       // ajout de badge gold de joueur dans le stade 
-        divParent.parentNode.innerHTML = playerCodeHtml(player);
-      
-      
-        localStorage.setItem("playerStad" , JSON.stringify(playerStad) );
+function ChangePosition(idplayer, el) {
+  goPlayerOutStad(idplayer, el);
+  // meme code que ajout player au staduim
+  idvalue = idplayer;
+  let player = getPlayer(idvalue);
+  // vu que la position de joueur peut etre differente de sa position sur le terrain ; on ajout une nouvelle attribut pour designe sa position sur le terrain
+  p = divParent.parentNode;
+  console.log(p.getAttribute("id"));
+  player.positionInStade = p.getAttribute("id");
+  player.isActif = true;
+  playerStad.push(player);
+  console.log("-------player in stad-------");
+  console.log(player);
+
+  //supprimer le joueur de la list de reserve :
+  index = players.findIndex((p) => p.id == idvalue); // si le joueur exist au reserve on le supprime du reserve
+  if (index > -1) {
+    players.splice(index, 1);
+    localStorage.setItem("players", JSON.stringify(players));
+    Affiche(players);
+    console.log("-------supp reserve player-------");
+  }
+
+  // ajout de badge gold de joueur dans le stade
+  divParent.parentNode.innerHTML = playerCodeHtml(player);
+
+  localStorage.setItem("playerStad", JSON.stringify(playerStad));
 }
