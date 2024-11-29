@@ -44,9 +44,7 @@ if (
   JSON.parse(localStorage.getItem("players").length) > 0
 ) {
   players = JSON.parse(localStorage.getItem("players"));
-  id = players.length
-  
-
+  id = JSON.parse(localStorage.getItem("id"))
   players.forEach((player) => {
     console.log(player);
     addPlayerToList(player);
@@ -130,7 +128,8 @@ function AddPlayer(event) {
 
     newplayer.photo = photo.value.trim();
     newplayer.position = position.value;
-    newplayer.nationality = nationality.value.trim();
+    newplayer.flag = nationality.value.trim();
+    newplayer.nationality = nationality.textContent.trim();
     newplayer.club = club.value.trim();
     newplayer.diving = diving.value.trim();
     newplayer.handling = handling.value.trim();
@@ -158,7 +157,9 @@ function AddPlayer(event) {
     });
 
     console.log("Formulaire validé avec succès !");
-    
+    let selectedOption = nationality.options[nationality.selectedIndex];
+   
+
     newplayer.name = name_p.value.trim();
     newplayer.rating = parseInt((
       parseFloat(pace.value) + 
@@ -168,9 +169,10 @@ function AddPlayer(event) {
       parseFloat(defending.value) + 
       parseFloat(physical.value)
     ) / 6);
-    newplayer.photo = name_p.value.trim();
+    newplayer.photo = photo.value.trim();
     newplayer.position = position.value.trim();
-    newplayer.nationality = nationality.value.trim();
+    newplayer.flag = nationality.value.trim();
+    newplayer.nationality = selectedOption.textContent.trim();
     newplayer.club = club.value.trim();
     newplayer.pace = pace.value.trim();
     newplayer.shooting = shooting.value.trim();
@@ -318,21 +320,21 @@ function afficheOnePlayer(idplayer, el) {
     playerCodeHtml(player);
   document.getElementById("div_2_ShowbadgetPlayer").innerHTML = `            `;
 }
-
+showBarre() ; 
+function showBarre(){
 const badges = document.querySelectorAll(".badge_gold");
 
-// Pour chaque badge, ajouter les événements de survol
 badges.forEach((badge) => {
-  // Lorsque la souris entre dans le badge
+
   badge.addEventListener("mouseenter", function () {
-    this.querySelector(".barre").classList.remove("hidden"); // Afficher la barre
+    this.querySelector(".barre").classList.remove("hidden"); 
   });
 
-  // Lorsque la souris quitte le badge
+
   badge.addEventListener("mouseleave", function () {
-    this.querySelector(".barre").classList.add("hidden"); // Masquer la barre
+    this.querySelector(".barre").classList.add("hidden"); 
   });
-});
+});}
 
 function isValidURL(string) {
   try {
@@ -346,8 +348,11 @@ function isValidURL(string) {
 
 function getPlayer(id) {
   let player = players.find((p) => p.id == id);
+  console.table(playerStad) ;  
   if (!player) {
-    player = playerStad.find((p) => p.id == id && p.isActif === true);
+    alert(id);
+    alert(playerStad); 
+    player = playerStad.find((p) => p.id == id && p.isActif == true);
   }
   if (!player) {
     alert("Pas de joueur trouvé");
@@ -466,17 +471,17 @@ selectPlayer.addEventListener("change", function () {
 
   // ajout de badge gold de joueur dans le stade
   divParent.parentNode.innerHTML = playerCodeHtml(player);
-
+  showBarre() ; 
   localStorage.setItem("playerStad", JSON.stringify(playerStad));
 });
 
 /**********  Supprimer le joueur de la liste et de stade ************ */
 function deletedPlayer(idplayer, el) {
   // let player  = getPlayer(id) ;
+  goPlayerOutStad(idplayer, el);
   players = players.filter((p) => p.id != idplayer);
   playerStad = playerStad.filter((p) => p.id != idplayer);
   Affiche(players);
-  goPlayerOutStad(idplayer, el);
   localStorage.setItem("players", JSON.stringify(players));
   localStorage.setItem("playerstad", JSON.stringify(playerstad));
 }
@@ -503,13 +508,17 @@ function showformEdit(idplayer) {
 }
 /********   mettre le joueur hors terrain *********  */
 function goPlayerOutStad(idplayer, el) {
+
   divPositi = el.parentNode.parentNode.parentNode;
-  badgetGold = el.parentNode.parentNode;
-  console.log(badgetGold);
-  badgetGold.remove();
+  badgeGold = el.parentNode.parentNode;
+  console.log(badgeGold);
+  console.log("idplayer : ") ; 
+  console.log(idplayer) ; 
+  badgeGold.remove();
   pl = getPlayer(idplayer);
   pl.isActif = false;
   players.push(pl);
+
   codehtml = `<div class="badge_black">
     <span onclick="ShowSelectPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
         health_and_safety

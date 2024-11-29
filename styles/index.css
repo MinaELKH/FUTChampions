@@ -1,0 +1,184 @@
+
+body {
+    color: rgba(43, 41, 41, 0.858);
+   font-family: 'Montserrat', sans-serif;
+  /* background-image: url('img/terrain.jpg');
+   background-size: 100% 100% ;
+    background-position: center;
+    background-repeat: no-repeat;*/
+ 
+}
+
+.stade { 
+    width: 100%;
+    height: 900px;
+    background-size: 100% 100%;
+    background-image: url('img/stadium_background.webp');
+   /* background-image: url('img/terrain1.jpg');*/
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+.badge_black {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background-size: contain;
+    background-image: url('img/badgeBlack.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 180px;
+    height: 200px;
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+    justify-content: center;
+
+}
+.badge_gold {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background-size: contain;
+    background-image: url('img/badge_gold.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 180px;
+    height: 200px;
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+    justify-content: center;
+
+}
+
+.Score{
+  position: absolute;
+  top:20px;
+  left: 20px;
+  color: rgba(16, 13, 13, 0.642);
+  font-weight: 900;
+  padding: 5px;
+}
+.Score h4{
+    font-size: 20px;
+    font-weight: 900;
+}
+.Score h5{
+    font-size: 16px;
+}
+.flag{
+position: absolute;
+margin:0 auto;
+  top:20px;
+  right: 20px;
+  padding: 5px;
+}
+.flag .nation {
+    width: 20px;
+    height: 20px;
+    margin: 5px 0px;
+}
+.flag .logoClub {
+    width: 24px;
+    height: 24px;
+    margin: 5px 0px;
+}
+
+
+.nom {
+    font-weight: 900;
+    font-size: 16px;
+    text-align: center;
+}
+
+.statistique {
+    display: flex;
+    font-size: 10px;
+    justify-content: center;
+    gap: 2.5px;
+    font-weight:bold;
+}
+
+.statistique div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+.photo {
+    /* w-full h-3/5  mx-auto flex  justify-center ;*/
+    display: flex;
+    width: 80%;
+    height: 50%;
+    margin: 0 auto;
+    justify-content: center;
+
+}
+
+@media(max-width:760px) {
+    .badge_gold {
+        width: 90px;
+        height: 180px;
+        gap: 2px;
+    }
+
+    .ulPlayers   .badge_gold{
+        width: 180px;
+        height: 200px;
+    }
+
+    .badge_black {
+        width: 90px;
+        height: 180px;
+        gap: 2px;
+
+    }
+    .photo {
+        /* w-full h-3/5  mx-auto flex  justify-center ;*/
+        display: flex;
+        width: 40%;
+        height: 30%;
+        margin: 0 auto;
+        justify-content: center;
+
+    }
+
+ .stade   .nom {
+        font-weight: 800;
+        font-size: 8px;
+        text-align: center;
+    }
+
+  .stade  .statistique {
+        flex-wrap: wrap;
+        gap: 2px;
+        font-size: 6px;
+    }
+
+    .stade { 
+    width: 100%;
+    height: 80vh ;
+    background-size: 100% 100%;
+    /*background-image: url('img/stadium_background.webp');*/
+    background-image: url('img/terrain1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+
+.stade .Score{
+  top:25px;
+  left: 0px;
+} 
+
+.stade .flag{
+  top:25px;
+  right: 0px;
+}
+
+}

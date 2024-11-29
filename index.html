@@ -4,180 +4,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="./styles/index.css">-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>FUT</title>
     <script src="js/data.js" defer></script>
     <script src="js/main.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            color: rgba(43, 41, 41, 0.858);
-           font-family: 'Montserrat', sans-serif;
-          /* background-image: url('img/terrain.jpg');
-           background-size: 100% 100% ;
-            background-position: center;
-            background-repeat: no-repeat;*/
-         
+   
+  <style>
+    body {
+        color: rgba(43, 41, 41, 0.858);
+       font-family: 'Montserrat', sans-serif;
+      /* background-image: url('img/terrain.jpg');
+       background-size: 100% 100% ;
+        background-position: center;
+        background-repeat: no-repeat;*/
+     
+    }
+    
+    .stade { 
+        width: 100%;
+        height: 900px;
+        background-size: 100% 100%;
+        background-image: url('img/stadium_background.webp');
+       /* background-image: url('img/terrain1.jpg');*/
+        background-position: center;
+        background-repeat: no-repeat;
         }
-
-        .stade { 
-            width: 100%;
-            height: 900px;
-            background-size: 100% 100%;
-            background-image: url('img/stadium_background.webp');
-           /* background-image: url('img/terrain1.jpg');*/
-            background-position: center;
-            background-repeat: no-repeat;
-            }
-
-        .badge_black {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            background-size: contain;
-            background-image: url('img/badgeBlack.webp');
-            background-position: center;
-            background-repeat: no-repeat;
-            width: 180px;
-            height: 200px;
-            position: relative;
-            justify-content: center;
-            justify-items: center;
-            justify-content: center;
-
-        }
+    
+    .badge_black {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        background-size: contain;
+        background-image: url('img/badgeBlack.webp');
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 180px;
+        height: 200px;
+        position: relative;
+        justify-content: center;
+        justify-items: center;
+        justify-content: center;
+    
+    }
+    .badge_gold {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        background-size: contain;
+        background-image: url('img/badge_gold.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 180px;
+        height: 200px;
+        position: relative;
+        justify-content: center;
+        justify-items: center;
+        justify-content: center;
+    
+    }
+    
+    .Score{
+      position: absolute;
+      top:20px;
+      left: 20px;
+      color: rgba(16, 13, 13, 0.642);
+      font-weight: 900;
+      padding: 5px;
+    }
+    .Score h4{
+        font-size: 20px;
+        font-weight: 900;
+    }
+    .Score h5{
+        font-size: 16px;
+    }
+    .flag{
+    position: absolute;
+    margin:0 auto;
+      top:20px;
+      right: 20px;
+      padding: 5px;
+    }
+    .flag .nation {
+        width: 20px;
+        height: 20px;
+        margin: 5px 0px;
+    }
+    .flag .logoClub {
+        width: 24px;
+        height: 24px;
+        margin: 5px 0px;
+    }
+    
+    
+    .nom {
+        font-weight: 900;
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    .statistique {
+        display: flex;
+        font-size: 10px;
+        justify-content: center;
+        gap: 2.5px;
+        font-weight:bold;
+    }
+    
+    .statistique div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    
+    
+    
+    
+    .photo {
+        /* w-full h-3/5  mx-auto flex  justify-center ;*/
+        display: flex;
+        width: 80%;
+        height: 50%;
+        margin: 0 auto;
+        justify-content: center;
+    
+    }
+    
+    @media(max-width:760px) {
         .badge_gold {
-            display: flex;
-            flex-direction: column;
+            width: 90px;
+            height: 180px;
             gap: 2px;
-            background-size: contain;
-            background-image: url('img/badge_gold.png');
-            background-position: center;
-            background-repeat: no-repeat;
+        }
+    
+        .ulPlayers   .badge_gold{
             width: 180px;
             height: 200px;
-            position: relative;
-            justify-content: center;
-            justify-items: center;
-            justify-content: center;
-
         }
-
-        .Score{
-          position: absolute;
-          top:20px;
-          left: 20px;
-          color: rgba(16, 13, 13, 0.642);
-          font-weight: 900;
-          padding: 5px;
+    
+        .badge_black {
+            width: 90px;
+            height: 180px;
+            gap: 2px;
+    
         }
-        .Score h4{
-            font-size: 20px;
-            font-weight: 900;
-        }
-        .Score h5{
-            font-size: 16px;
-        }
-      .flag{
-        position: absolute;
-        margin:0 auto;
-          top:20px;
-          right: 20px;
-          padding: 5px;
-      }
-        .flag .nation {
-            width: 20px;
-            height: 20px;
-            margin: 5px 0px;
-        }
-        .flag .logoClub {
-            width: 24px;
-            height: 24px;
-            margin: 5px 0px;
-        }
-
-
-        .nom {
-            font-weight: 900;
-            font-size: 12px;
-            text-align: center;
-        }
-
-        .statistique {
-            display: flex;
-            font-size: 10px;
-            justify-content: center;
-            gap: 2.5px;
-            font-weight:bold;
-        }
-      
-        .statistique div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-      
-
-       
-
         .photo {
             /* w-full h-3/5  mx-auto flex  justify-center ;*/
             display: flex;
-            width: 80%;
-            height: 50%;
+            width: 40%;
+            height: 30%;
             margin: 0 auto;
             justify-content: center;
-
+    
         }
-
-        @media(max-width:760px) {
-            .badge_gold {
-                width: 90px;
-                height: 180px;
-                gap: 2px;
-            }
-            .badge_black {
-                width: 90px;
-                height: 180px;
-                gap: 2px;
-
-            }
-            .photo {
-                /* w-full h-3/5  mx-auto flex  justify-center ;*/
-                display: flex;
-                width: 40%;
-                height: 30%;
-                margin: 0 auto;
-                justify-content: center;
-
-            }
-
-            .nom {
-                font-weight: 800;
-                font-size: 12px;
-                text-align: center;
-            }
-
-            .statistique {
-                flex-wrap: wrap;
-                gap: 2px;
-                font-size: 6px;
-            }
-
-            .stade { 
-            width: 100%;
-            height: 80vh ;
-            background-size: 100% 100%;
-            /*background-image: url('img/stadium_background.webp');*/
-            background-image: url('img/terrain1.jpg');
-            background-position: center;
-            background-repeat: no-repeat;
-            }
-
+    
+     .stade   .nom {
+            font-weight: 800;
+            font-size: 8px;
+            text-align: center;
         }
+    
+      .stade  .statistique {
+            flex-wrap: wrap;
+            gap: 2px;
+            font-size: 6px;
+        }
+    
+        .stade { 
+        width: 100%;
+        height: 80vh ;
+        background-size: 100% 100%;
+        /*background-image: url('img/stadium_background.webp');*/
+        background-image: url('img/terrain1.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        }
+    
+    
+    .stade .Score{
+      top:25px;
+      left: 0px;
+    } 
+    
+    .stade .flag{
+      top:25px;
+      right: 0px;
+    }
+    
+    }
     </style>
 </head>
 
@@ -208,34 +226,37 @@
                     <div>
                         <label for="nationality" class="block font-medium mb-1">Nationalité</label>
                         <select id="nationality" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
-                            <option value="Portugal">Portugal</option>
-                            <option value="Belgium">Belgium</option>
-                            <option value="France">France</option>
-                            <option value="Netherlands">Netherlands</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Brazil">Brazil</option>
-                            <option value="Egypt">Egypt</option>
-                            <option value="Croatia">Croatia</option>
-                            <option value="Morocco">Morocco</option>
-                            <option value="Norway">Norway</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Argentina">Argentina</option>
+                            <option value="https://cdn.sofifa.net/flags/pt.png">Portugal</option>
+                            <option value="https://cdn.sofifa.net/flags/be.png">Belgium</option>
+                            <option value="https://cdn.sofifa.net/flags/fr.png">France</option>
+                            <option value="https://cdn.sofifa.net/flags/nl.png">Netherlands</option>
+                            <option value="https://cdn.sofifa.net/flags/de.png">Germany</option>
+                            <option value="https://cdn.sofifa.net/flags/br.png">Brazil</option>
+                            <option value="https://cdn.sofifa.net/flags/eg.png">Egypt</option>
+                            <option value="https://cdn.sofifa.net/flags/hr.png">Croatia</option>
+                            <option value="https://cdn.sofifa.net/flags/ma.png">Morocco</option>
+                            <option value="https://cdn.sofifa.net/flags/no.png">Norway</option>
+                            <option value="https://cdn.sofifa.net/flags/ca.png">Canada</option>
+                            <option value="https://cdn.sofifa.net/flags/ar.png">Argentina</option>
                         </select>
                     </div>
                     <div>   <div>
                         <label for="club" class="block font-medium mb-1">Club</label>
                         <select id="club" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
-                            <option value="Real Madrid">Real Madrid</option>
-                            <option value="FC Barcelona">FC Barcelona</option>
-                            <option value="Manchester United">Manchester United</option>
-                            <option value="Paris Saint-Germain">Paris Saint-Germain</option>
-                            <option value="Bayern Munich">Bayern Munich</option>
-                            <option value="Chelsea">Chelsea</option>
-                            <option value="Juventus">Juventus</option>
-                            <option value="Liverpool">Liverpool</option>
-                            <option value="AC Milan">AC Milan</option>
-                            <option value="Inter Milan">Inter Milan</option>
-                            <option value="Inter Miami">Inter Miami</option>
+                            <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Real Madrid</option>
+                            <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain</option>
+                            <option value="https://cdn.sofifa.net/meta/team/2506/120.png">Al Nassr</option>
+                            <option value="https://cdn.sofifa.net/players/239/085/25_120.png">Manchester City</option>
+                            <option value="https://cdn.sofifa.net/meta/team/7011/120.png">Al-Hilal</option>
+                            <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
+                            <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain</option>
+                            <option value="https://cdn.sofifa.net/meta/team/503/120.png">Bayern Munich</option>
+                            <option value="https://cdn.sofifa.net/meta/team/7980/120.png">Atletico Madrid</option>
+                            <option value="https://cdn.sofifa.net/meta/team/476/120.png">Al-Ittihad</option>
+                            <option value="https://cdn.sofifa.net/flags/gb-eng.png">Liverpool</option>
+                            <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
+                            <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Inter Miami</option>
+                            <option value="https://cdn.sofifa.net/meta/team/88/120.png">Fenerbahçe</option>
                             
                         </select>
                     </div></div>
@@ -342,9 +363,6 @@
         </div>
     </div>
     
-
-
-
     <!--selectio player -->
     <div id="modalSelectPlayer" class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
         <div class="relative p-5 shadow-xl rounded-lg bg-white w-full sm:w-1/3">
@@ -373,7 +391,6 @@
         </div>
     </div>
 
-  
     <header class="bg-gradient-to-r from-[#7F020F] via-[#6B0209] to-[#7F0000] bg-top flex justify-between   ">
         <img src="img/logo.png" class="w-16 h-16" alt="Logo">
    
@@ -406,7 +423,9 @@
     <section>
         <div class="flex flex-col lg:flex-row lg:px-[20px] gap-20 relative justify-center text-center">  
             <!--show player -->
-            <div class="stade mx-auto px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full lg:w-4/5 border-4  border-green-400">
+            <div>       <span class="block text-[#7F020F] text-2xl font-semibold p-8 bg-gray-100  mp-4">  Formation d'équipe   : 4-4-2 </span>
+            <div class="stade  px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full lg:w-full border-4  border-green-400">
+         
                 <div id='RST' class="STR col-start-2">
                     <div class="badge_black">
                         <span   class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
@@ -509,11 +528,11 @@
                 </div>
 
             </div>
-
+        </div>
             <div class="w-full  lg:w-1/3  bg-gray-200 bg-opacity-50  relative">
                 <div class=" text-[#7F020F] text-2xl font-semibold p-8 bg-gray-100  mb-5">  les Joueurs en Reserve </div>
                 <div  class=" h-[850px] overflow-auto">
-                    <ul id="ulPlayers" class="  grid grid-cols-2 gap-5 justify-items-center mx-auto " >
+                    <ul id="ulPlayers" class="ulPlayers  grid grid-cols-2  justify-items-center " >
                  
                     </ul>
                 </div>
