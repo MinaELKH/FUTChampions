@@ -183,35 +183,31 @@
 
 <body class="min-h-screen  w-full bg-[url('img/bg1.png')] h-full  bg-cover bg-no-repeat    justify-center  ">
   
-    <div id="modalFormPlayer" class="hidden fixed inset-0 flex items-center z-50 justify-center  bg-white bg-opacity-50  ">
-        <div class="relative  p-5 shadow-xl rounded-lg bg-[#7F020F] self-center bg-opacity-80 text-white overflow-y-auto  lg:w-1/4">
-            <span id="closeForm" class="absolute right-5 text-white material-symbols-outlined cursor-pointer">cancel</span>
-            <h2 class="text-xl font-bold mb-4">Joueur</h2>
-            <p id="pargErreur" class="hidden text-sm font-semibold px-4 m-2 text-red-900 border bg-gray-200 bg-opacity-70 border-red-400"></p>
-            <form class="flex flex-col gap-1 p-4 bg-white shadow-lg rounded-lg border border-gray-300 text-[12px]  ">
-                <input id="id_input" type="text" value="-1">
-                
-                <!-- Nom -->
-                <div class="flex items-center gap-4">
-                    <label for="name" class="font-semibold text-gray-700 w-1/3">Nom</label>
-                    <input id="name_input" type="text" placeholder="Name" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 w-2/3" required>
+  
+    <div id="modalFormPlayer" class="hidden fixed inset-0 flex items-center z-50 justify-center bg-white bg-opacity-50">
+        <div class="relative p-6 shadow-xl rounded-lg bg-white text-gray-900 overflow-y-auto lg:w-1/3">
+            <span id="closeForm" class="absolute right-4 top-4 text-gray-600 hover:text-gray-900 cursor-pointer material-symbols-outlined text-2xl">cancel</span>
+            <h2 class="text-2xl font-bold mb-6 text-center text-yellow-500"> Joueur</h2>
+            <p id="pargErreur" class="hidden text-sm font-semibold px-4 py-2 mb-4 text-red-700 bg-red-100 border border-red-400 rounded"></p>
+            <form class="flex flex-col gap-4">
+                <input id="id_input" type="hidden" value="-1">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+                <div>
+                    <label for="name" class="block font-medium mb-1">Nom</label>
+                    <input id="name_input" type="text" placeholder="Nom du joueur" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
                 </div>
-    
-                <!-- Note -->
-                <div class="flex items-center gap-4">
-                    <label for="rating" class="font-semibold text-gray-700 w-1/3">Note</label>
-                    <input id="rating" type="text" placeholder="rating" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 w-2/3" required>
+                <div>
+                    <label for="photo" class="block font-medium mb-1">Photo</label>
+                    <input id="photo" type="text" placeholder="URL de la photo" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
                 </div>
-    
-                <!--  photo -- Nationalite -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="flex flex-col">
-                        <label for="photo" class="font-semibold text-gray-700">Photo</label>
-                        <input id="photo" type="url" placeholder="https://exemple/nat.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="nationality" class="font-semibold text-gray-700">Nationalité</label>
-                       <select name="nationality" id="nationality">
+             
+                </div>
+              
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="nationality" class="block font-medium mb-1">Nationalité</label>
+                        <select id="nationality" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
                             <option value="Portugal">Portugal</option>
                             <option value="Belgium">Belgium</option>
                             <option value="France">France</option>
@@ -223,27 +219,38 @@
                             <option value="Morocco">Morocco</option>
                             <option value="Norway">Norway</option>
                             <option value="Canada">Canada</option>
+                            <option value="Argentina">Argentina</option>
                         </select>
                     </div>
+                    <div>   <div>
+                        <label for="club" class="block font-medium mb-1">Club</label>
+                        <select id="club" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                            <option value="Real Madrid">Real Madrid</option>
+                            <option value="FC Barcelona">FC Barcelona</option>
+                            <option value="Manchester United">Manchester United</option>
+                            <option value="Paris Saint-Germain">Paris Saint-Germain</option>
+                            <option value="Bayern Munich">Bayern Munich</option>
+                            <option value="Chelsea">Chelsea</option>
+                            <option value="Juventus">Juventus</option>
+                            <option value="Liverpool">Liverpool</option>
+                            <option value="AC Milan">AC Milan</option>
+                            <option value="Inter Milan">Inter Milan</option>
+                            <option value="Inter Miami">Inter Miami</option>
+                            
+                        </select>
+                    </div></div>
                 </div>
     
-                <!-- Flag et Club -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="flex flex-col">
-                        <label for="flag" class="font-semibold text-gray-700">Flag</label>
-                        <input id="flag" type="url" placeholder="https://exemple/flag.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="club" class="font-semibold text-gray-700">Club</label>
-                        <input id="club" type="url" placeholder="https://exemple/club.png" required class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
-                    </div>
-                </div>
+            
+               
+                 
+             
     
                 <!-- Position -->
-                <div class="flex items-center gap-4">
-                    <label for="position" class="font-semibold text-gray-700 w-1/3">Position</label>
-                    <select id="position" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 w-2/3 focus:outline-none focus:ring focus:ring-blue-400" required>
-                        <option value="">Position</option>
+                <div>
+                    <label for="position" class="block font-medium mb-1">Position</label>
+                    <select id="position" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                        <option value="">Choisissez une position</option>
                         <optgroup label="Gardien">
                             <option value="GK">Gardien (GK)</option>
                         </optgroup>
@@ -269,74 +276,77 @@
                     </select>
                 </div>
     
-                <!-- Statistiques du joueur -->
-                <div id="statistique_player" class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
-                    <!-- Ces champs seront alignés de la même manière -->
-                    <div class="flex flex-col">
-                        <label for="pace" class="font-semibold text-gray-700">Pace</label>
-                        <input id="pace" type="text" placeholder="Pace" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="shooting" class="font-semibold text-gray-700">Shooting</label>
-                        <input id="shooting" type="text" placeholder="Shooting" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="passing" class="font-semibold text-gray-700">Passing</label>
-                        <input id="passing" type="text" placeholder="Passing" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="dribbling" class="font-semibold text-gray-700">Dribbling</label>
-                        <input id="dribbling" type="text" placeholder="Dribbling" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="defending" class="font-semibold text-gray-700">Defending</label>
-                        <input id="defending" type="text" placeholder="Defending" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="physical" class="font-semibold text-gray-700">Physical</label>
-                        <input id="physical" type="text" placeholder="Physical" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                </div>
-    
-                <!-- Statistiques du Gardien -->
-                <div id="statistique_GK" class="hidden grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
-                    <!-- Ces champs seront également alignés sur la même ligne -->
-                    <div class="flex flex-col">
-                        <label for="diving" class="font-semibold text-gray-700">Diving</label>
-                        <input id="diving" type="text" value="81" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="handling" class="font-semibold text-gray-700">Handling</label>
-                        <input id="handling" type="text" value="82" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="kicking" class="font-semibold text-gray-700">Kicking</label>
-                        <input id="kicking" type="text" value="77" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="reflexes" class="font-semibold text-gray-700">Reflexes</label>
-                        <input id="reflexes" type="text" value="89" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="speed" class="font-semibold text-gray-700">Speed</label>
-                        <input id="speed" type="text" value="64" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="positioning" class="font-semibold text-gray-700">Positioning</label>
-                        <input id="positioning" type="text" value="77" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-                    </div>
-                </div>
-    
-                <!-- Buttons -->
-                <div class="flex justify-between items-center mt-4">
-                    <button id="submitplayer" class="text-white bg-[#7F020F] hover:bg-red-800 font-semibold text-sm p-2.5 rounded-lg w-full">Ajouter</button>
+          
+               
+           <!-- Statistiques du joueur -->
+           <div id="statistique_player"  class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-yellow-500 text-xs rounded-lg p-4">
+       
+            <div class="flex flex-col">
+                <label for="pace" class="font-semibold text-gray-700">Pace</label>
+                <input id="pace" type="text" placeholder="Pace" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="shooting" class="font-semibold text-gray-700">Shooting</label>
+                <input id="shooting" type="text" placeholder="Shooting" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="passing" class="font-semibold text-gray-700">Passing</label>
+                <input id="passing" type="text" placeholder="Passing" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="dribbling" class="font-semibold text-gray-700">Dribbling</label>
+                <input id="dribbling" type="text" placeholder="Dribbling" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="defending" class="font-semibold text-gray-700">Defending</label>
+                <input id="defending" type="text" placeholder="Defending" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="physical" class="font-semibold text-gray-700">Physical</label>
+                <input id="physical" type="text" placeholder="Physical" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+        </div>
+
+        <!-- Statistiques du Gardien -->
+        <div id="statistique_GK" class="hidden grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
+          
+            <div class="flex flex-col">
+                <label for="diving" class="font-semibold text-gray-700">Diving</label>
+                <input id="diving" type="text" value="81" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="handling" class="font-semibold text-gray-700">Handling</label>
+                <input id="handling" type="text" value="82" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="kicking" class="font-semibold text-gray-700">Kicking</label>
+                <input id="kicking" type="text" value="77" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="reflexes" class="font-semibold text-gray-700">Reflexes</label>
+                <input id="reflexes" type="text" value="89" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="speed" class="font-semibold text-gray-700">Speed</label>
+                <input id="speed" type="text" value="64" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="positioning" class="font-semibold text-gray-700">Positioning</label>
+                <input id="positioning" type="text" value="77" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+            </div>
+        </div>         
+                <div class="flex justify-center">
+                    <button id="submitplayer" class="w-full bg-[#7F020F] hover:bg-red-700 text-white font-bold py-2 rounded-lg">Valider</button>
                 </div>
             </form>
         </div>
     </div>
     
+
+
+
     <!--selectio player -->
-    <div id="modalSelectPlayer" class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
+    <div id="modalSelectPlayer3" class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
         <div class="relative p-5 shadow-xl rounded-lg bg-white w-full sm:w-1/3">
             <span id="closeSelectPlayer" class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
             

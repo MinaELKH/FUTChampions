@@ -5,17 +5,21 @@ let ulPlayers = document.getElementById("ulPlayers");
 
 let id_input = document.getElementById("id_input"); //, input type hidden utliisable lors de modification
 let name_p = document.getElementById("name_input");
-let rating = document.getElementById("rating");
+//let rating = document.getElementById("rating");
 let photo = document.getElementById("photo");
 let nationality = document.getElementById("nationality");
-let flag = document.getElementById("flag");
 let club = document.getElementById("club");
+
+
 let pace = document.getElementById("pace");
 let shooting = document.getElementById("shooting");
 let passing = document.getElementById("passing");
 let dribbling = document.getElementById("dribbling");
 let defending = document.getElementById("defending");
 let physical = document.getElementById("physical");
+
+
+
 let position = document.getElementById("position");
 let statistique_GK = document.getElementById("statistique_GK");
 let statistique_player = document.getElementById("statistique_player");
@@ -84,6 +88,9 @@ document.getElementById("position").addEventListener("change", function () {
     console.log(this.value);
     statistique_GK.classList.remove("hidden");
     statistique_player.classList.add("hidden");
+  }else{
+    statistique_GK.classList.add("hidden");
+    statistique_player.classList.remove("hidden");
   }
 });
 //ajout player
@@ -91,70 +98,41 @@ document.getElementById("submitplayer").addEventListener("click", AddPlayer);
 
 function AddPlayer(event) {
   event.preventDefault();
-  name_p = name_p.value.trim();
-  rating = rating.value.trim();
-  photo = photo.value.trim();
-  nationality = nationality.value.trim();
-  flag = flag.value.trim();
-  club = club.value.trim();
-  pace = pace.value.trim();
-  shooting = shooting.value.trim();
-  passing = passing.value.trim();
-  dribbling = dribbling.value.trim();
-  defending = defending.value.trim();
-  physical = physical.value.trim();
-  position = position.value.trim();
-   
-  if (
-    !name_p ||
-    !rating ||
-    !photo ||
-    !nationality ||
-    !flag ||
-    !club ||
-    !rating ||
-    !pace ||
-    !shooting ||
-    !passing ||
-    !dribbling ||
-    !defending ||
-    !physical
-  ) {
-    alert("Veuillez remplir tous les champs obligatoires !");
-    return;
+ 
+
+const staticplayer = [pace, shooting, passing, dribbling, defending, physical];
+
+staticplayer.forEach(input => {
+  console.log("validddd")
+  console.log(input)
+  if (isNaN(input.value) || input.value < 0 || input.value > 100) {
+    input.classList.add('ring-2', 'ring-red-700', 'p-2');
   }
-  if (
-    !isValidURL(photo) ||
-    !isValidURL(nationality) ||
-    !isValidURL(flag) ||
-    !isValidURL(club)
-  ) {
-    alert("Veuillez entrer des URL valides pour Nationality, Flag et Club !");
-    return;
-  }
-  if (
-    isNaN(rating) ||
-    isNaN(pace) ||
-    isNaN(shooting) ||
-    isNaN(passing) ||
-    isNaN(dribbling) ||
-    isNaN(defending) ||
-    isNaN(physical)
-  ) {
-    alert("Les statistiques doivent être des nombres !");
-    return;
-  }
+});
+
+name_p = name_p.value.trim();
+ photo = photo.value.trim();
+ nationality = nationality.value.trim();
+ club = club.value.trim();
+ pace = pace.value.trim();
+ shooting = shooting.value.trim();
+ passing = passing.value.trim();
+ dribbling = dribbling.value.trim();
+ defending = defending.value.trim();
+ physical = physical.value.trim();
+ position = position.value.trim();
+
 
   console.log("Formulaire validé avec succès !");
 
   let newplayer = {};
 
   newplayer.name = name_p;
-  newplayer.rating = rating;
+  newplayer.rating =  parseInt(((pace +shooting + passing +  dribbling + defending + physical))/6) ;
   newplayer.photo = photo;
   newplayer.position = position;
   newplayer.nationality = nationality;
-  newplayer.flag = flag;
+
   newplayer.club = club;
   newplayer.pace = pace;
   newplayer.shooting = shooting;
@@ -482,11 +460,10 @@ function showformEdit(idplayer) {
   //remplir les inputs de formulaire a partir de player
   name_p.value = player.name;
   id_input.value = player.id;
-  rating.value = player.rating;
+  //rating.value = player.rating;
   photo.value = player.photo;
   position.value = player.position;
   nationality.value = player.nationality;
-  flag.value = player.flag;
   club.value = player.club;
   pace.value = player.pace;
   shooting.value = player.shooting;
