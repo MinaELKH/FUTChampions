@@ -2,7 +2,7 @@ let erreurForm = document.getElementById("pargErreur");
 let FormPlayer = document.getElementById("modalFormPlayer");
 let modalSelectPlayer = document.getElementById("modalSelectPlayer");
 let ulPlayers = document.getElementById("ulPlayers");
-
+let formulaire = document.getElementById("formulaire") ;
 let id_input = document.getElementById("id_input"); //, input type hidden utliisable lors de modification
 let name_p = document.getElementById("name_input");
 //let rating = document.getElementById("rating");
@@ -27,6 +27,7 @@ let speed = document.getElementById("speed");
 let positioning = document.getElementById("positioning");
 
 let position = document.getElementById("position");
+let divPosition = document.getElementById("divPosition");
 let statistique_GK = document.getElementById("statistique_GK");
 let statistique_player = document.getElementById("statistique_player");
 
@@ -60,12 +61,18 @@ if (
 
 if ( localStorage.getItem("playerStad") && JSON.parse(localStorage.getItem("playerStad").length) > 0) {
   playerStad = JSON.parse(localStorage.getItem("playerStad"));
-  console.log(" table stade player a supprimer "  ) ;
-    console.table(playerStad);
-  playerStad.forEach((pl) => {
-    document.getElementById(pl.positionInStade).innerHTML = playerCodeHtml(pl);
-  });
+      afficheStade(playerStad ) ; 
+
 }
+
+function afficheStade(playerStad ) {
+playerStad.forEach((pl) => {
+  document.getElementById(pl.positionInStade).innerHTML = playerCodeHtml(pl);
+});
+   showBarre();
+   formulaire.reset(); 
+}
+
 Affiche(players);
 /************************************* */
 
@@ -76,7 +83,14 @@ document.getElementById("closeForm").addEventListener("click", function () {
   FormPlayer.classList.add("hidden");
   pargErreur.classList.add("hidden");
   pargErreur.innerHTML = "";
+  document.querySelectorAll(".inputformulaire").forEach(input => {
+      input.classList.remove("ring-2", "ring-red-700");
+    })
 });
+
+
+
+
 document
   .getElementById("closeShowPlayer")
   .addEventListener("click", function () {
@@ -109,10 +123,14 @@ document.getElementById("position").addEventListener("change", function () {
 /************************************************** */
 
 //ajout player  ajouplayer
+
+
+/**  validation  */
 function validation(){
   let valid = true ; 
   alert(valid);
  const validText = /^[A-Za-z\s'-]+$/;
+
  if (!validText.test(name_p.value)) {
    name_p.classList.add("ring-2", "ring-red-700", "p-2");
    valid = false ; 
@@ -134,31 +152,55 @@ function validation(){
    if (position.value == "GK") {
    let staticGK = [diving, handling, kicking, reflexes, speed, positioning];
      staticGK.forEach((input) => {
-    
-   
-     if (isNaN(input.value) || input.value < 0 || input.value > 100) {
-       input.classList.add("ring-2", "ring-red-700", "p-2");
-       valid = false ; 
-     }
+      const value = parseInt(input.value); 
+      if (isNaN(value) || value < 0 || value > 100 || input.value.trim() === "") {
+        input.classList.add("ring-2", "ring-red-700", "p-2");
+        valid = false;
+      } else {
+        input.classList.remove("ring-2", "ring-red-700", "p-2");
+      }
    });
    }else {
    const staticplayer = [pace,shooting,passing, dribbling, defending, physical];
    staticplayer.forEach((input) => {
-     if (isNaN(input.value) || input.value < 0 || input.value > 100) {
-       input.classList.add("ring-2", "ring-red-700", "p-2");
-       valid=false ; 
-     }
+    const value = parseInt(input.value); 
+    if (isNaN(value) || value < 0 || value > 100 || input.value.trim() === "") {
+      input.classList.add("ring-2", "ring-red-700", "p-2");
+      valid = false;
+    } else {
+      input.classList.remove("ring-2", "ring-red-700", "p-2");
+    }
    });
    
   
   /** si l un des input pas valid affiche message  */
-    if(!valid) { pargErreur.classList.remove("hidden") ; 
+    if(!valid) { 
+      pargErreur.classList.remove("hidden") ; 
      pargErreur.innerHTML = "Veuillez verifier votre formulaire" ;
-      console.log("Erreur ")}
-
     }
+    else {
+      pargErreur.classList.add("hidden") ; 
+    }
+    }
+  
     return valid ; 
 }
+
+
+/**  validation changement de champs ne reste pas rouge  */
+initformulaire()
+function initformulaire(){
+document.querySelectorAll(".inputformulaire").forEach(field => {
+  field.addEventListener("input", () => {
+    field.classList.remove("ring-2", "ring-red-700");
+  });
+  field.addEventListener("change", () => {
+    field.classList.remove("ring-2", "ring-red-700");
+  });
+});
+
+}
+
 document.getElementById("submitplayer").addEventListener("click", AddPlayer);
 
 function AddPlayer(event) {
@@ -215,23 +257,34 @@ if (valid) {
    Affiche(players);
    localStorage.setItem("players", JSON.stringify(players));
     FormPlayer.classList.add("hidden") ;
-    document.getElementById("formulaire").reset();
+    formulaire.reset();
  } else if( valid) {  // Si l id_input  different de -1  alors edit
 
    console.log("id input : " + id_input.value);
    
    let playerMod = getPlayer(id_input.value);
 
-      newplayer.isActif = true; 
+      
       newplayer.id = id_input.value ; 
-      newplayer.positionInStade = playerMod.positionInStade ; 
+    
 
    if(playerMod.isActif==true){  // supprimer le joueur existant et ajout new player
-      index = playerStad.indexOf(p=>(p.id ==  id_input.value))
+      
+    newplayer.isActif = true; 
+    newplayer.position =playerMod.position ; 
+    newplayer.positionInStade = playerMod.positionInStade ; 
+    index = playerStad.findIndex(p=>p.id ==  id_input.value) ;
        playerStad.splice(index, 1, newplayer);
+       afficheStade(playerStad ) ; 
    }else if(playerMod.isActif==false){
-        index = players.indexOf(p=>(p.id ==  id_input.value))
-        players.splice(index, 1, newplayer);
+     
+        newplayer.isActif = false; 
+        index1 = players.findIndex(p => p.id == id_input.value);
+        console.table(players ) ;
+        console.log("je suis not actif" + index1  +" id : "+ id_input.value ) ;
+
+        players.splice(index1, 1, newplayer);
+        Affiche(players) ; 
    }
    
    localStorage.setItem("players", JSON.stringify(players));
@@ -257,10 +310,10 @@ function addPlayerToList(player) {
 
 function Affiche(players) {
   ulPlayers.innerHTML = ``;
-  // players = players.slice(1,8) ;
   players.forEach((player) => {
     addPlayerToList(player);
   });
+  formulaire.reset(); 
   showBarre();
 }
 
@@ -535,7 +588,7 @@ function showformEdit(idplayer) {
   console.log(idplayer);
   document.getElementById("modalFormPlayer").classList.remove("hidden");
   let player = getPlayer(idplayer);
-  console.log(player);
+  console.table(players);
   //remplir les inputs de formulaire a partir de player
   name_p.value = player.name;
   id_input.value = player.id;
@@ -550,6 +603,14 @@ function showformEdit(idplayer) {
   dribbling.value = player.dribbling;
   defending.value = player.defending;
   physical.value = player.physical;
+   console.log(player) ; 
+  if(player.isActif==true){
+    alert("position actif")
+    divPosition.classList.add("hidden"); 
+  } else {
+    alert("position in actif  : " + player.isActif)
+    divPosition.classList.remove("hidden") ;
+  }
 }
 /********   mettre le joueur hors terrain *********  */
 function goPlayerOutStad(idplayer, el) {

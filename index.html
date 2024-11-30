@@ -216,11 +216,11 @@
               
                 <div>
                     <label for="name" class="block font-medium mb-1">Nom</label>
-                    <input id="name_input" type="text" placeholder="Nom du joueur" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
+                    <input id="name_input" type="text" placeholder="Nom du joueur" class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
                 </div>
                 <div>
                     <label for="photo" class="block font-medium mb-1">Photo</label>
-                    <input id="photo" type="text" placeholder="URL de la photo" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
+                    <input id="photo" type="text" placeholder="URL de la photo" class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
                 </div>
              
                 </div>
@@ -228,7 +228,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="nationality" class="block font-medium mb-1">Nationalité</label>
-                        <select id="nationality" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                        <select id="nationality" class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                            <option value="">Choisir Nationalité</option>
                             <option value="https://cdn.sofifa.net/flags/pt.png">Portugal</option>
                             <option value="https://cdn.sofifa.net/flags/be.png">Belgium</option>
                             <option value="https://cdn.sofifa.net/flags/fr.png">France</option>
@@ -245,7 +246,8 @@
                     </div>
                     <div>   <div>
                         <label for="club" class="block font-medium mb-1">Club</label>
-                        <select id="club" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                        <select id="club" class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                            <option value="">Choisir Club</option>
                             <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Real Madrid</option>
                             <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain</option>
                             <option value="https://cdn.sofifa.net/meta/team/2506/120.png">Al Nassr</option>
@@ -256,7 +258,7 @@
                             <option value="https://cdn.sofifa.net/meta/team/503/120.png">Bayern Munich</option>
                             <option value="https://cdn.sofifa.net/meta/team/7980/120.png">Atletico Madrid</option>
                             <option value="https://cdn.sofifa.net/meta/team/476/120.png">Al-Ittihad</option>
-                            <option value="https://cdn.sofifa.net/flags/gb-eng.png">Liverpool</option>
+                            <option value="https://cdn.sofifa.net/meta/team/8/120.pngg">Liverpool</option>
                             <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
                             <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Inter Miami</option>
                             <option value="https://cdn.sofifa.net/meta/team/88/120.png">Fenerbahçe</option>
@@ -271,9 +273,9 @@
              
     
                 <!-- Position -->
-                <div>
-                    <label for="position" class="block font-medium mb-1">Position</label>
-                    <select id="position" class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                <div id="divPosition" class="">
+                    <label for="position" class=" block font-medium mb-1">Position</label>
+                    <select id="position" class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
                         <option value="">Choisissez une position</option>
                         <optgroup label="Gardien">
                             <option value="GK">Gardien (GK)</option>
@@ -281,21 +283,23 @@
                         <optgroup label="Défense">
                             <option value="LB">Latéral gauche (LB)</option>
                             <option value="RB">Latéral droit (RB)</option>
-                            <option value="LCB">Défenseur central gauche (LCB)</option>
-                            <option value="RCB">Défenseur central droit (RCB)</option>
+                           <!--<option value="LCB">Défenseur central gauche (LCB)</option>
+                            <option value="RCB">Défenseur central droit (RCB)</option>-->
+                            <option value="CB">Défenseur central (CB)</option>
                         </optgroup>
                         <optgroup label="Milieu">
                             <option value="CM">Milieu central (CM)</option>
-                            <option value="LCM">Milieu central gauche (LCM)</option>
-                            <option value="RCM">Milieu central droit (RCM)</option>
+                            <!--<option value="LCM">Milieu central gauche (LCM)</option>
+                            <option value="RCM">Milieu central droit (RCM)</option>-->
                             <option value="LM">Milieu gauche (LM)</option>
                             <option value="RM">Milieu droit (RM)</option>
                         </optgroup>
                         <optgroup label="Attaque">
                             <option value="LW">Ailier gauche (LW)</option>
                             <option value="RW">Ailier droit (RW)</option>
-                            <option value="LST">Attaquant gauche (LST)</option>
-                            <option value="RST">Attaquant droit (RST)</option>
+                            <option value="ST">Attaquant(ST)</option>
+                            <!--<option value="LST">Attaquant gauche (LST)</option>
+                            <option value="RST">Attaquant droit (RST)</option>-->
                         </optgroup>
                     </select>
                 </div>
@@ -307,27 +311,27 @@
        
             <div class="flex flex-col">
                 <label for="pace" class="font-semibold text-gray-700">Pace</label>
-                <input id="pace" type="text" placeholder="Pace" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="pace" type="text" placeholder="Pace" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="shooting" class="font-semibold text-gray-700">Shooting</label>
-                <input id="shooting" type="text" placeholder="Shooting" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="shooting" type="text" placeholder="Shooting" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="passing" class="font-semibold text-gray-700">Passing</label>
-                <input id="passing" type="text" placeholder="Passing" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="passing" type="text" placeholder="Passing" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="dribbling" class="font-semibold text-gray-700">Dribbling</label>
-                <input id="dribbling" type="text" placeholder="Dribbling" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="dribbling" type="text" placeholder="Dribbling" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="defending" class="font-semibold text-gray-700">Defending</label>
-                <input id="defending" type="text" placeholder="Defending" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="defending" type="text" placeholder="Defending" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="physical" class="font-semibold text-gray-700">Physical</label>
-                <input id="physical" type="text" placeholder="Physical" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="physical" type="text" placeholder="Physical" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
         </div>
 
@@ -336,15 +340,15 @@
           
             <div class="flex flex-col">
                 <label for="diving" class="font-semibold text-gray-700">Diving</label>
-                <input id="diving" type="text" value="81" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="diving" type="text" value="81" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="handling" class="font-semibold text-gray-700">Handling</label>
-                <input id="handling" type="text" value="82" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="handling" type="text" value="82" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="kicking" class="font-semibold text-gray-700">Kicking</label>
-                <input id="kicking" type="text" value="77" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="kicking" type="text" value="77" class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="reflexes" class="font-semibold text-gray-700">Reflexes</label>
@@ -352,11 +356,11 @@
             </div>
             <div class="flex flex-col">
                 <label for="speed" class="font-semibold text-gray-700">Speed</label>
-                <input id="speed" type="text" value="64" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="speed" type="text" value="64" class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
             <div class="flex flex-col">
                 <label for="positioning" class="font-semibold text-gray-700">Positioning</label>
-                <input id="positioning" type="text" value="77" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
+                <input id="positioning" type="text" value="77" class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
             </div>
         </div>         
                 <div class="flex justify-center">
