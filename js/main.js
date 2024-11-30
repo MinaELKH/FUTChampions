@@ -46,25 +46,27 @@ if (
   players = JSON.parse(localStorage.getItem("players"));
   id = JSON.parse(localStorage.getItem("id"))
   players.forEach((player) => {
-    console.log(player);
     addPlayerToList(player);
   });
 } else {
-  players = data_players;
+ data_players.forEach(p=>{ //on ajout des donnees de joueurs fictif avce isactif = false car il sont ajout a la liste de reserve
+     p.isActif = false; 
+     players.push(p); 
+
+})
   localStorage.setItem("players", JSON.stringify(players)); //stock players fictitives dans local storage
 }
 /******  local storage joueur sur terrain */
 
-if (
-  localStorage.getItem("playerStad") &&
-  JSON.parse(localStorage.getItem("playerStad").length) > 0
-) {
+if ( localStorage.getItem("playerStad") && JSON.parse(localStorage.getItem("playerStad").length) > 0) {
   playerStad = JSON.parse(localStorage.getItem("playerStad"));
+  console.log(" table stade player a supprimer "  ) ;
+    console.table(playerStad);
   playerStad.forEach((pl) => {
     document.getElementById(pl.positionInStade).innerHTML = playerCodeHtml(pl);
   });
 }
-
+Affiche(players);
 /************************************* */
 
 document.getElementById("btnOpenForm").addEventListener("click", function () {
@@ -72,8 +74,8 @@ document.getElementById("btnOpenForm").addEventListener("click", function () {
 });
 document.getElementById("closeForm").addEventListener("click", function () {
   FormPlayer.classList.add("hidden");
-  // erreurForm1.classList.add("hidden");
-  // erreurForm1.innerHTML = "";
+  pargErreur.classList.add("hidden");
+  pargErreur.innerHTML = "";
 });
 document
   .getElementById("closeShowPlayer")
@@ -89,9 +91,9 @@ document
   });
 
 document.getElementById("position").addEventListener("change", function () {
-  console.log(this.value);
+
   if (this.value == "GK") {
-    console.log(this.value);
+
     statistique_GK.classList.remove("hidden");
     statistique_player.classList.add("hidden");
   } else {
@@ -99,112 +101,159 @@ document.getElementById("position").addEventListener("change", function () {
     statistique_player.classList.remove("hidden");
   }
 });
-//ajout player
+
+
+/************************************************** */
+/************************************************** */
+/************************************************** */
+/************************************************** */
+
+//ajout player  ajouplayer
+function validation(){
+  let valid = true ; 
+  alert(valid);
+ const validText = /^[A-Za-z\s'-]+$/;
+ if (!validText.test(name_p.value)) {
+   name_p.classList.add("ring-2", "ring-red-700", "p-2");
+   valid = false ; 
+ } 
+ if (position.value === "") {
+   position.classList.add("ring-2", "ring-red-700", "p-2");
+   valid = false ; 
+ } 
+
+ if (club.value === "") {
+   club.classList.add("ring-2", "ring-red-700", "p-2");
+   valid = false ; 
+ } 
+ if (nationality.value === "") {
+   nationality.classList.add("ring-2", "ring-red-700", "p-2");
+   valid = false ; 
+ } 
+
+   if (position.value == "GK") {
+   let staticGK = [diving, handling, kicking, reflexes, speed, positioning];
+     staticGK.forEach((input) => {
+    
+   
+     if (isNaN(input.value) || input.value < 0 || input.value > 100) {
+       input.classList.add("ring-2", "ring-red-700", "p-2");
+       valid = false ; 
+     }
+   });
+   }else {
+   const staticplayer = [pace,shooting,passing, dribbling, defending, physical];
+   staticplayer.forEach((input) => {
+     if (isNaN(input.value) || input.value < 0 || input.value > 100) {
+       input.classList.add("ring-2", "ring-red-700", "p-2");
+       valid=false ; 
+     }
+   });
+   
+  
+  /** si l un des input pas valid affiche message  */
+    if(!valid) { pargErreur.classList.remove("hidden") ; 
+     pargErreur.innerHTML = "Veuillez verifier votre formulaire" ;
+      console.log("Erreur ")}
+
+    }
+    return valid ; 
+}
 document.getElementById("submitplayer").addEventListener("click", AddPlayer);
 
 function AddPlayer(event) {
-  event.preventDefault();
-  let newplayer = {};
-  if (position.value == "GK") {
-    let staticGK = [diving, handling, kicking, reflexes, speed, positioning];
-      staticGK.forEach((input) => {
-      console.log("validddd");
-      console.log(input);
-      if (isNaN(input.value) || input.value < 0 || input.value > 100) {
-        input.classList.add("ring-2", "ring-red-700", "p-2");
-      }
-    });
+ event.preventDefault();
+ let newplayer = {};
+let valid = validation() ; 
 
-    console.log("Formulaire validé avec succès !");
-    newplayer.name = name_p.value.trim();
-    newplayer.rating = parseInt((
-      parseFloat(diving.value) + 
-      parseFloat(handling.value) + 
-      parseFloat(kicking.value) + 
-      parseFloat(reflexes.value) + 
-      parseFloat(speed.value) + 
-      parseFloat(positioning.value)
-    ) / 6);
+alert(valid);
+// cree objet player 
+if (valid) {
+ console.log("Formulaire validé avec succès !");
+ let selectedOption = nationality.options[nationality.selectedIndex];
+ let selectedOptionClub = club.options[club.selectedIndex];
+ newplayer.name = name_p.value.trim();
+ newplayer.photo = photo.value.trim();
+ newplayer.position = position.value.trim();
+ newplayer.flag = nationality.value.trim();
+ newplayer.nationality = selectedOption.textContent.trim();
+ newplayer.club = selectedOptionClub.textContent.trim();
+ newplayer.logo = club.value.trim();
 
-    newplayer.photo = photo.value.trim();
-    newplayer.position = position.value;
-    newplayer.flag = nationality.value.trim();
-    newplayer.nationality = nationality.textContent.trim();
-    newplayer.club = club.value.trim();
-    newplayer.diving = diving.value.trim();
-    newplayer.handling = handling.value.trim();
-    newplayer.kicking = kicking.value.trim();
-    newplayer.reflexes = reflexes.value.trim();
-    newplayer.speed = speed.value.trim();
-    newplayer.positioning = positioning.value.trim();
-    newplayer.isActif = false;
-    console.log(id_input);
-  } else {
-    const staticplayer = [
-      pace,
-      shooting,
-      passing,
-      dribbling,
-      defending,
-      physical,
-    ];
-    staticplayer.forEach((input) => {
-      console.log("validddd");
-      console.log(input);
-      if (isNaN(input.value) || input.value < 0 || input.value > 100) {
-        input.classList.add("ring-2", "ring-red-700", "p-2");
-      }
-    });
 
-    console.log("Formulaire validé avec succès !");
-    let selectedOption = nationality.options[nationality.selectedIndex];
-   
-
-    newplayer.name = name_p.value.trim();
-    newplayer.rating = parseInt((
-      parseFloat(pace.value) + 
-      parseFloat(shooting.value) + 
-      parseFloat(passing.value) + 
-      parseFloat(dribbling.value) + 
-      parseFloat(defending.value) + 
-      parseFloat(physical.value)
-    ) / 6);
-    newplayer.photo = photo.value.trim();
-    newplayer.position = position.value.trim();
-    newplayer.flag = nationality.value.trim();
-    newplayer.nationality = selectedOption.textContent.trim();
-    newplayer.club = club.value.trim();
-    newplayer.pace = pace.value.trim();
-    newplayer.shooting = shooting.value.trim();
-    newplayer.passing = passing.value.trim();
-    newplayer.dribbling = dribbling.value.trim();
-    newplayer.defending = defending.value.trim();
-    newplayer.physical = physical.value.trim();
-    newplayer.isActif = false;
-    console.log(id_input);
-  }
-
-  // gestio entre edit et ajout
-  if (id_input.value.trim() == "-1") {
-    // Si l'ID est vide
-    console.log("id vide :");
-    console.log(id_input.value);
-    id++;
-    newplayer.id = id; // Incrémente l'ID puis ajoute
-    players.push(newplayer);
-    localStorage.setItem("id", id);
-    addPlayerToList(newplayer);
-  } else {
-    // Si l'ID n'est pas vide
-    let index = players.findIndex((p) => p.id == id_input.value);
-    players.splice(index, 1, newplayer); // Modifie le joueur existant
-    Affiche(players);
-    console.log("id pas vide :");
-    console.log(id_input.value);
-  }
-
-  localStorage.setItem("players", JSON.stringify(players));
+ if (position.value === "GK") { // gardien
+     newplayer.rating = parseInt(( parseFloat(diving.value) +parseFloat(handling.value) +parseFloat(kicking.value) +parseFloat(reflexes.value) + parseFloat(speed.value) +parseFloat(positioning.value)) / 6);
+     newplayer.diving = diving.value.trim();
+     newplayer.handling = handling.value.trim();
+     newplayer.kicking = kicking.value.trim();
+     newplayer.reflexes = reflexes.value.trim();
+     newplayer.speed = speed.value.trim();
+     newplayer.positioning = positioning.value.trim();
+ } else { // joueur
+     newplayer.rating = parseInt(( parseFloat(pace.value) +  parseFloat(shooting.value) + parseFloat(passing.value) + parseFloat(dribbling.value) + parseFloat(defending.value) +parseFloat(physical.value)) / 6);
+     newplayer.pace = pace.value.trim();
+     newplayer.shooting = shooting.value.trim();
+     newplayer.passing = passing.value.trim();
+     newplayer.dribbling = dribbling.value.trim();
+     newplayer.defending = defending.value.trim();
+     newplayer.physical = physical.value.trim();
+ }
 }
+
+
+/******************* */
+/*     ajout ou  edit */
+/******************* */
+ if (id_input.value.trim() == "-1" && valid) {  // ajout new player
+   // si l id  est vide don ajout 
+   id++;
+   newplayer.id = id; // Incrémente l'ID puis ajoute
+   newplayer.isActif = false;
+   players.push(newplayer);
+   localStorage.setItem("id", id);
+   addPlayerToList(newplayer);
+   Affiche(players);
+   localStorage.setItem("players", JSON.stringify(players));
+    FormPlayer.classList.add("hidden") ;
+    document.getElementById("formulaire").reset();
+ } else if( valid) {  // Si l id_input  different de -1  alors edit
+
+   console.log("id input : " + id_input.value);
+   
+   let playerMod = getPlayer(id_input.value);
+
+      newplayer.isActif = true; 
+      newplayer.id = id_input.value ; 
+      newplayer.positionInStade = playerMod.positionInStade ; 
+
+   if(playerMod.isActif==true){  // supprimer le joueur existant et ajout new player
+      index = playerStad.indexOf(p=>(p.id ==  id_input.value))
+       playerStad.splice(index, 1, newplayer);
+   }else if(playerMod.isActif==false){
+        index = players.indexOf(p=>(p.id ==  id_input.value))
+        players.splice(index, 1, newplayer);
+   }
+   
+   localStorage.setItem("players", JSON.stringify(players));
+   localStorage.setItem("playerStad" , JSON.stringify(playerStad));
+   localStorage.setItem("id" , JSON.stringify(id))
+   FormPlayer.classList.add("hidden") ;
+   document.getElementById("formulaire").reset();
+
+ }
+}
+/************************************************** */
+/************************************************** */
+/************************************************** */
+/************************************************** */
+
+function addPlayerToList(player) {
+  let li = document.createElement("li");
+  li.innerHTML = playerCodeHtml(player);
+  ulPlayers.appendChild(li);
+}
+
+
 
 function Affiche(players) {
   ulPlayers.innerHTML = ``;
@@ -212,15 +261,14 @@ function Affiche(players) {
   players.forEach((player) => {
     addPlayerToList(player);
   });
+  showBarre();
 }
 
-function addPlayerToList(player) {
-  let li = document.createElement("li");
-  li.innerHTML = playerCodeHtml(player);
-  ulPlayers.appendChild(li);
-}
+
+
+
 function playerCodeHtml(player) {
-  console.log(player);
+  //console.log(player);
   if (player.position == "GK") {
     static = `<div class="statistique"> 
         <div>
@@ -347,12 +395,11 @@ function isValidURL(string) {
 }
 
 function getPlayer(id) {
+  alert("id get : " +  id );
   let player = players.find((p) => p.id == id);
-  console.table(playerStad) ;  
+ // console.table(players.find((p) => p.id == id)) ;  
   if (!player) {
-    alert(id);
-    alert(playerStad); 
-    player = playerStad.find((p) => p.id == id && p.isActif == true);
+    player = playerStad.find((p) => p.id == id);
   }
   if (!player) {
     alert("Pas de joueur trouvé");
@@ -360,26 +407,7 @@ function getPlayer(id) {
 
   return player;
 }
-/*function getPlayer(id) {
-  let index = players.findIndex((p) => p.id == id);
-  let index1 = playerStad.findIndex((p) => (p.id == id &&  p.isActif==true));
-  let player;
-  if (index > -1 ) {
-    player = players[index];
-  } else if (index1 > -1 ) {
-    player = playerStad[index];
-  } else {
-    alert("pas de getplayer");
-  }
 
-  return player;
-}*/
-/*
-function getPlayer(id) {
-  index = players.findIndex((p) => p.id == id);
-  let player = players[index];
-  return player;
-}*/
 //select  player to stadium
 let selectPlayer = document.getElementById("selectplayer"); // select list contient le nom d players
 
@@ -446,7 +474,7 @@ All_icon.forEach((AddPlayerStd) => {
   AddPlayerStd.addEventListener("click", ShowSelectPlayerToStad);
 });
 
-// ajout player to stadium : et supprime le de reserve  addplayertostad
+/********** ajout player to stadium : et supprime le de reserve  addplayertostad   **/
 selectPlayer.addEventListener("change", function () {
   idvalue = this.value;
   let player = getPlayer(idvalue);
@@ -474,16 +502,33 @@ selectPlayer.addEventListener("change", function () {
   showBarre() ; 
   localStorage.setItem("playerStad", JSON.stringify(playerStad));
 });
-
 /**********  Supprimer le joueur de la liste et de stade ************ */
 function deletedPlayer(idplayer, el) {
-  // let player  = getPlayer(id) ;
-  goPlayerOutStad(idplayer, el);
-  players = players.filter((p) => p.id != idplayer);
-  playerStad = playerStad.filter((p) => p.id != idplayer);
-  Affiche(players);
+
+  let player  = getPlayer(idplayer) ;                                           /************** */
+  if(player.isActif){  
+   /* si le joueur est sur stade, on va supprim node parent */  
+   divPositi = el.parentNode.parentNode.parentNode;   
+   badgeGold = el.parentNode.parentNode;
+   badgeGold.remove();
+   codehtml = `<div class="badge_black">
+     <span onclick="ShowSelectPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+         health_and_safety
+     </span>
+      </div>`;
+    
+    divPositi.innerHTML = codehtml;
+    playerStad = playerStad.filter((p) => p.id != idplayer);
+    pla = playerStad.filter((p) => p.id != 1000004)
+    localStorage.setItem("playerStad", JSON.stringify(playerStad)); 
+  }
+  else{
+    console.log("not actif" +  idplayer  + "voila id")
+    players = players.filter((p) => p.id != idplayer);
+    Affiche(players); 
   localStorage.setItem("players", JSON.stringify(players));
-  localStorage.setItem("playerstad", JSON.stringify(playerstad));
+  }
+  showBarre() ; 
 }
 
 function showformEdit(idplayer) {
@@ -511,9 +556,6 @@ function goPlayerOutStad(idplayer, el) {
 
   divPositi = el.parentNode.parentNode.parentNode;
   badgeGold = el.parentNode.parentNode;
-  console.log(badgeGold);
-  console.log("idplayer : ") ; 
-  console.log(idplayer) ; 
   badgeGold.remove();
   pl = getPlayer(idplayer);
   pl.isActif = false;

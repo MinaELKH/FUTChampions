@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Concevoir une application web de gestion d'équipe Ultimate Team pour EA FC 25">
+    <meta name="keywords" content="foot, formation, Real, equipe, Ultimate Team">
+    <meta name="author" content="Mina">
     <!--<link rel="stylesheet" href="./styles/index.css">-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +14,7 @@
     <script src="js/data.js" defer></script>
     <script src="js/main.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-   
+    <link rel="icon" href="img/logo1.jpg" type="image/x-icon">
   <style>
     body {
         color: rgba(43, 41, 41, 0.858);
@@ -207,7 +210,7 @@
             <span id="closeForm" class="absolute right-4 top-4 text-gray-600 hover:text-gray-900 cursor-pointer material-symbols-outlined text-2xl">cancel</span>
             <h2 class="text-2xl font-bold mb-6 text-center text-yellow-500"> Joueur</h2>
             <p id="pargErreur" class="hidden text-sm font-semibold px-4 py-2 mb-4 text-red-700 bg-red-100 border border-red-400 rounded"></p>
-            <form class="flex flex-col gap-4">
+            <form id="formulaire" class="flex flex-col gap-4">
                 <input id="id_input" type="hidden" value="-1">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               
@@ -392,7 +395,7 @@
     </div>
 
     <header class="bg-gradient-to-r from-[#7F020F] via-[#6B0209] to-[#7F0000] bg-top flex justify-between   ">
-        <img src="img/logo.png" class="w-16 h-16" alt="Logo">
+        <img src="img/logo.png" class="w-20 h-20 mx-16" alt="Logo">
    
     </header>
 
@@ -400,23 +403,12 @@
         <div class="grid   items-center">
             <!-- menu -->
             <div
-                class=" flex  gap-5  m-2.5  p-2 border-b-2 border-y-indigo-300 text-red-900  cursor-pointer  hover:text-green-500 ">
+                class=" flex  gap-5  m-2.5  p-2 border-b-2 border-y-indigo-300 text-red-900   ">
 
-                <span id="btnOpenForm" class="material-symbols-outlined ">
+                <span id="btnOpenForm" class="material-symbols-outlined cursor-pointer  hover:text-green-500">
                     add_task
                 </span>
-                <span id="btnImport" class="material-symbols-outlined">
-                    playlist_add_check_circle
-                </span>
-                <span id="btn_statistic" class="material-symbols-outlined ">
-                    bar_chart_4_bars
-                </span>
-                <span id="btn_tri" class="material-symbols-outlined">
-                    sort_by_alpha
-                </span>
-                <span id="btn_filtre" class="   material-symbols-outlined"> tune
-                </span>
-
+          
             </div>
     </section>
     <!--main-->
@@ -541,6 +533,82 @@
 
         </div>
     </section>
+
+
+ 
+
+
+
+        <footer>
+            <!-- top footer -->
+            <section class=" flex flex-col md:flex-row items-center justify-between px-8 md:px-40 mb-5 ">
+                <img src="img/logo.png" width="100" alt="logo" >
+                <div class="text-[#F7E0A1]">
+                    <h3 class="text-lg font-semibold">Follow us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#"><i class='bx bxl-facebook-circle'></i></a>
+                        <a href="#"><i class='bx bxl-pinterest'></i></a>
+                        <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </section>
+            <div class="px-10">
+                <hr class="border-t border-[#F7E0A1] opacity-80">
+            </div>
+            
+        
+            <!-- footer-body -->
+            <section class="relative  flex flex-col md:flex-row justify-between gap-10 sm:gap-20 px-14 py-10">
+                <div class="flex flex-col sm:flex-row gap-10 md:gap-20 w-full">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">LATEST SQUADS</h3>
+                        <hr class="border-t-4 border-[#F7E0A1] opacity-80 w-20 ">
+                        <div class="text-lg">
+                            <div><a href="#" class="text-white ">FC Pro</a></div>
+                            <div><a href="#" class="text-white ">Team Of The Week 10</a></div>
+                            <div><a href="#" class="text-white">Track Stars</a></div>
+                            <div><a href="#" class="text-white">Team Of The Week 9</a></div>
+                            <div><a href="#" class="text-white">Ballon d'Or</a></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">USEFUL LINKS</h3>
+                        <hr class="border-t-4 border-[#F7E0A1] opacity-80 w-20 ">
+                        <div class="text-lg">
+                            <a href="#" class="text-white hover:text-customDarkBrown">Squad Builder</a>
+                            <div><a href="#" class="text-white ">SBC</a></div>
+                            <div><a href="#" class="text-white ">EA FC 25 Players</a></div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="flex flex-col sm:flex-row gap-10 md:gap-10 sm:gap-4 w-full">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">FUTBIN APPLICATIONS</h3>
+                        <hr class="border-t-4 border-[#F7E0A1] opacity-80 w-20 ">
+                        <div  class="text-lg">
+                            <a href="#" class="text-white hover:text-customDarkBrown">FUTBIN For Android</a>
+                            <div><a href="#" class="text-white hover:text-customDarkBrown">FUTBIN For Ios</a>
+                            </div><a href="#" class="text-white hover:text-customDarkBrown">More Details</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </section>
+            <div class="px-10">
+                <hr class="border-t border-[#F7E0A1] opacity-80">
+            </div>
+        
+            <!-- footer-bottom -->
+            <div class="text-center pt-4 ">
+                <p class="text-[#F7E0A1] font-semibold bg-[#70010B] p-4">© 2025-2030 Copyright FIFA
+                </p>
+            </div>
+    
+        </footer>
 
 
 
