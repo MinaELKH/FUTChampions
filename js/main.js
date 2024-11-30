@@ -1,7 +1,9 @@
 let erreurForm = document.getElementById("pargErreur");
 let FormPlayer = document.getElementById("modalFormPlayer");
 let modalSelectPlayer = document.getElementById("modalSelectPlayer");
+let modalChoixPlayer = document.getElementById("modalChoixPlayer");
 let ulPlayers = document.getElementById("ulPlayers");
+let ulChoixPlayers = document.getElementById("ulChoixPlayers");
 let formulaire = document.getElementById("formulaire") ;
 let id_input = document.getElementById("id_input"); //, input type hidden utliisable lors de modification
 let name_p = document.getElementById("name_input");
@@ -98,11 +100,13 @@ document
     // erreurForm1.classList.add("hidden");
     // erreurForm1.innerHTML = "";
   });
-document
-  .getElementById("closeSelectPlayer")
-  .addEventListener("click", function () {
+document.getElementById("closeSelectPlayer").addEventListener("click", function () {
     modalSelectPlayer.classList.add("hidden");
   });
+  document.getElementById("closeChoixPlayer").addEventListener("click", function () {
+    modalChoixPlayer.classList.add("hidden");
+  });
+
 
 document.getElementById("position").addEventListener("change", function () {
 
@@ -305,6 +309,11 @@ function addPlayerToList(player) {
   li.innerHTML = playerCodeHtml(player);
   ulPlayers.appendChild(li);
 }
+function addPlayerModalChoixPlayer(player) {
+  let li = document.createElement("li");
+  li.innerHTML = playerCodeHtml(player);
+  ulChoixPlayers.appendChild(li);
+}
 
 
 
@@ -464,7 +473,7 @@ function getPlayer(id) {
 //select  player to stadium
 let selectPlayer = document.getElementById("selectplayer"); // select list contient le nom d players
 
-let All_icon = document.querySelectorAll(".iconAddPlayerStd"); // Récupérer les icônes "+"
+let All_iconAddPlayerStd = document.querySelectorAll(".iconAddPlayerStd"); // Récupérer les icônes "+"
 let divParent = ""; // Badge
 // remplir le select html avec les joueurs adequat avec position
 function ShowSelectPlayerToStad(event) {
@@ -523,8 +532,53 @@ function ShowSelectPlayerToStad(event) {
   }
 }
 
-All_icon.forEach((AddPlayerStd) => {
-  AddPlayerStd.addEventListener("click", ShowSelectPlayerToStad);
+
+function ShowModalChoixPlayer(event) {
+  modalChoixPlayer.classList.remove("hidden");
+  divParent = event.target.parentNode;
+  let x = divParent.parentNode;
+  let positionINstad = x.getAttribute("id");
+ 
+
+  ulChoixPlayers.innerHTML="" ; 
+
+  if (positionINstad == "RST" || positionINstad == "LST") {
+    players.forEach((p) => {
+      if (p.position == "ST") {
+       addPlayerModalChoixPlayer(p);
+      }
+    });
+  } else if (positionINstad == "LCM" || positionINstad == "RCM") {
+    players.forEach((p) => {
+      if (p.position == "CM") {
+      
+        addPlayerModalChoixPlayer(p);
+      }
+    });
+  } else if (positionINstad == "LCB" || positionINstad == "RCB") {
+    players.forEach((p) => {
+      if (p.position == "CB") {
+        addPlayerModalChoixPlayer(p);
+      }
+    });
+  } else if (
+    positionINstad == "LM" ||
+    positionINstad == "RM" ||
+    positionINstad == "LB" ||
+    positionINstad == "RB" ||
+    positionINstad == "GK"
+  ) {
+    players.forEach((p) => {
+      if (p.position == positionINstad) {
+        addPlayerModalChoixPlayer(p) ; ;
+      }
+    });
+  }
+}
+
+
+All_iconAddPlayerStd.forEach((AddPlayerStd) => {
+  AddPlayerStd.addEventListener("click", ShowModalChoixPlayer);
 });
 
 /********** ajout player to stadium : et supprime le de reserve  addplayertostad   **/
@@ -565,7 +619,7 @@ function deletedPlayer(idplayer, el) {
    badgeGold = el.parentNode.parentNode;
    badgeGold.remove();
    codehtml = `<div class="badge_black">
-     <span onclick="ShowSelectPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+     <span onclick="ShowModalChoixPlayer(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
          health_and_safety
      </span>
       </div>`;
@@ -623,7 +677,7 @@ function goPlayerOutStad(idplayer, el) {
   players.push(pl);
 
   codehtml = `<div class="badge_black">
-    <span onclick="ShowSelectPlayerToStad(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+    <span onclick=" ShowModalChoixPlayer(event)" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
         health_and_safety
     </span>
      </div>`;
