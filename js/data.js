@@ -1,4 +1,24 @@
 const data_players = [
+  
+
+{
+  id: 10000022,
+  name: "Hakim Ziyech",
+  photo: "https://cdn.sofifa.net/players/208/670/24_120.png",
+  position: "RW",
+  nationality: "Morocco",
+  flag: "https://cdn.sofifa.net/flags/ma.png",
+  club: "Galatasaray",
+  logo: "https://cdn.sofifa.net/meta/team/325/120.png",
+  rating: 83,
+  pace: 72,
+  shooting: 76,
+  passing: 87,
+  dribbling: 85,
+  defending: 50,
+  physical: 58
+
+} ,
   {
     id: 1000001,
     name: "Lionel Messi",
@@ -121,7 +141,7 @@ const data_players = [
   {
     id: 1000008,
     name: "Mohamed Salah",
-    photo: "https://cdn.sofifa.net/players/192/985/25_120.png",
+    photo: "https://cdn.sofifa.net/players/209/331/24_120.png",
     position: "RW",
     nationality: "Egypt",
     flag: "https://cdn.sofifa.net/flags/eg.png",
