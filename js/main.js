@@ -325,6 +325,7 @@ function AddPlayer(event) {
     localStorage.setItem("players", JSON.stringify(players));
     FormPlayer.classList.add("hidden");
     formulaire.reset();
+    messageConfirmation("ajout");
     // cas 2 => edition  :  dans l edition il y a deux cas : soit joueur en reserve soit sur le terrain
   } else if (valid) {
     // Si l id_input  different de -1  alors edit
@@ -341,11 +342,13 @@ function AddPlayer(event) {
       playerStad.splice(index, 1, newplayer);
       afficheStade(playerStad);
       // cas 2 : joueur en reserve
+      messageConfirmation("edit");
     } else if (playerMod.isActif == false) {
       newplayer.isActif = false;
       index1 = players.findIndex((p) => p.id == id_input.value);
       players.splice(index1, 1, newplayer);
       Affiche(players);
+      messageConfirmation("edit");
     }
 
     localStorage.setItem("players", JSON.stringify(players));
@@ -545,7 +548,8 @@ function deletedPlayer(idplayer, event) {
                         <button  value="${positionTerrain}" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                             health_and_safety
                         </button>
-                    </div>`;
+                    </div>
+                     <h2 class="block text-white text-xl font-semibold text-center" > ${player.position} </h2>`;
     divPosition.innerHTML = codehtml;
     // on ajout event listener a la nouvelle icone
     divPosition
@@ -572,6 +576,7 @@ function deletedPlayer(idplayer, event) {
 function goPlayerOutStad(idplayer, event) {
   // preseque meme code de supprimer avec une difference que on sauvgarde l joueur en reserve
   //on supprime le badge puis on ajout le badget noir avec +
+  pl = getPlayer(idplayer);
   divPosition = event.target.parentNode.parentNode.parentNode;
   let positionTerrain = divPosition.getAttribute("id");
   badgeGold = event.target.parentNode.parentNode;
@@ -580,14 +585,15 @@ function goPlayerOutStad(idplayer, event) {
                       <button  value="${positionTerrain}" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                           health_and_safety
                       </button>
-                  </div>`;
+                  </div>
+                  <h2 class="block text-white  text-xl font-semibold text-center" > ${pl.position} </h2>`;
   divPosition.innerHTML = codehtml;
   divPosition
     .querySelector(".iconAddPlayerStd")
     .addEventListener("click", ShowModalChoixPlayer);
 
   // on recupere le joueur et on fait des modifications  et on l ajout au reserve
-  pl = getPlayer(idplayer);
+  //pl = getPlayer(idplayer);
   pl.isActif = false;
   pl.positionInStade = "";
   players.push(pl);
@@ -1178,5 +1184,20 @@ function compteurJoueurStad(){
 document.getElementById("closeFelicitation").addEventListener('click' , function() {
   document.getElementById("ModalFelicitation").classList.add("hidden") ; 
 })
+/*------------------------------------------------------------------------------------ */
+/*                               Modal affichage de message de felicitaion joueur ajoute    :                                          */
+/*------------------------------------------------------------------------------------- */
+function messageConfirmation(action) {
+  document.getElementById("ModalFelicitationAjoutEdit").classList.remove("hidden");
+  
+  if (action == "edit") {
+    document.getElementById("div_ModalFelicitationAjoutEdit").innerHTML = `<h4>Le joueur a été bien modifié.</h4>`;
+  } else if (action == "ajout") {
+    document.getElementById("div_ModalFelicitationAjoutEdit").innerHTML = `<h4>Le joueur a été bien ajouté.</h4>`;
+  }
+}
 
-
+// Fermeture du modal
+document.getElementById("closeModalFelicitationAjoutEdit").addEventListener("click", function() {
+  document.getElementById("ModalFelicitationAjoutEdit").classList.add("hidden");
+});
