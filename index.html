@@ -7,7 +7,7 @@
     <meta name="description" content="Concevoir une application web de gestion d'équipe Ultimate Team pour EA FC 25">
     <meta name="keywords" content="foot, formation, Real, equipe, Ultimate Team">
     <meta name="author" content="Mina">
-    <!--<link rel="stylesheet" href="./styles/index.css">-->
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>FUT</title>
@@ -15,220 +15,311 @@
     <script src="js/main.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="img/logo1.jpg" type="image/x-icon">
-  <style>
-    body {
-        color: rgba(43, 41, 41, 0.858);
-       font-family: 'Montserrat', sans-serif;
-      /* background-image: url('img/terrain.jpg');
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"> <!-- icon reseau sociaux-->
+    <link rel="stylesheet" href="./styles/index.css" />
+
+    <style>
+        body {
+            color: rgba(43, 41, 41, 0.858);
+            font-family: 'Montserrat', sans-serif;
+            /* background-image: url('img/terrain.jpg');
        background-size: 100% 100% ;
         background-position: center;
         background-repeat: no-repeat;*/
-     
-    }
-    
-    .stade { 
-        width: 100%;
-        height: 900px;
-        background-size: 100% 100%;
-        background-image: url('img/stadium_background.webp');
-       /* background-image: url('img/terrain1.jpg');*/
-        background-position: center;
-        background-repeat: no-repeat;
+
         }
-    
-    .badge_black {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        background-size: contain;
-        background-image: url('img/badgeBlack.webp');
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 180px;
-        height: 200px;
-        position: relative;
-        justify-content: center;
-        justify-items: center;
-        justify-content: center;
-    
-    }
-    .badge_gold {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        background-size: contain;
-        background-image: url('img/badge_gold.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 180px;
-        height: 200px;
-        position: relative;
-        justify-content: center;
-        justify-items: center;
-        justify-content: center;
-    
-    }
-    
-    .Score{
-      position: absolute;
-      top:20px;
-      left: 20px;
-      color: rgba(16, 13, 13, 0.642);
-      font-weight: 900;
-      padding: 5px;
-    }
-    .Score h4{
-        font-size: 20px;
-        font-weight: 900;
-    }
-    .Score h5{
-        font-size: 16px;
-    }
-    .flag{
-    position: absolute;
-    margin:0 auto;
-      top:20px;
-      right: 20px;
-      padding: 5px;
-    }
-    .flag .nation {
-        width: 20px;
-        height: 20px;
-        margin: 5px 0px;
-    }
-    .flag .logoClub {
-        width: 24px;
-        height: 24px;
-        margin: 5px 0px;
-    }
-    
-    
-    .nom {
-        font-weight: 900;
-        font-size: 16px;
-        text-align: center;
-    }
-    
-    .statistique {
-        display: flex;
-        font-size: 10px;
-        justify-content: center;
-        gap: 2.5px;
-        font-weight:bold;
-    }
-    
-    .statistique div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    
-    
-    
-    
-    .photo {
-        /* w-full h-3/5  mx-auto flex  justify-center ;*/
-        display: flex;
-        width: 80%;
-        height: 50%;
-        margin: 0 auto;
-        justify-content: center;
-    
-    }
-    
-    @media(max-width:760px) {
-        .badge_gold {
-            width: 90px;
-            height: 180px;
+
+        .stade {
+            width: 100%;
+            height: 900px;
+            background-size: 100% 100%;
+            background-image: url('img/stadium_background.webp');
+            /* background-image: url('img/terrain1.jpg');*/
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .badge_black {
+            display: flex;
+            flex-direction: column;
             gap: 2px;
-        }
-    
-        .ulPlayers   .badge_gold{
+            background-size: contain;
+            background-image: url('img/badgeBlack.webp');
+            background-position: center;
+            background-repeat: no-repeat;
             width: 180px;
             height: 200px;
+            position: relative;
+            justify-content: center;
+            justify-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
         }
-    
-        .badge_black {
-            width: 90px;
-            height: 180px;
+
+        .badge_gold {
+            display: flex;
+            flex-direction: column;
             gap: 2px;
-    
+            background-size: contain;
+            background-image: url('img/badge_gold.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 180px;
+            height: 200px;
+            position: relative;
+            justify-content: center;
+            justify-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            margin: 10px;
         }
+
+        .badge_gold:hover {
+            transform: scale(1.2);
+            z-index: 1;
+        }
+
+        .badge_black:hover {
+            transform: scale(1.2);
+            z-index: 1;
+        }
+
+        .Score {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: rgba(16, 13, 13, 0.642);
+            font-weight: 900;
+            padding: 5px;
+        }
+
+        .Score h4 {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .Score h5 {
+            font-size: 16px;
+        }
+
+        .flag {
+            position: absolute;
+            margin: 0 auto;
+            top: 20px;
+            right: 20px;
+            padding: 5px;
+        }
+
+        .flag .nation {
+            width: 20px;
+            height: 20px;
+            margin: 5px 0px;
+        }
+
+        .flag .logoClub {
+            width: 24px;
+            height: 24px;
+            margin: 5px 0px;
+        }
+
+
+        .nom {
+            font-weight: 700;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .statistique {
+            display: flex;
+            font-size: 10px;
+            justify-content: center;
+            gap: 2.5px;
+            font-weight: 900;
+        }
+
+        .statistique div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+
+
+
         .photo {
             /* w-full h-3/5  mx-auto flex  justify-center ;*/
             display: flex;
-            width: 40%;
-            height: 30%;
+            width: 80%;
+            height: 50%;
             margin: 0 auto;
             justify-content: center;
-    
+
         }
-    
-     .stade   .nom {
-            font-weight: 800;
-            font-size: 8px;
-            text-align: center;
+
+        @media(min-width:600) and (max-width:900) {
+            .badge_gold {
+                width: 90px;
+                height: 180px;
+                gap: 2px;
+            }
+
+            .ulPlayers .badge_gold {
+                width: 180px;
+                height: 200px;
+            }
+
+            .badge_black {
+                width: 90px;
+                height: 180px;
+                gap: 2px;
+
+            }
+
+            .photo {
+                /* w-full h-3/5  mx-auto flex  justify-center ;*/
+                display: flex;
+                width: 40%;
+                height: 30%;
+                margin: 0 auto;
+                justify-content: center;
+
+            }
+
+            .stade .nom {
+                font-weight: 800;
+                font-size: 8px;
+                text-align: center;
+            }
+
+            .stade .statistique {
+                flex-wrap: wrap;
+                gap: 2px;
+                font-size: 6px;
+            }
+
+            .stade {
+                width: 100%;
+                height: 80vh;
+                background-size: 100% 100%;
+                /*background-image: url('img/stadium_background.webp');*/
+                background-image: url('img/terrain1.jpg');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+
+            .stade .Score {
+                top: 25px;
+                left: 0px;
+            }
+
+            .stade .flag {
+                top: 25px;
+                right: 0px;
+            }
         }
-    
-      .stade  .statistique {
-            flex-wrap: wrap;
-            gap: 2px;
-            font-size: 6px;
+
+
+        @media(max-width:760px) {
+            .badge_gold {
+                width: 90px;
+                height: 180px;
+                gap: 2px;
+            }
+
+            .ulPlayers .badge_gold {
+                width: 180px;
+                height: 200px;
+            }
+
+            .badge_black {
+                width: 90px;
+                height: 180px;
+                gap: 2px;
+
+            }
+
+            .photo {
+                /* w-full h-3/5  mx-auto flex  justify-center ;*/
+                display: flex;
+                width: 40%;
+                height: 30%;
+                margin: 0 auto;
+                justify-content: center;
+
+            }
+
+            .stade .nom {
+                font-weight: 800;
+                font-size: 8px;
+                text-align: center;
+            }
+
+            .stade .statistique {
+                flex-wrap: wrap;
+                gap: 2px;
+                font-size: 6px;
+            }
+
+            .stade {
+                width: 100%;
+                height: 80vh;
+                background-size: 100% 100%;
+                /*background-image: url('img/stadium_background.webp');*/
+                background-image: url('img/terrain1.jpg');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+
+            .stade .Score {
+                top: 25px;
+                left: 0px;
+            }
+
+            .stade .flag {
+                top: 25px;
+                right: 0px;
+            }
+
         }
-    
-        .stade { 
-        width: 100%;
-        height: 80vh ;
-        background-size: 100% 100%;
-        /*background-image: url('img/stadium_background.webp');*/
-        background-image: url('img/terrain1.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
-        }
-    
-    
-    .stade .Score{
-      top:25px;
-      left: 0px;
-    } 
-    
-    .stade .flag{
-      top:25px;
-      right: 0px;
-    }
-    
-    }
     </style>
 </head>
 
-<body class="min-h-screen  w-full bg-[url('img/bg1.png')] h-full  bg-cover bg-no-repeat    justify-center  ">
-  
-  
+<body class="min-h-screen  w-full bg-[url('img/bg1.png')] h-full  bg-cover bg-no-repeat  bg-black  justify-center  ">
+
+
     <div id="modalFormPlayer" class="hidden fixed inset-0 flex items-center z-50 justify-center bg-white bg-opacity-50">
         <div class="relative p-6 shadow-xl rounded-lg bg-white text-gray-900 overflow-y-auto lg:w-1/3">
-            <span id="closeForm" class="absolute right-4 top-4 text-gray-600 hover:text-gray-900 cursor-pointer material-symbols-outlined text-2xl">cancel</span>
+            <span id="closeForm"
+                class="absolute right-4 top-4 text-gray-600 hover:text-gray-900 cursor-pointer material-symbols-outlined text-2xl">cancel</span>
             <h2 class="text-2xl font-bold mb-6 text-center text-yellow-500"> Joueur</h2>
-            <p id="pargErreur" class="hidden text-sm font-semibold px-4 py-2 mb-4 text-red-700 bg-red-100 border border-red-400 rounded"></p>
+            <p id="pargErreur"
+                class="hidden text-sm font-semibold px-4 py-2 mb-4 text-red-700 bg-red-100 border border-red-400 rounded">
+            </p>
             <form id="formulaire" class="flex flex-col gap-4">
                 <input id="id_input" type="hidden" value="-1">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-                <div>
-                    <label for="name" class="block font-medium mb-1">Nom</label>
-                    <input id="name_input" type="text" placeholder="Nom du joueur" class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
+
+                    <div>
+                        <label for="name" class="block font-medium mb-1">Nom</label>
+                        <input id="name_input" type="text" placeholder="Nom du joueur"
+                            class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                    </div>
+                    <div>
+                        <label for="photo" class="block font-medium mb-1">Photo</label>
+                        <input id="photo" type="text" placeholder="URL de la photo"
+                            class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                    </div>
+
                 </div>
-                <div>
-                    <label for="photo" class="block font-medium mb-1">Photo</label>
-                    <input id="photo" type="text" placeholder="URL de la photo" class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm" required>
-                </div>
-             
-                </div>
-              
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="nationality" class="block font-medium mb-1">Nationalité</label>
-                        <select id="nationality" class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                        <select id="nationality"
+                            class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
                             <option value="">Choisir Nationalité</option>
                             <option value="https://cdn.sofifa.net/flags/pt.png">Portugal</option>
                             <option value="https://cdn.sofifa.net/flags/be.png">Belgium</option>
@@ -244,39 +335,46 @@
                             <option value="https://cdn.sofifa.net/flags/ar.png">Argentina</option>
                         </select>
                     </div>
-                    <div>   <div>
-                        <label for="club" class="block font-medium mb-1">Club</label>
-                        <select id="club" class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
-                            <option value="">Choisir Club</option>
-                            <option value="https://cdn.sofifa.net/meta/team/325/120.png">Galatasaray</option>
-                            <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Real Madrid</option>
-                            <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain</option>
-                            <option value="https://cdn.sofifa.net/meta/team/2506/120.png">Al Nassr</option>
-                            <option value="https://cdn.sofifa.net/players/239/085/25_120.png">Manchester City</option>
-                            <option value="https://cdn.sofifa.net/meta/team/7011/120.png">Al-Hilal</option>
-                            <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
-                            <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain</option>
-                            <option value="https://cdn.sofifa.net/meta/team/503/120.png">Bayern Munich</option>
-                            <option value="https://cdn.sofifa.net/meta/team/7980/120.png">Atletico Madrid</option>
-                            <option value="https://cdn.sofifa.net/meta/team/476/120.png">Al-Ittihad</option>
-                            <option value="https://cdn.sofifa.net/meta/team/8/120.pngg">Liverpool</option>
-                            <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
-                            <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Inter Miami</option>
-                            <option value="https://cdn.sofifa.net/meta/team/88/120.png">Fenerbahçe</option>
-                            
-                        </select>
-                    </div></div>
+                    <div>
+                        <div>
+                            <label for="club" class="block font-medium mb-1">Club</label>
+                            <select id="club"
+                                class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                                <option value="">Choisir Club</option>
+                                <option value="https://cdn.sofifa.net/meta/team/325/120.png">Galatasaray</option>
+                                <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Real Madrid</option>
+                                <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain
+                                </option>
+                                <option value="https://cdn.sofifa.net/meta/team/2506/120.png">Al Nassr</option>
+                                <option value="https://cdn.sofifa.net/players/239/085/25_120.png">Manchester City
+                                </option>
+                                <option value="https://cdn.sofifa.net/meta/team/7011/120.png">Al-Hilal</option>
+                                <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
+                                <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain
+                                </option>
+                                <option value="https://cdn.sofifa.net/meta/team/503/120.png">Bayern Munich</option>
+                                <option value="https://cdn.sofifa.net/meta/team/7980/120.png">Atletico Madrid</option>
+                                <option value="https://cdn.sofifa.net/meta/team/476/120.png">Al-Ittihad</option>
+                                <option value="https://cdn.sofifa.net/meta/team/8/120.pngg">Liverpool</option>
+                                <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
+                                <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Inter Miami</option>
+                                <option value="https://cdn.sofifa.net/meta/team/88/120.png">Fenerbahçe</option>
+
+                            </select>
+                        </div>
+                    </div>
                 </div>
-    
-            
-               
-                 
-             
-    
+
+
+
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Position -->
                 <div id="divPosition" class="">
                     <label for="position" class=" block font-medium mb-1">Position</label>
-                    <select id="position" class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                    <select id="position"
+                        class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
                         <option value="">Choisissez une position</option>
                         <optgroup label="Gardien">
                             <option value="GK">Gardien (GK)</option>
@@ -284,7 +382,7 @@
                         <optgroup label="Défense">
                             <option value="LB">Latéral gauche (LB)</option>
                             <option value="RB">Latéral droit (RB)</option>
-                           <!--<option value="LCB">Défenseur central gauche (LCB)</option>
+                            <!--<option value="LCB">Défenseur central gauche (LCB)</option>
                             <option value="RCB">Défenseur central droit (RCB)</option>-->
                             <option value="CB">Défenseur central (CB)</option>
                         </optgroup>
@@ -304,331 +402,451 @@
                         </optgroup>
                     </select>
                 </div>
-    
-          
-               
-           <!-- Statistiques du joueur -->
-           <div id="statistique_player"  class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-yellow-500 text-xs rounded-lg p-4">
-       
-            <div class="flex flex-col">
-                <label for="pace" class="font-semibold text-gray-700">Pace</label>
-                <input id="pace" type="text" placeholder="Pace" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="shooting" class="font-semibold text-gray-700">Shooting</label>
-                <input id="shooting" type="text" placeholder="Shooting" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="passing" class="font-semibold text-gray-700">Passing</label>
-                <input id="passing" type="text" placeholder="Passing" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="dribbling" class="font-semibold text-gray-700">Dribbling</label>
-                <input id="dribbling" type="text" placeholder="Dribbling" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="defending" class="font-semibold text-gray-700">Defending</label>
-                <input id="defending" type="text" placeholder="Defending" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="physical" class="font-semibold text-gray-700">Physical</label>
-                <input id="physical" type="text" placeholder="Physical" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-        </div>
 
-        <!-- Statistiques du Gardien -->
-        <div id="statistique_GK" class="hidden grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
-          
-            <div class="flex flex-col">
-                <label for="diving" class="font-semibold text-gray-700">Diving</label>
-                <input id="diving" type="text" value="81" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="handling" class="font-semibold text-gray-700">Handling</label>
-                <input id="handling" type="text" value="82" class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="kicking" class="font-semibold text-gray-700">Kicking</label>
-                <input id="kicking" type="text" value="77" class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="reflexes" class="font-semibold text-gray-700">Reflexes</label>
-                <input id="reflexes" type="text" value="89" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="speed" class="font-semibold text-gray-700">Speed</label>
-                <input id="speed" type="text" value="64" class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-            <div class="flex flex-col">
-                <label for="positioning" class="font-semibold text-gray-700">Positioning</label>
-                <input id="positioning" type="text" value="77" class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5" required>
-            </div>
-        </div>         
+                <!--league-->
+                <div>
+                    <label for="league" class="block font-medium mb-1">Club</label>
+                    <select id="league"
+                        class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                        <option value="">Choisir championnat</option>
+                        <option value="Super Lig">Super Lig</option>
+                        <option value="MLS">MLS</option>
+                        <option value="Saudi Pro League">Saudi Pro League</option>
+                        <option value="Premier League">Premier League</option>
+                        <option value="La Liga">La Liga</option>
+                        <option value="Bundesliga">Bundesliga</option>
+                    </select>
+                </div>
+               </div>
+
+                <!-- Statistiques du joueur -->
+                <div id="statistique_player"
+                    class="grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-yellow-500 text-xs rounded-lg p-4">
+
+                    <div class="flex flex-col">
+                        <label for="pace" class="font-semibold text-gray-700">Pace</label>
+                        <input id="pace" type="text" placeholder="Pace"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="shooting" class="font-semibold text-gray-700">Shooting</label>
+                        <input id="shooting" type="text" placeholder="Shooting"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="passing" class="font-semibold text-gray-700">Passing</label>
+                        <input id="passing" type="text" placeholder="Passing"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="dribbling" class="font-semibold text-gray-700">Dribbling</label>
+                        <input id="dribbling" type="text" placeholder="Dribbling"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="defending" class="font-semibold text-gray-700">Defending</label>
+                        <input id="defending" type="text" placeholder="Defending"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="physical" class="font-semibold text-gray-700">Physical</label>
+                        <input id="physical" type="text" placeholder="Physical"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                </div>
+
+                <!-- Statistiques du Gardien -->
+                <div id="statistique_GK"
+                    class="hidden grid grid-cols-2 lg:grid-cols-3 gap-4 border-2 border-[#7F020F] text-xs rounded-lg p-4">
+
+                    <div class="flex flex-col">
+                        <label for="diving" class="font-semibold text-gray-700">Diving</label>
+                        <input id="diving" type="text" value="81"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="handling" class="font-semibold text-gray-700">Handling</label>
+                        <input id="handling" type="text" value="82"
+                            class="inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="kicking" class="font-semibold text-gray-700">Kicking</label>
+                        <input id="kicking" type="text" value="77"
+                            class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="reflexes" class="font-semibold text-gray-700">Reflexes</label>
+                        <input id="reflexes" type="text" value="89"
+                            class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="speed" class="font-semibold text-gray-700">Speed</label>
+                        <input id="speed" type="text" value="64"
+                            class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="positioning" class="font-semibold text-gray-700">Positioning</label>
+                        <input id="positioning" type="text" value="77"
+                            class=" inputformulaire bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5">
+                    </div>
+                </div>
                 <div class="flex justify-center">
-                    <button id="submitplayer" class="w-full bg-[#7F020F] hover:bg-red-700 text-white font-bold py-2 rounded-lg">Valider</button>
+                    <button id="submitplayer"
+                        class="w-full bg-[#7F020F] hover:bg-red-700 text-white font-bold py-2 rounded-lg">Valider</button>
                 </div>
             </form>
         </div>
     </div>
-    
+
     <!--selectio player -->
-    <div id="modalSelectPlayer" class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
+    <div id="modalSelectPlayer"
+        class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
         <div class="relative p-5 shadow-xl rounded-lg bg-white w-full sm:w-1/3">
-            <span id="closeSelectPlayer" class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
-            
+            <span id="closeSelectPlayer"
+                class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
+
             <h2 class="text-xl font-bold mb-4 text-center">Select a Player</h2>
- 
-                <select id="selectplayer" class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:ring-indigo-300">
-             
-                </select>
-    
+
+            <select id="selectplayer"
+                class="bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 focus:ring-indigo-300">
+
+            </select>
+
         </div>
     </div>
 
 
-    <div id="modalShowPlayer" class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
-        <div class="relative p-5 shadow-xl rounded-lg bg-white w-1/3 h-1/2 ">
-            <span id="closeShowPlayer" class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
+    <div id="modalShowPlayer"
+        class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
+        <div class="relative p-5 shadow-xl rounded-lg bg-white ">
+            <span id="closeShowPlayer"
+                class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
+
+
+
+            <div id="div_2_ShowbadgetPlayer" class="m-2">
             
-            <h2 class="text-xl font-bold mb-4 text-center">Player</h2>
-             <div class="grid grid-cols-2" >
-                <div  id="div_1_ShowbadgetPlayer"></div>
-                <div  id="div_2_ShowbadgetPlayer"></div>
-               
-             </div>
+            </div>
+
+
         </div>
     </div>
 
 
-    <div id="modalChoixPlayer" class="hidden fixed inset-0  flex items-center justify-center z-50 bg-red-700 bg-opacity-50">
+    <div id="modalChoixPlayer"
+        class="hidden fixed inset-0  flex items-center justify-center z-50 bg-red-700 bg-opacity-50">
         <div class="relative p-5 shadow-xl rounded-lg bg-white w-full min-h-36 md:w-1/2 lg:w-1/3 lg:min-h-44">
-         <span id="closeChoixPlayer" class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
-            
+            <span id="closeChoixPlayer"
+                class="absolute right-5 top-5 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
+
             <h2 class="text-xl font-bold mb-4 text-center">Choisir Un joueur </h2>
-             <ul id="ulChoixPlayers" class="grid grid-cols-2" >
-             
-               
-             </div>
+            <ul id="ulChoixPlayers" class="grid grid-cols-2">
+
+
         </div>
     </div>
+    </div>
 
-    <header class="bg-gradient-to-r from-[#7F020F] via-[#6B0209] to-[#7F0000] bg-top flex justify-between   ">
-        <img src="img/logo.png" class="w-20 h-20 mx-16" alt="Logo">
-   
+    <header class="bg-[#7F020F] bg-opacity-50 flex justify-between items-center hover:bg-opacity-100 ">
+        <img src="img/logo.png" class="w-30 h-24 mx-16 p-2" alt="Logo">
+        <div class="hidden lg:flex space-x-8  items-center">
+            <a href="" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Joueurs</a>
+            <a href="" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Créateur d'équipe</a>
+            <a href="#" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Équipes</a>
+            <a href="#" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Objectif</a>
+            <a href="#" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Évolutions</a>
+
+            <div class="relative flex">
+                <input type="text" id="champRecherche" placeholder="Equipe"
+                    class=" m-2.5 p-1 border border-gray-300 w-48 rounded-full text-black">
+                <img src="./img/Search.png" alt="search logo" class=" absolute right-5 top-2.5">
+            </div>
+
+        </div>
+        <img src="img/p2.png" class="w-30 h-24 " alt="person ballon">
     </header>
 
-    <section>
-        <div class="grid   items-center">
-            <!-- menu -->
-            <div
-                class=" flex  gap-5  m-2.5  p-2 border-b-2 border-y-indigo-300 text-red-900   ">
 
-                <span id="btnOpenForm" class="material-symbols-outlined cursor-pointer  hover:text-green-500">
-                    add_task
-                </span>
-          
-            </div>
-    </section>
-    <!--main-->
-    <section>
-        <div class="flex flex-col lg:flex-row lg:px-[20px] gap-20 relative justify-center text-center">  
+
+
+
+
+    <!--main  : Terrain -->
+    <section class="py-10">
+        <div class="flex flex-col lg:flex-row lg:px-[20px] gap-20 relative justify-cente">
             <!--show player -->
-            <div>       <span class="block text-[#7F020F] text-2xl font-semibold p-8 bg-gray-100  mp-4">  Formation d'équipe   : 4-4-2 </span>
-            <div class="stade  px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full lg:w-full border-4  border-green-400">
-               
-                <div id='RST' class="RST col-start-2">
-            
-                    <div class="badge_black">
-                        <button value="RST" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+            <div> <span class="block text-[#7F020F] text-2xl font-semibold p-4 bg-white opacity-50  mp-4"> Formation
+                    d'équipe : 4-4-2 </span>
+                <div
+                    class="stade  px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full lg:w-full border-4  border-[#F7E0A1]">
+
+                    <div id='RST' class="RST col-start-2">
+
+                        <div class="badge_black">
+                            <button value="RST"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
+
                     </div>
-                  
-                </div>
-              
-                <div id='LST' class="LST">
-                    <div class="badge_black ">
-                        <button  value="LST" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+
+                    <div id='LST' class="LST">
+                        <div class="badge_black ">
+                            <button value="LST"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
-               
 
-                <div id="LM" class="LM col-start-1">
-                    <div class="badge_black">
-                        <button  value="LM" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+
+                    <div id="LM" class="LM col-start-1">
+                        <div class="badge_black">
+                            <button value="LM"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <div id="LCM">
-                    <div class="badge_black">
-                        <button value="LCM" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+                    <div id="LCM">
+                        <div class="badge_black">
+                            <button value="LCM"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
 
 
-                <div id="RCM">
-                    <div class="badge_black">
-                        <button  value="RCM" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+                    <div id="RCM">
+                        <div class="badge_black">
+                            <button value="RCM"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
 
 
-                <div id="RM">
-                    <div class="badge_black">
-                        <button value="RM" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+                    <div id="RM">
+                        <div class="badge_black">
+                            <button value="RM"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
 
 
 
-                <div id="LB" class="col-start-1">
-                    <div class="badge_black">
-                        <button value="LB" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+                    <div id="LB" class="col-start-1">
+                        <div class="badge_black">
+                            <button value="LB"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
 
 
 
-                <div id="LCB">
-                    <div class="badge_black">
-                        <button  value="LCB" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+                    <div id="LCB">
+                        <div class="badge_black">
+                            <button value="LCB"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
 
 
 
-                <div id="RCB">
-                    <div class="badge_black">
-                        <button  value="RCB" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+                    <div id="RCB">
+                        <div class="badge_black">
+                            <button value="RCB"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
 
 
-                <div id="RB">
-                    <div   class="badge_black">
-                        <button  value="RB"class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+                    <div id="RB">
+                        <div class="badge_black">
+                            <button value="RB"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
                     </div>
-                </div>
-          
 
-       
-                
-                <div id="GK" class="GK col-span-4 flex justify-center items-center h-full">
-                    <div class="badge_black">
-                        <button  value="GK" class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
-                            health_and_safety
-                        </button>
+
+
+
+                    <div id="GK" class="GK col-span-4 flex justify-center items-center h-full">
+                        <div class="badge_black">
+                            <button value="GK"
+                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                health_and_safety
+                            </button>
+                        </div>
+
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-            <div class="w-full  lg:w-1/3  bg-gray-200 bg-opacity-50  relative">
-                <div class=" text-[#7F020F] text-2xl font-semibold p-8 bg-gray-100  mb-5">  les Joueurs en Reserve </div>
-                <div  class=" h-[850px] overflow-auto">
-                    <ul id="ulPlayers" class="ulPlayers  grid grid-cols-2  justify-items-center " >
-                 
+            <div class="w-full  lg:w-1/3   relative">
+
+                <div class="  p-4 bg-white opacity-50  flex justify-between items-center"><span
+                        class="text-[#7F020F] text-2xl font-semibold"> Gestion d'équipe</span>
+                    <div class="  flex justify-between items-center text-[#7F020F]">
+                        <span id="chimie" class=" p-1 lg:text-2xl font-semibold ">
+
+                        </span>
+                        <span class="material-symbols-outlined cursor-pointer p-1 lg:text-4xl ">
+                            experiment
+                        </span>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="bg-[#7F020F] bg-opacity-50 p-5">
+                    <div class="flex flex-col items-center md:flex-row  lg:flex-row gap-5">
+                        <div class=" w-full md:w-1/3">
+                            <label for="name" class="block font-medium mb-1 text-white">Nom d'équipe</label>
+                            <input id="name_input" type="text" placeholder="Nom"
+                                class="inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                        </div>
+
+                        <div class=" w-full md:w-1/3">
+                            <label for="formation" class="block font-medium mb-1 text-white">Formation</label>
+                            <select id="formation"
+                                class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                                <option value="">4-4-2</option>
+                                <option value="">3-3-4</option>
+                            </select>
+                        </div>
+                        <div class=" w-full md:w-1/3">
+                            <label for="formation" class="block font-medium mb-1 text-white">Style</label>
+                            <select id="formation"
+                                class=" inputformulaire w-full bg-gray-50 border border-gray-300 rounded-lg p-2 text-sm">
+                                <option value="">Contre-attaque</option>
+                                <option value="">Défense</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <hr class="my-4">
+                    <div class="flex">
+                        <div id="btnOpenForm"
+                            class="text-[#F7E0A1] flex items-center gap-5 m-2 w-1/2 border-2  cursor-pointer border-[#F7E0A1]  rounded-lg   hover:scale-[1.1]  hover:text-white">
+                            <p class="flex items-center">
+                                <span class="material-symbols-outlined cursor-pointer p-1 lg:text-4xl ">
+                                    person_add
+                                </span>
+                                Ajouter joueur
+                            </p>
+                        </div>
+                        <div id="" onclick="totalChimieEquipe()"
+                            class="text-[#F7E0A1] flex items-center m-2 w-1/2 border-2  cursor-pointer border-[#F7E0A1]  rounded-lg  hover:scale-[1.1]  hover:text-white">
+                            <p class="flex items-center">
+                                <span class="material-symbols-outlined cursor-pointer p-1 lg:text-4xl ">
+
+                                    experiment
+                                </span>
+                                Chimie de l'équipe
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <span class="block text-[#7F020F] text-2xl font-semibold p-4 bg-white opacity-50  "> les Joueurs en
+                    Reserve </span>
+                <div class=" h-[530px] overflow-auto  bg-gray-200 bg-opacity-30">
+                    <ul id="ulPlayers" class="ulPlayers  grid grid-cols-2  justify-items-center ">
+
                     </ul>
                 </div>
             </div>
-
-
-        </div>
     </section>
 
 
- 
 
 
 
-        <footer>
-            <!-- top footer -->
-            <section class=" flex flex-col md:flex-row items-center justify-between px-8 md:px-40 mb-5 ">
-                <img src="img/logo.png" width="100" alt="logo" >
-                <div class="text-[#F7E0A1]">
-                    <h3 class="text-lg font-semibold">Follow us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#"><i class='bx bxl-facebook-circle'></i></a>
-                        <a href="#"><i class='bx bxl-pinterest'></i></a>
-                        <a href="#"><i class='bx bxl-whatsapp'></i></a>
-                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+
+    <footer class="bg-[#7F020F] bg-opacity-30">
+        <!-- top footer -->
+        <section class=" flex flex-col md:flex-row items-center justify-between px-8 md:px-40 mb-5 ">
+            <img src="img/logo.png" width="100" alt="logo">
+            <div class="text-[#F7E0A1]">
+                <h3 class="text-lg font-semibold">Follow us</h3>
+                <div class="flex space-x-4">
+                    <a href="#"><i class='bx bxl-facebook-circle'></i></a>
+                    <a href="#"><i class='bx bxl-pinterest'></i></a>
+                    <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                    <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                </div>
+            </div>
+        </section>
+
+        <hr class=" mx-10 border-t border-[#F7E0A1] opacity-80">
+
+        <section class=" flex flex-col md:flex-row justify-between gap-10 sm:gap-20 px-14 py-10">
+            <div class="flex flex-col justify-evenly sm:flex-row gap-10 md:gap-20 w-full text-[#F7E0A1]">
+                <div>
+                    <h3 class="text-sm font-semibold mb-1">DERNIERS EFFECTIFS</h3>
+                    <hr class="my-2.5 border-t border-[#F7E0A1] opacity-80">
+                    <div class="text-white">
+                        <a href="#">Créateur d'effectifs</a>
+                        <div><a href="#">SBC</a></div>
+                        <div><a href="#">Joueurs EA FC 25</a></div>
                     </div>
                 </div>
-            </section>
-            <div class="px-10">
-                <hr class="border-t border-[#F7E0A1] opacity-80">
-            </div>
-            
-        
-            <!-- footer-body -->
-            <section class="relative  flex flex-col md:flex-row justify-between gap-10 sm:gap-20 px-14 py-10">
-                <div class="flex flex-col sm:flex-row gap-10 md:gap-20 w-full">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">LATEST SQUADS</h3>
-                        <hr class="border-t-4 border-[#F7E0A1] opacity-80 w-20 ">
-                        <div class="text-lg">
-                            <div><a href="#" class="text-white ">FC Pro</a></div>
-                            <div><a href="#" class="text-white ">Team Of The Week 10</a></div>
-                            <div><a href="#" class="text-white">Track Stars</a></div>
-                            <div><a href="#" class="text-white">Team Of The Week 9</a></div>
-                            <div><a href="#" class="text-white">Ballon d'Or</a></div>
-                        </div>
+                <div>
+                    <h3 class="text-sm font-bold mb-1">LIENS UTILES</h3>
+                    <hr class="my-2.5 border-t border-[#F7E0A1] opacity-80">
+                    <div class="text-white">
+                        <a href="#">FAQ</a>
+                        <div><a href="#">Aide en ligne</a></div>
+                        <div><a href="#">Conditions d'utilisation</a></div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">USEFUL LINKS</h3>
-                        <hr class="border-t-4 border-[#F7E0A1] opacity-80 w-20 ">
-                        <div class="text-lg">
-                            <a href="#" class="text-white hover:text-customDarkBrown">Squad Builder</a>
-                            <div><a href="#" class="text-white ">SBC</a></div>
-                            <div><a href="#" class="text-white ">EA FC 25 Players</a></div>
-                        </div>
-                    </div>
-                    
                 </div>
-                <div class="flex flex-col sm:flex-row gap-10 md:gap-10 sm:gap-4 w-full">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">FUTBIN APPLICATIONS</h3>
-                        <hr class="border-t-4 border-[#F7E0A1] opacity-80 w-20 ">
-                        <div  class="text-lg">
-                            <a href="#" class="text-white hover:text-customDarkBrown">FUTBIN For Android</a>
-                            <div><a href="#" class="text-white hover:text-customDarkBrown">FUTBIN For Ios</a>
-                            </div><a href="#" class="text-white hover:text-customDarkBrown">More Details</a>
-                            
-                        </div>
+                <div>
+                    <h3 class="text-sm font-bold mb-1">SUPPORT</h3>
+                    <hr class="my-2.5 border-t border-[#F7E0A1] opacity-80">
+                    <div class="text-white">
+                        <a href="#">Contactez-nous</a>
+                        <div><a href="#">Centre d'assistance</a></div>
                     </div>
-                    
                 </div>
-                
-            </section>
-            <div class="px-10">
-                <hr class="border-t border-[#F7E0A1] opacity-80">
+
+                <img src="img/person.png" class="w-32 h-32">
             </div>
-        
-            <!-- footer-bottom -->
-            <div class="text-center pt-4 ">
-                <p class="text-[#F7E0A1] font-semibold bg-[#70010B] p-4">© 2025-2030 Copyright FIFA
-                </p>
-            </div>
-    
-        </footer>
+
+
+        </section>
+        <div class="px-10">
+            <hr class="border-t border-[#F7E0A1] opacity-80">
+        </div>
+
+        <!-- footer-bottom -->
+        <div class="text-center pt-4 ">
+            <p class="text-[#F7E0A1]  p-4">© 2025-2030 Copyright FIFA
+            </p>
+        </div>
+
+    </footer>
 
 
 

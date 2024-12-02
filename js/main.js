@@ -11,7 +11,7 @@ let name_p = document.getElementById("name_input");
 let photo = document.getElementById("photo");
 let nationality = document.getElementById("nationality");
 let club = document.getElementById("club");
-
+let league = document.getElementById("league");
 // static plyer
 let pace = document.getElementById("pace");
 let shooting = document.getElementById("shooting");
@@ -105,7 +105,7 @@ if (
   data_players.forEach((p) => {
     //on ajout des donnees de joueurs fictif avce isactif = false car il sont ajout a la liste de reserve
     p.isActif = false;
-    p.positionInStade="";
+    p.positionInStade = "";
     players.push(p);
   });
   localStorage.setItem("players", JSON.stringify(players)); //stock players fictitives dans local storage
@@ -125,7 +125,7 @@ if (
 
 function afficheStade(playerStad) {
   playerStad.forEach((pl) => {
-    console.log(pl.id)
+    console.log(pl.id);
     document.getElementById(pl.positionInStade).innerHTML = playerCodeHtml(pl);
   });
   showBarre();
@@ -239,7 +239,6 @@ function eventValidationformulaire() {
 /*  Ajout du joueur a la liste des joueurs  */
 /*-------------------------------------    */
 
-
 document.getElementById("submitplayer").addEventListener("click", AddPlayer);
 
 function AddPlayer(event) {
@@ -247,8 +246,7 @@ function AddPlayer(event) {
   let newplayer = {};
   let valid = validation();
 
-
- // on cree  objet player 
+  // on cree  objet player
   if (valid) {
     console.log("Formulaire validé avec succès !");
     let selectedOption = nationality.options[nationality.selectedIndex];
@@ -260,7 +258,7 @@ function AddPlayer(event) {
     newplayer.nationality = selectedOption.textContent.trim();
     newplayer.club = selectedOptionClub.textContent.trim();
     newplayer.logo = club.value.trim();
-/* Dans ce bloc de code, on traite s il gardien ou joueur */
+    /* Dans ce bloc de code, on traite s il gardien ou joueur */
 
     if (position.value === "GK") {
       // gardien
@@ -271,7 +269,7 @@ function AddPlayer(event) {
           parseFloat(reflexes.value) +
           parseFloat(speed.value) +
           parseFloat(positioning.value)) /
-        6
+          6
       );
       newplayer.diving = diving.value.trim();
       newplayer.handling = handling.value.trim();
@@ -288,7 +286,7 @@ function AddPlayer(event) {
           parseFloat(dribbling.value) +
           parseFloat(defending.value) +
           parseFloat(physical.value)) /
-        6
+          6
       );
       newplayer.pace = pace.value.trim();
       newplayer.shooting = shooting.value.trim();
@@ -298,11 +296,11 @@ function AddPlayer(event) {
       newplayer.physical = physical.value.trim();
     }
   }
-/* Dans ce bloc de code, on traite si c'est un nouvel ajout ou une édition d un joueur existant*/
-// cas 1 => ajout 
+  /* Dans ce bloc de code, on traite si c'est un nouvel ajout ou une édition d un joueur existant*/
+  // cas 1 => ajout
   if (id_input.value.trim() == "-1" && valid) {
     id++;
-    newplayer.id = id; 
+    newplayer.id = id;
     newplayer.isActif = false;
     players.push(newplayer);
     localStorage.setItem("id", id);
@@ -311,9 +309,10 @@ function AddPlayer(event) {
     localStorage.setItem("players", JSON.stringify(players));
     FormPlayer.classList.add("hidden");
     formulaire.reset();
-// cas 2 => edition  :  dans l edition il y a deux cas : soit joueur en reserve soit sur le terrain 
-  } else if (valid) {  // Si l id_input  different de -1  alors edit
-   
+    // cas 2 => edition  :  dans l edition il y a deux cas : soit joueur en reserve soit sur le terrain
+  } else if (valid) {
+    // Si l id_input  different de -1  alors edit
+
     let playerMod = getPlayer(id_input.value);
     newplayer.id = id_input.value;
     // cas 1 : joueur sur terrain avec isatif ==true
@@ -325,7 +324,7 @@ function AddPlayer(event) {
       index = playerStad.findIndex((p) => p.id == id_input.value);
       playerStad.splice(index, 1, newplayer);
       afficheStade(playerStad);
-    // cas 2 : joueur en reserve 
+      // cas 2 : joueur en reserve
     } else if (playerMod.isActif == false) {
       newplayer.isActif = false;
       index1 = players.findIndex((p) => p.id == id_input.value);
@@ -341,20 +340,18 @@ function AddPlayer(event) {
   }
 }
 
-
-//ajout de nouveau joueur comme target <li> 
+//ajout de nouveau joueur comme target <li>
 function addPlayerToList(player) {
   let li = document.createElement("li");
-  li.innerHTML = playerCodeHtml(player);
+  li.innerHTML = playerReserveCodeHtml(player);
   ulPlayers.appendChild(li);
 }
 
+// ajout d un joueur a la modale de choix  ,
+//il y a un event on click sur le joueur ,
+//s il l user click sur le badge on passe au fonction positionner
 
-// ajout d un joueur a la modale de choix  , 
-//il y a un event on click sur le joueur , 
-//s il l user click sur le badge on passe au fonction positionner 
-
-function addPlayerModalChoixPlayer(player  , positionARemplir) {
+function addPlayerModalChoixPlayer(player, positionARemplir) {
   let li = document.createElement("li");
   if (player.position == "GK") {
     static = `<div class="statistique"> 
@@ -444,31 +441,30 @@ function addPlayerModalChoixPlayer(player  , positionARemplir) {
   ulChoixPlayers.appendChild(li);
 }
 
-
 let divParent = ""; // Badge
 //l affiche  de joueur sur la modale , les joueurs sont affiche selon leur position adequat
-// chaque buuton(icon +) contient une valeur de position event.target.value 
-//il nous permet de savoir la position a remplir 
-function ShowModalChoixPlayer(event ) {
+// chaque buuton(icon +) contient une valeur de position event.target.value
+//il nous permet de savoir la position a remplir
+function ShowModalChoixPlayer(event) {
   modalChoixPlayer.classList.remove("hidden");
-  const positionINstad = event.target.value; 
+  const positionINstad = event.target.value;
   ulChoixPlayers.innerHTML = "";
   if (positionINstad == "RST" || positionINstad == "LST") {
     players.forEach((p) => {
       if (p.position == "ST") {
-        addPlayerModalChoixPlayer(p , positionINstad);
+        addPlayerModalChoixPlayer(p, positionINstad);
       }
     });
   } else if (positionINstad == "LCM" || positionINstad == "RCM") {
     players.forEach((p) => {
       if (p.position == "CM") {
-        addPlayerModalChoixPlayer(p , positionINstad);
+        addPlayerModalChoixPlayer(p, positionINstad);
       }
     });
   } else if (positionINstad == "LCB" || positionINstad == "RCB") {
     players.forEach((p) => {
       if (p.position == "CB") {
-        addPlayerModalChoixPlayer(p , positionINstad);
+        addPlayerModalChoixPlayer(p, positionINstad);
       }
     });
   } else if (
@@ -480,24 +476,22 @@ function ShowModalChoixPlayer(event ) {
   ) {
     players.forEach((p) => {
       if (p.position == positionINstad) {
-        addPlayerModalChoixPlayer(p , positionINstad);
+        addPlayerModalChoixPlayer(p, positionINstad);
       }
     });
   }
-  // ce return je l ai pas utlise 
-  return positionINstad ;
+  // ce return je l ai pas utlise
+  return positionINstad;
 }
-
 
 /*--------------------------------------    */
 /*  ajout player to stadium                */
 /*-------------------------------------    */
 /*positionner le  player au stade  et supprime le dans la liste de  reserve   **/
 // cette fonction est declenche lors de l click sur le badge dans la modale " choisir joueur"
-function positionnerPlayer(idvalue , positionARemplir , event) {
-
+function positionnerPlayer(idvalue, positionARemplir, event) {
   let player = getPlayer(idvalue);
-  player.positionInStade = positionARemplir ;   // la valeur de button est la position GK ou STL c est le meme id de div parent 
+  player.positionInStade = positionARemplir; // la valeur de button est la position GK ou STL c est le meme id de div parent
   player.isActif = true;
   playerStad.push(player);
   localStorage.setItem("playerStad", JSON.stringify(playerStad));
@@ -508,13 +502,13 @@ function positionnerPlayer(idvalue , positionARemplir , event) {
     players.splice(index, 1);
     localStorage.setItem("players", JSON.stringify(players));
   }
-  
+
   // ajout de badge gold de joueur dans le stade
-    document.getElementById(positionARemplir).innerHTML = playerCodeHtml(player);
-    modalChoixPlayer.classList.add("hidden") ; 
-// mettre a jour l affichage
-    Affiche(players);
-    afficheStade(playerStad) ; 
+  document.getElementById(positionARemplir).innerHTML = playerCodeHtml(player);
+  modalChoixPlayer.classList.add("hidden");
+  // mettre a jour l affichage
+  Affiche(players);
+  afficheStade(playerStad);
 }
 
 /*--------------------------------------    */
@@ -522,10 +516,11 @@ function positionnerPlayer(idvalue , positionARemplir , event) {
 /*-------------------------------------    */
 
 function deletedPlayer(idplayer, event) {
-  let player = getPlayer(idplayer); 
+  let player = getPlayer(idplayer);
 
-  if (player.isActif) {// si le joueur est sur stade
-    // on va supprim node parent 
+  if (player.isActif) {
+    // si le joueur est sur stade
+    // on va supprim node parent
     divPosition = event.target.parentNode.parentNode.parentNode;
     let positionTerrain = divPosition.getAttribute("id");
     badgeGold = event.target.parentNode.parentNode;
@@ -537,29 +532,30 @@ function deletedPlayer(idplayer, event) {
                     </div>`;
     divPosition.innerHTML = codehtml;
     // on ajout event listener a la nouvelle icone
-    divPosition.querySelector(".iconAddPlayerStd").addEventListener("click", ShowModalChoixPlayer);
+    divPosition
+      .querySelector(".iconAddPlayerStd")
+      .addEventListener("click", ShowModalChoixPlayer);
     // on supprime le joueur de la liste des joueurs en stade
     playerStad = playerStad.filter((p) => p.id != idplayer);
     localStorage.setItem("playerStad", JSON.stringify(playerStad));
-  }// si le joueur sur le reserve  
+  } // si le joueur sur le reserve
   else {
-    // on supprime le joueur et on met a jour l affichage 
+    // on supprime le joueur et on met a jour l affichage
     players = players.filter((p) => p.id != idplayer);
     Affiche(players);
     localStorage.setItem("players", JSON.stringify(players));
   }
-  // mettre a jour les barres pour le stade 
+  // mettre a jour les barres pour le stade
   showBarre();
 }
-
 
 /*--------------------------------------    */
 /*     sortie d un joueur hors terrain    */
 /*-------------------------------------    */
 function goPlayerOutStad(idplayer, event) {
- // preseque meme code de supprimer avec une difference que on sauvgarde l joueur en reserve
- //on supprime le badge puis on ajout le badget noir avec + 
- divPosition = event.target.parentNode.parentNode.parentNode;
+  // preseque meme code de supprimer avec une difference que on sauvgarde l joueur en reserve
+  //on supprime le badge puis on ajout le badget noir avec +
+  divPosition = event.target.parentNode.parentNode.parentNode;
   let positionTerrain = divPosition.getAttribute("id");
   badgeGold = event.target.parentNode.parentNode;
   badgeGold.remove();
@@ -569,22 +565,24 @@ function goPlayerOutStad(idplayer, event) {
                       </button>
                   </div>`;
   divPosition.innerHTML = codehtml;
-  divPosition.querySelector(".iconAddPlayerStd").addEventListener("click", ShowModalChoixPlayer);
+  divPosition
+    .querySelector(".iconAddPlayerStd")
+    .addEventListener("click", ShowModalChoixPlayer);
 
-// on recupere le joueur et on fait des modifications  et on l ajout au reserve
+  // on recupere le joueur et on fait des modifications  et on l ajout au reserve
   pl = getPlayer(idplayer);
   pl.isActif = false;
-  pl.positionInStade=""
+  pl.positionInStade = "";
   players.push(pl);
 
   // on supprime le joueur de stade
-  index = playerStad.findIndex((p) => (p.id == idplayer));
-  console.log("splice index : "+ index); 
+  index = playerStad.findIndex((p) => p.id == idplayer);
+  console.log("splice index : " + index);
   playerStad.splice(index, 1);
-// mettre a jour le local storage 
+  // mettre a jour le local storage
   localStorage.setItem("playerStad", JSON.stringify(playerStad));
   localStorage.setItem("players", JSON.stringify(players));
-// affiche les joueurs en etat de mise a jour 
+  // affiche les joueurs en etat de mise a jour
   Affiche(players);
   showBarre();
 }
@@ -592,38 +590,36 @@ function goPlayerOutStad(idplayer, event) {
 /*     Remplace un joueur                  */
 /*-------------------------------------    */
 
-function replacePlayer( idplayer  , poistion  ) {
-  // affichage de modal choisir joueur par defaut on passe par la fonction positionner joueur 
+function replacePlayer(idplayer, poistion) {
+  // affichage de modal choisir joueur par defaut on passe par la fonction positionner joueur
   ShowModalChoixPlayer(event);
 
-   // on recupere l ancien joueur et on l ajout au reserve 
+  // on recupere l ancien joueur et on l ajout au reserve
   let oldplayer = getPlayer(idplayer);
-  oldplayer .isActif = false;
-  oldplayer .positionInStade = "";
+  oldplayer.isActif = false;
+  oldplayer.positionInStade = "";
   players.push(oldplayer);
- 
-  //on supprime l ancien joueur du array de joueur sur terrain 
-  index = playerStad.findIndex((p) => (p.id == idplayer));
+
+  //on supprime l ancien joueur du array de joueur sur terrain
+  index = playerStad.findIndex((p) => p.id == idplayer);
   playerStad.splice(index, 1);
- // mettre a jour les localS
+  // mettre a jour les localS
   localStorage.setItem("playerStad", JSON.stringify(playerStad));
   localStorage.setItem("players", JSON.stringify(players));
-  // affichage des joueurs sur reserve apres l ajout de l oldplayer 
+  // affichage des joueurs sur reserve apres l ajout de l oldplayer
   Affiche(players);
-  
 }
 
-
-
-
 /*------------------------------------------------------------------------------------ */
-/*                               Fonctions  secondaire                                            */
+/*                               Fonctions  secondaire                                   */
 /*------------------------------------------------------------------------------------- */
 function getPlayer(id) {
   let player = players.find((p) => p.id == id);
   if (!player) {
     player = playerStad.find((p) => p.id == id);
-  }else{console.log("joueur introuvable id :" + id )}
+  } else {
+    console.log("joueur introuvable id :" + id);
+  }
   return player;
 }
 function Affiche(players) {
@@ -701,8 +697,8 @@ function playerCodeHtml(player) {
 <div class="barre  hidden absolute right-0 top-5 bg-white flex flex-col  text-center "> 
   <span onclick="deletedPlayer(${player.id} , event)" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-l font-semibold border border-b-red-800"> close </span> 
   <span onclick="showformEdit(${player.id})" name_form="btnEdit" class=" text-red-800  material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold border border-b-red-800">edit</span>
-  <span onclick="goPlayerOutStad(${player.id} , event)" name_form="btnEdit" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold  border border-b-red-800">move_item</span>
-<button  value="${player.positionInStade}" onclick="replacePlayer(${player.id}  , ${player.positionInStade})" name_form="btnEdit" class="  text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold ">
+  <span id="goPlayerOutStad" onclick="goPlayerOutStad(${player.id} , event)" name_form="btnEdit" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold  border border-b-red-800">move_item</span>
+<button  id="replacePlayer" value="${player.positionInStade}" onclick="replacePlayer(${player.id}  , ${player.positionInStade})" name_form="btnEdit" class="  text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold ">
 swap_horiz
 </button>
   </div>
@@ -726,14 +722,321 @@ swap_horiz
 
   return codeHtml;
 }
+
+function playerDetailCodeHtml(player) {
+  //console.log(player);
+  if (player.position == "GK") {
+    static = `<div class=""> 
+        <div>
+            <h5>DIV</h5> 
+            <h4>${player.diving}</h4>
+        </div>
+        <div>
+            <h5>HAN</h5> 
+            <h4>${player.handling}</h4>
+        </div>
+        <div>
+            <h5>KIC</h5> 
+            <h4>${player.kicking}</h4>
+        </div>
+        <div>
+            <h5>REF</h5> 
+            <h4>${player.reflexes}</h4>
+        </div>
+        <div>
+            <h5>SPD</h5> 
+            <h4>${player.speed}</h4>
+        </div>
+        <div>
+            <h5>POS</h5> 
+            <h4>${player.positioning}</h4>
+        </div>
+    </div>
+    `;
+  } else {
+    static = `<div class="statistique">
+           
+<div>
+    <h5>PAC</h5> 
+    <h4>${player.pace} </h4>
+</div>
+<div >
+    <h5>SHO</h5> 
+    <h4>${player.shooting}</h4>
+</div>
+<div >
+    <h5>PAS</h5> 
+    <h4>${player.passing}</h4>
+</div>
+<div >
+    <h5>DRI</h5> 
+    <h4>${player.dribbling}</h4>
+</div>
+<div >
+    <h5>DEF</h5> 
+    <h4>${player.defending}</h4>
+</div>
+<div >
+    <h5>PHY</h5> 
+    <h4>${player.physical}</h4>
+</div>
+
+       </div>`;
+  }
+
+  codeHtml = `  
+                 <div>
+
+     <div class=>
+                        <h4>${player.rating}</h4>
+                        <h5>${player.position}</h5>
+    </div> 
+      <div class="">
+                    
+                        <img  class ="nation" src="${player.flag}"  alt="flag">
+                        <img class ="logoClub" src="${player.logo}" alt="nationalite">
+    </div> 
+       
+        <h4 class="nom">${player.name} </h4>
+        ${static}
+      
+    </div>
+      `;
+
+  return codeHtml;
+}
+
+function playerReserveCodeHtml(player) {
+  //console.log(player);
+  if (player.position == "GK") {
+    static = `<div class="statistique"> 
+        <div>
+            <h5>DIV</h5> 
+            <h4>${player.diving}</h4>
+        </div>
+        <div>
+            <h5>HAN</h5> 
+            <h4>${player.handling}</h4>
+        </div>
+        <div>
+            <h5>KIC</h5> 
+            <h4>${player.kicking}</h4>
+        </div>
+        <div>
+            <h5>REF</h5> 
+            <h4>${player.reflexes}</h4>
+        </div>
+        <div>
+            <h5>SPD</h5> 
+            <h4>${player.speed}</h4>
+        </div>
+        <div>
+            <h5>POS</h5> 
+            <h4>${player.positioning}</h4>
+        </div>
+    </div>
+    `;
+  } else {
+    static = `<div class="statistique">
+           
+<div>
+    <h5>PAC</h5> 
+    <h4>${player.pace} </h4>
+</div>
+<div >
+    <h5>SHO</h5> 
+    <h4>${player.shooting}</h4>
+</div>
+<div >
+    <h5>PAS</h5> 
+    <h4>${player.passing}</h4>
+</div>
+<div >
+    <h5>DRI</h5> 
+    <h4>${player.dribbling}</h4>
+</div>
+<div >
+    <h5>DEF</h5> 
+    <h4>${player.defending}</h4>
+</div>
+<div >
+    <h5>PHY</h5> 
+    <h4>${player.physical}</h4>
+</div>
+
+       </div>`;
+  }
+
+  codeHtml = `  
+ <div id="${player.id}" class="badge_gold"  >
+<div class="barre  hidden absolute right-0 top-5 bg-white flex flex-col  text-center "> 
+  <span onclick="deletedPlayer(${player.id} , event)" class=" text-red-800 material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-l font-semibold border border-b-red-800"> close </span> 
+  <span onclick="showformEdit(${player.id})" name_form="btnEdit" class=" text-red-800  material-symbols-outlined cursor-pointer text-white hover:text-red-400 text-xl font-semibold border border-b-red-800">edit</span>
+
+  </div>
+     <div class="Score">
+                        <h4>${player.rating}</h4>
+                        <h5>${player.position}</h5>
+    </div> 
+      <div class="flag">
+                    
+                        <img  class ="nation" src="${player.flag}"  alt="flag">
+                        <img class ="logoClub" src="${player.logo}" alt="nationalite">
+    </div> 
+        <div class="photo" onclick="afficheOnePlayer(${player.id} , this)">
+            <img src=${player.photo} class="" alt="joueur">
+        </div>
+        <h4 class="nom">${player.name} </h4>
+        ${static}
+      
+    </div>
+      `;
+
+  return codeHtml;
+}
+
 function afficheOnePlayer(idplayer, el) {
   document.getElementById("modalShowPlayer").classList.remove("hidden");
   let player = getPlayer(idplayer);
   console.log("---pfficheOnePlayer---");
   console.log(player);
-  document.getElementById("div_1_ShowbadgetPlayer").innerHTML =
-    playerCodeHtml(player);
-  document.getElementById("div_2_ShowbadgetPlayer").innerHTML = `            `;
+
+
+
+  let CodestaticPlayer = `
+  <!-- Statistiques -->
+  <div class="mt-6">
+    <h3 class="text-lg font-semibold text-gray-700">Statistique:</h3>
+    <hr class="border-2 border-t border-[#F7E0A1] opacity-80 w-16">
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div class="flex justify-between text-gray-700">
+        <span>Rating:</span><span class="font-bold">${player.rating}</span>
+      </div>
+          <div></div>
+      <div class="flex justify-between text-gray-700">
+        <span>Pace:</span><span class="font-bold">${player.pace}</span>
+      </div>
+      <div class="flex justify-between text-gray-700">
+        <span>Shooting:</span><span class="font-bold">${player.shooting}</span>
+      </div>
+      <div class="flex justify-between text-gray-700">
+        <span>Passing:</span><span class="font-bold">${player.passing}</span>
+      </div>
+      <div class="flex justify-between text-gray-700">
+        <span>Dribbling:</span><span class="font-bold">${player.dribbling}</span>
+      </div>
+      <div class="flex justify-between text-gray-700">
+        <span>Defending:</span><span class="font-bold">${player.defending}</span>
+      </div>
+      <div class="flex justify-between text-gray-700">
+        <span>Physical:</span><span class="font-bold">${player.physical}</span>
+      </div>
+    </div>
+  </div>
+`;
+
+
+let CodestaticGK = `
+<!-- Statistiques -->
+<div class="m-6">
+  <h3 class="text-lg font-semibold text-gray-700">Statistique:</h3>
+  <hr class="border-2 border-t border-[#F7E0A1] opacity-80 w-16">
+  <div class="grid grid-cols-2 gap-4 mt-4">
+    <div class="flex justify-between text-gray-700">
+      <span>Rating:</span><span class="font-bold">${player.rating}</span>
+    </div>
+    <div></div>
+    <div class="flex justify-between text-gray-700">
+      <span>Diving:</span><span class="font-bold">${player.diving}</span>
+    </div>
+    <div class="flex justify-between text-gray-700">
+      <span>Handling:</span><span class="font-bold">${player.handling}</span>
+    </div>
+    <div class="flex justify-between text-gray-700">
+      <span>Kicking:</span><span class="font-bold">${player.kicking}</span>
+    </div>
+    <div class="flex justify-between text-gray-700">
+      <span>Reflexes:</span><span class="font-bold">${player.reflexes}</span>
+    </div>
+    <div class="flex justify-between text-gray-700">
+      <span>Speed:</span><span class="font-bold">${player.speed}</span>
+    </div>
+    <div class="flex justify-between text-gray-700">
+      <span>Positioning:</span><span class="font-bold">${player.positioning}</span>
+    </div>
+  </div>
+</div>
+`;
+
+
+let CodeHtmlStatic
+if (player.position == "GK"){
+  CodeHtmlStatic = CodestaticGK ;
+}else{
+  CodeHtmlStatic = CodestaticPlayer;
+}
+let chimie = 0
+if(player.isActif){ // s il sur le stade on peut calcul chimie
+ chimie = calculChimieOnePlayer(player) ; 
+}
+else {  // sinon 
+  chimie = 0 ;
+   
+}
+  document.getElementById(
+    "div_2_ShowbadgetPlayer"
+  ).innerHTML = `<div class="flex  justify-evenly">
+                    <h2 class="text-2xl font-semibold">${player.name}</h2>
+                    <div class="  flex  items-center text-gray-900"> 
+                       
+                        <span class="material-symbols-outlined cursor-pointer  lg:text-2xl  ">
+                            experiment
+                        </span><span  lg:text-2xl font-semibold > Chimie  : 
+                         <span id="chimiePlayer" class="  lg:text-2xl font-semibold ">
+                            ${chimie}
+                        </span>
+                        </div>
+                </div>
+                   <hr class=" m-5 border-2 border-t border-[#F7E0A1] opacity-80">
+                    <div class="flex  gap-5 mx-auto bg-white rounded-lg  ">
+                        <div class="bg-gray-900 rounded-full text-white text-center ">
+                          <img src="${player.photo}" alt="Hakim Ziyech" class="w-24 h-24 rounded-full mx-auto ">
+                        </div>
+                        <div class="p-6 ">
+                            <h3 class="text-lg font-semibold text-gray-700">Profil:</h3>
+                            <hr class=" border-2 border-t border-[#F7E0A1] opacity-80 w-16">
+                          <div class="flex items-center mb-4 gap-2.5">
+                            <span class="font-semibold text-gray-700 w-1/2">Position:</span>
+                            <span class="text-gray-600 w-1/2">${player.position}</span>
+                          </div>
+                          <div class="flex justif-between items-center mb-4 gap-2.5">
+                            <span class=" font-semibold text-gray-700 w-1/2">Nationalité:</span>
+                            <div class="flex items-center w-1/2">
+                              <img src="${player.flag}" alt="Flag of Morocco" class=" rounded-full w-5 h-5 mr-2">
+                              <span class="text-gray-600">${player.nationality}</span>
+                            </div>
+                          </div>
+                          <div class="flex items-center mb-4 gap-2.5">
+                            <span class="font-semibold text-gray-700 w-1/2">Club:</span>
+                            <div class="flex items-center w-1/2">
+                              <img src="${player.logo}" alt="Galatasaray Logo" class=" rounded-full w-6 h-6 mr-2">
+                              <span class="text-gray-600">${player.club}</span>
+                            </div>
+                          </div>
+                          <div class="flex items-center mb-4">
+                            <span class="font-semibold text-gray-700 w-1/3">Ligue:</span>
+                            <span class="text-gray-600 ">${player.league}</span>
+                          </div>
+                        </div>
+                        
+                          ${CodeHtmlStatic}
+                    </div>
+                            
+                    </div>
+                  
+                    `;
+
+
 }
 
 function showBarre() {
@@ -741,15 +1044,13 @@ function showBarre() {
 
   badges.forEach((badge) => {
     console.log("badge");
-    console.log(badge) ;
+    console.log(badge);
     badge.addEventListener("mouseenter", function () {
-
       this.querySelector(".barre").classList.remove("hidden");
     });
 
     badge.addEventListener("mouseleave", function () {
       this.querySelector(".barre").classList.add("hidden");
- 
     });
   });
 }
@@ -775,10 +1076,42 @@ function showformEdit(idplayer) {
   physical.value = player.physical;
   console.log(player);
   if (player.isActif == true) {
-
     divPosition.classList.add("hidden");
   } else {
-
     divPosition.classList.remove("hidden");
   }
+}
+
+/*------------------------------------------------------------------------------------ */
+/*                               Calcul chimie                                         */
+/*------------------------------------------------------------------------------------- */
+
+function totalChimieEquipe() {
+  let totalchimie = 0;
+
+  playerStad.forEach((player) => {
+    player.chimie = calculChimieOnePlayer(player);
+    totalchimie += player.chimie;
+    console.log("Chimie de l'équipe plauyer  : " + totalchimie);
+  });
+  total = (totalchimie / (playerStad.length * 18)) * 100;
+  document.getElementById("chimie").innerHTML = total.toFixed(2); // fix a deux chiffre apres virgule 55.27
+  console.log("Chimie de l'équipe : " + total);
+}
+
+function calculChimieOnePlayer(player) {
+  let chimie = 10;
+  let club = playerStad.filter(
+    (p) => p.club === player.club && p.id !== player.id
+  ).length;
+  chimie += club * 3;
+  let league = playerStad.filter(
+    (p) => p.league === player.league && p.id !== player.id
+  ).length;
+  chimie += league * 4;
+  let nationality = playerStad.filter(
+    (p) => p.nationality === player.nationality && p.id !== player.id
+  ).length;
+  chimie += nationality * 1;
+  return chimie;
 }
