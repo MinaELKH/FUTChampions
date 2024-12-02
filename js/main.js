@@ -155,6 +155,10 @@ function validation() {
     club.classList.add("ring-2", "ring-red-700", "p-2");
     valid = false;
   }
+  if (league.value === "") {
+    league.classList.add("ring-2", "ring-red-700", "p-2");
+    valid = false;
+  }
   if (nationality.value === "") {
     nationality.classList.add("ring-2", "ring-red-700", "p-2");
     valid = false;
@@ -254,12 +258,13 @@ function AddPlayer(event) {
     newplayer.name = name_p.value.trim();
     newplayer.photo = photo.value.trim();
     newplayer.position = position.value.trim();
+    newplayer.league = league.value.trim();
     newplayer.flag = nationality.value.trim();
     newplayer.nationality = selectedOption.textContent.trim();
     newplayer.club = selectedOptionClub.textContent.trim();
     newplayer.logo = club.value.trim();
     /* Dans ce bloc de code, on traite s il gardien ou joueur */
-
+    alert("new joueur");
     if (position.value === "GK") {
       // gardien
       newplayer.rating = parseInt(
@@ -296,9 +301,15 @@ function AddPlayer(event) {
       newplayer.physical = physical.value.trim();
     }
   }
+
+
+  console.log( newplayer) ; 
   /* Dans ce bloc de code, on traite si c'est un nouvel ajout ou une édition d un joueur existant*/
   // cas 1 => ajout
+
+    
   if (id_input.value.trim() == "-1" && valid) {
+  
     id++;
     newplayer.id = id;
     newplayer.isActif = false;
@@ -1068,6 +1079,7 @@ function showformEdit(idplayer) {
   position.value = player.position;
   nationality.value = player.nationality;
   club.value = player.club;
+  league.value = player.league;
   pace.value = player.pace;
   shooting.value = player.shooting;
   passing.value = player.passing;

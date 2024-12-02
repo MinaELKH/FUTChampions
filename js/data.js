@@ -425,7 +425,7 @@ const data_players = [
     flag: "https://cdn.sofifa.net/flags/ma.png",
     club: "Fenerbahçe",
     logo: "https://cdn.sofifa.net/meta/team/88/120.png",
-    league: "Süper Lig",
+    league: "Super Lig",
     rating: 83,
     pace: 82,
     shooting: 82,
