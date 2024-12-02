@@ -87,6 +87,7 @@ let players = [];
 let playersReserve = [];
 let playerStad = [];
 let id = 1;
+let choix = 0  ; 
 /*------------------------------------- */
 /*    local storage                     */
 /*------------------------------------- */
@@ -110,8 +111,7 @@ if (
   });
   localStorage.setItem("players", JSON.stringify(players)); //stock players fictitives dans local storage
 }
-Affiche(players);
-showBarre();
+
 
 /* Local_S liste de joueurs  sur terrain */
 
@@ -122,6 +122,11 @@ if (
   playerStad = JSON.parse(localStorage.getItem("playerStad"));
   afficheStade(playerStad);
 }
+
+
+Affiche(players);
+showBarre(); 
+
 
 function afficheStade(playerStad) {
   playerStad.forEach((pl) => {
@@ -520,6 +525,8 @@ function positionnerPlayer(idvalue, positionARemplir, event) {
   // mettre a jour l affichage
   Affiche(players);
   afficheStade(playerStad);
+  choix = 1 ; 
+  return choix ; 
 }
 
 /*--------------------------------------    */
@@ -601,10 +608,11 @@ function goPlayerOutStad(idplayer, event) {
 /*     Remplace un joueur                  */
 /*-------------------------------------    */
 
-function replacePlayer(idplayer, poistion) {
+function replacePlayer(idplayer, position) {
   // affichage de modal choisir joueur par defaut on passe par la fonction positionner joueur
-  ShowModalChoixPlayer(event);
-
+  choix=0 ;
+  playerChoisi = ShowModalChoixPlayer(event);
+if(choix){
   // on recupere l ancien joueur et on l ajout au reserve
   let oldplayer = getPlayer(idplayer);
   oldplayer.isActif = false;
@@ -619,6 +627,7 @@ function replacePlayer(idplayer, poistion) {
   localStorage.setItem("players", JSON.stringify(players));
   // affichage des joueurs sur reserve apres l ajout de l oldplayer
   Affiche(players);
+}
 }
 
 /*------------------------------------------------------------------------------------ */
@@ -640,6 +649,7 @@ function Affiche(players) {
   });
   formulaire.reset();
   showBarre();
+  compteurJoueurStad() ;
 }
 
 function playerCodeHtml(player) {
@@ -1114,24 +1124,30 @@ function totalChimieEquipe() {
   });
   total = (totalchimie / (playerStad.length * 18)) * 100;
   document.getElementById("chimie").innerHTML = total.toFixed(2); // fix a deux chiffre apres virgule 55.27
-  console.log("Chimie de l'équipe : " + total);
+  return total ; 
 }
 
 function calculChimieOnePlayer(player) {
   let chimie = 10;
-  let club = playerStad.filter(
-    (p) => p.club === player.club && p.id !== player.id
+
+
+  let club = playerStad.filter( (p) => p.club === player.club && p.id !== player.id
   ).length;
   chimie += club * 3;
+
+
+
   let league = playerStad.filter(
     (p) => p.league === player.league && p.id !== player.id
   ).length;
   chimie += league * 4;
+
   let nationality = playerStad.filter(
     (p) => p.nationality === player.nationality && p.id !== player.id
   ).length;
   chimie += nationality * 1;
-  return chimie;
+return chimie ; 
+
 }
 
 
@@ -1147,3 +1163,21 @@ menuButton.addEventListener('click', () => {
     
     }
 });
+
+/*------------------------------------------------------------------------------------ */
+/*                               Compteur     :                                          */
+/*------------------------------------------------------------------------------------- */
+function compteurJoueurStad(){
+   compteur = playerStad.length ; 
+   document.getElementById("compteur").innerHTML = `Nombre de joueur au Stade  :  ${compteur}` ; 
+   if(compteur==11){
+    chimie = totalChimieEquipe()
+       document.getElementById("ModalFelicitation").classList.remove("hidden") ; 
+       document.getElementById("div_felicitation").innerHTML = `<h4>Bravo, vous avez composé votre équipe avec succès : ${compteur} joueurs </h4>
+<p>Avec une chimie de : ${chimie}</p>`
+}}
+document.getElementById("closeFelicitation").addEventListener('click' , function() {
+  document.getElementById("ModalFelicitation").classList.add("hidden") ; 
+})
+
+

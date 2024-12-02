@@ -22,16 +22,11 @@
         body {
             color: rgba(43, 41, 41, 0.858);
             font-family: 'Montserrat', sans-serif;
-            /* background-image: url('img/terrain.jpg');
-       background-size: 100% 100% ;
-        background-position: center;
-        background-repeat: no-repeat;*/
-
         }
 
         .stade {
             width: 100%;
-            height: 900px;
+            height: 950px;
             background-size: 100% 100%;
             background-image: url('img/stadium_background.webp');
             /* background-image: url('img/terrain1.jpg');*/
@@ -356,7 +351,7 @@
                                 <option value="https://cdn.sofifa.net/meta/team/7980/120.png">Atletico Madrid</option>
                                 <option value="https://cdn.sofifa.net/meta/team/476/120.png">Al-Ittihad</option>
                                 <option value="https://cdn.sofifa.net/meta/team/8/120.pngg">Liverpool</option>
-                                <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
+                                <option value="hhttps://cdn.sofifa.net/meta/team/9/120.png">Manchester United</option>
                                 <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Inter Miami</option>
                                 <option value="https://cdn.sofifa.net/meta/team/88/120.png">Fenerbahçe</option>
 
@@ -548,6 +543,25 @@
     </div>
     </div>
 
+
+
+    <div id="ModalFelicitation"
+    class="hidden fixed inset-0  flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
+    <div class="relative p-5 shadow-xl rounded-lg bg-white  p-20  ">
+        <span id="closeFelicitation"
+            class="absolute right-2 top-2 text-gray-700 cursor-pointer material-symbols-outlined">cancel</span>
+
+
+
+        <div id="div_felicitation" class="m-2  p-5  border-2 border-[#7F020F]">
+        
+        </div>
+
+
+    </div>
+</div>
+
+
     <header class="bg-[#7F020F] bg-opacity-50 flex justify-between items-center hover:bg-opacity-100 ">
     
         <img src="img/logo.png" class="w-30 h-24 mx-2.5 lg:mx-16 p-2" alt="Logo">
@@ -595,12 +609,17 @@
     <section class="py-10">
         <div class="flex flex-col lg:flex-row lg:px-[20px] gap-20 relative justify-cente">
             <!--show player -->
-            <div> <span class="block text-[#7F020F] text-2xl font-semibold p-4 bg-white opacity-50  mp-4"> Formation
-                    d'équipe : 4-4-2 </span>
+            <div>
+                <div  class="text-[#7F020F]  flex justify-between  text-2xl font-semibold p-4 bg-white opacity-50  mp-4"> 
+                    <span > Formation
+                    d'équipe : 4-4-2  </span>
+                     <span id="compteur"  class="text-[16px]"> </span> 
+                
+                </div>
                 <div
                     class="stade  px-2.5 grid grid-cols-4 justify-center items-center gap-2.5 w-full lg:w-full border-4  border-[#F7E0A1]">
 
-                    <div id='RST' class="RST col-start-2">
+                    <div id='RST' class="RST col-start-2 ">
 
                         <div class="badge_black">
                             <button value="RST"
@@ -608,6 +627,7 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center" >  ST </h2>
 
                     </div>
 
@@ -618,6 +638,7 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center" >  ST </h2>
                     </div>
 
 
@@ -628,6 +649,7 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center self-start " >  LM </h2>
                     </div>
 
                     <div id="LCM">
@@ -637,16 +659,18 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center  " >  CM </h2>
                     </div>
 
 
                     <div id="RCM">
                         <div class="badge_black">
                             <button value="RCM"
-                                class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
+                                class=" iconAddPlayerStd absolute  self-center  cursor-pointer material-symbols-outlined text-4xl text-green-600">
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center" >  CM </h2>
                     </div>
 
 
@@ -657,17 +681,19 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center " >  RM </h2>
                     </div>
 
 
 
                     <div id="LB" class="col-start-1">
-                        <div class="badge_black">
+                        <div class="badge_black  self-top">
                             <button value="LB"
                                 class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center" >  LB </h2>
                     </div>
 
 
@@ -679,6 +705,7 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center" >  CB </h2>
                     </div>
 
 
@@ -690,6 +717,7 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center" >  CB </h2>
                     </div>
 
 
@@ -700,19 +728,20 @@
                                 health_and_safety
                             </button>
                         </div>
+                        <h2 class="block text-white text-md font-semibold text-center" >  RB </h2>
                     </div>
 
 
 
 
-                    <div id="GK" class="GK col-span-4 flex justify-center items-center h-full">
+                    <div id="GK" class="GK col-span-4 flex  flex-col justify-center items-center h-full">
                         <div class="badge_black">
                             <button value="GK"
                                 class=" iconAddPlayerStd absolute self-center   cursor-pointer material-symbols-outlined text-4xl text-green-600">
                                 health_and_safety
                             </button>
                         </div>
-
+                        <h2 class="block text-black text-xl font-semibold text-center" >  GK </h2>
                     </div>
 
                 </div>
@@ -792,7 +821,7 @@
 
                 <span class="block text-[#7F020F] text-2xl font-semibold p-4 bg-white opacity-50  "> les Joueurs en
                     Reserve </span>
-                <div class=" h-[620px] overflow-auto  bg-gray-200 bg-opacity-30">
+                <div class=" h-[651px] overflow-auto  bg-gray-200 bg-opacity-30">
                     <ul id="ulPlayers" class="ulPlayers  grid grid-cols-2  justify-items-center ">
 
                     </ul>

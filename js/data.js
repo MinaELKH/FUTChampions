@@ -1,6 +1,6 @@
 const data_players = [
     {
-      id: 10000022,
+      id: 10000032,
       name: "Hakim Ziyech",
       photo: "https://cdn.sofifa.net/players/208/670/24_120.png",
       position: "RW",
@@ -62,7 +62,7 @@ const data_players = [
       flag: "https://cdn.sofifa.net/flags/be.png",
       club: "Manchester City",
       league: "Premier League", // Angleterre
-      logo: "https://cdn.sofifa.net/players/239/085/25_120.png",
+      logo: "https://cdn.sofifa.net/meta/team/9/120.png",
       rating: 91,
       pace: 74,
       shooting: 86,
@@ -279,7 +279,7 @@ const data_players = [
     nationality: "Norway",
     flag: "https://cdn.sofifa.net/flags/no.png",
     club: "Manchester City",
-    logo: "https://cdn.sofifa.net/meta/team/8/120.png",
+    logo: "https://cdn.sofifa.net/meta/team/9/120.png",
     league: "Premier League",
     rating: 90,
     pace: 89,
