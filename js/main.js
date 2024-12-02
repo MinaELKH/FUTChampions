@@ -563,6 +563,7 @@ function deletedPlayer(idplayer, event) {
   }
   // mettre a jour les barres pour le stade
   showBarre();
+  compteurJoueurStad() ;
 }
 
 /*--------------------------------------    */
