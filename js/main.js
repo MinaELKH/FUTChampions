@@ -434,8 +434,6 @@ function addPlayerModalChoixPlayer(player, positionARemplir) {
   
 
   </div>
- 
- 
  <div class="Score">
                         <h4>${player.rating}</h4>
                         <h5>${player.position}</h5>
