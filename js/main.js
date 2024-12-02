@@ -1009,24 +1009,29 @@ else {  // sinon
                         </div>
                 </div>
                    <hr class=" m-5 border-2 border-t border-[#F7E0A1] opacity-80">
-                    <div class="flex  gap-5 mx-auto bg-white rounded-lg  ">
-                        <div class="bg-gray-900 rounded-full text-white text-center ">
-                          <img src="${player.photo}" alt="Hakim Ziyech" class="w-24 h-24 rounded-full mx-auto ">
+                    <div class="flex flex-col md:flex-row  gap-5 mx-auto bg-white rounded-lg  ">
+                        <div class=" w-24 h-24 bg-gray-900 rounded-full text-white text-center ">
+                          <img src="${player.photo}" alt="Joueur" class="w-24 h-24 rounded-full mx-auto ">
+                         
                         </div>
-                        <div class="p-6 ">
-                            <h3 class="text-lg font-semibold text-gray-700">Profil:</h3>
-                            <hr class=" border-2 border-t border-[#F7E0A1] opacity-80 w-16">
-                          <div class="flex items-center mb-4 gap-2.5">
+                        <div class="lg:p-6 ">
+                        <h3 class="text-lg font-semibold text-gray-700">Profil:</h3>
+                        <hr class="border-2 border-t border-[#F7E0A1] opacity-80 w-16">
+
+                          <div class="flex items-center gap-4 mb-4 gap-2.5  mt-4">
                             <span class="font-semibold text-gray-700 w-1/2">Position:</span>
                             <span class="text-gray-600 w-1/2">${player.position}</span>
                           </div>
+
                           <div class="flex justif-between items-center mb-4 gap-2.5">
                             <span class=" font-semibold text-gray-700 w-1/2">Nationalité:</span>
                             <div class="flex items-center w-1/2">
-                              <img src="${player.flag}" alt="Flag of Morocco" class=" rounded-full w-5 h-5 mr-2">
+                              <img src="${player.flag}" alt="Flag of Morocco" class=" rounded-full w-6 h-6 mr-2">
                               <span class="text-gray-600">${player.nationality}</span>
                             </div>
                           </div>
+
+
                           <div class="flex items-center mb-4 gap-2.5">
                             <span class="font-semibold text-gray-700 w-1/2">Club:</span>
                             <div class="flex items-center w-1/2">
@@ -1034,6 +1039,7 @@ else {  // sinon
                               <span class="text-gray-600">${player.club}</span>
                             </div>
                           </div>
+
                           <div class="flex items-center mb-4">
                             <span class="font-semibold text-gray-700 w-1/3">Ligue:</span>
                             <span class="text-gray-600 ">${player.league}</span>
@@ -1077,8 +1083,8 @@ function showformEdit(idplayer) {
   //rating.value = player.rating;
   photo.value = player.photo;
   position.value = player.position;
-  nationality.value = player.nationality;
-  club.value = player.club;
+  nationality.value = player.flag;
+  club.value = player.logo;
   league.value = player.league;
   pace.value = player.pace;
   shooting.value = player.shooting;
@@ -1127,3 +1133,17 @@ function calculChimieOnePlayer(player) {
   chimie += nationality * 1;
   return chimie;
 }
+
+
+/* burger menu*/
+
+const menuButton = document.getElementById('menu-button');
+const menu = document.getElementById('menu');
+menuButton.addEventListener('click', () => {
+    if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+    } else {
+            menu.classList.add('hidden');
+    
+    }
+});

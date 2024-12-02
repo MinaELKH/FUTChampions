@@ -55,7 +55,7 @@ const data_players = [
     },
     {
       id: 1000003,
-      name: "Kevin De Bruyne",
+      name: "Kevin Bruyne",
       photo: "https://cdn.sofifa.net/players/192/985/25_120.png",
       position: "CM",
       nationality: "Belgium",
@@ -91,7 +91,7 @@ const data_players = [
     },
     {
       id: 1000005,
-      name: "Virgil van Dijk",
+      name: "Virgil Dijk",
       photo: "https://cdn.sofifa.net/players/203/376/25_120.png",
       position: "CB",
       nationality: "Netherlands",
@@ -345,7 +345,7 @@ const data_players = [
   },
   {
     id: 10000019,
-    name: "Bruno Fernandes",
+    name: " Fernandes",
     photo: "https://cdn.sofifa.net/players/212/198/25_120.png",
     position: "CM",
     nationality: "Portugal",
@@ -382,7 +382,7 @@ const data_players = [
   },
   {
     id: 10000021,
-    name: "Trent Alexander-Arnold",
+    name: "Alexander-Arnold",
     photo: "https://cdn.sofifa.net/players/231/281/25_120.png",
     position: "RB",
     nationality: "England",
@@ -472,7 +472,7 @@ const data_players = [
   },
   {
     id: 10000026,
-    name: "Gianluigi Donnarumma",
+    name: "Donnarumma",
     photo: "https://cdn.sofifa.net/players/230/621/25_120.png",
     position: "GK",
     nationality: "Italy",

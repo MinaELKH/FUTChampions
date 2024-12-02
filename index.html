@@ -266,8 +266,8 @@
                 width: 100%;
                 height: 80vh;
                 background-size: 100% 100%;
-                /*background-image: url('img/stadium_background.webp');*/
-                background-image: url('img/terrain1.jpg');
+                background-image: url('img/stadium_background.webp');
+               /* background-image: url('img/terrain1.jpg');*/
                 background-position: center;
                 background-repeat: no-repeat;
             }
@@ -549,21 +549,40 @@
     </div>
 
     <header class="bg-[#7F020F] bg-opacity-50 flex justify-between items-center hover:bg-opacity-100 ">
-        <img src="img/logo.png" class="w-30 h-24 mx-16 p-2" alt="Logo">
+    
+        <img src="img/logo.png" class="w-30 h-24 mx-2.5 lg:mx-16 p-2" alt="Logo">
+        
         <div class="hidden lg:flex space-x-8  items-center">
             <a href="" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Joueurs</a>
             <a href="" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Créateur d'équipe</a>
             <a href="#" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Équipes</a>
             <a href="#" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Objectif</a>
-            <a href="#" class="font-semibold lg:text-lg text-[#F7E0A1] hover:text-white">Évolutions</a>
-
-            <div class="relative flex">
+             <div class="relative flex">
                 <input type="text" id="champRecherche" placeholder="Equipe"
                     class=" m-2.5 p-1 border border-gray-300 w-48 rounded-full text-black">
                 <img src="./img/Search.png" alt="search logo" class=" absolute right-5 top-2.5">
             </div>
-
         </div>
+
+
+        <div class="flex justify-between items-center ">
+            <div class="block lg:hidden">
+          <button id="menu-button" class="text-[#F7E0A1] focus:outline-none">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+          </button>
+      </div> 
+
+      <div id="menu" class="fixed top-20 right-0 h-[40vh] w-[50%] bg-[#7F020F] bg-opacity-70 px-4 py-2  lg:hidden flex-col justify-center items-center  z-50 hidden pt-[10%]">
+        <div class="text-center space-y-8">
+        <div><a href="#" class="font-semibold text-white hover:text-[#F7E0A1]">Joueurs</a></div>
+          <div><a href="#" class="font-semibold text-white hover:text-[#F7E0A1]">Créateur d'équipe</a></div>
+          <div><a href="#" class="font-semibold text-white hover:text-[#F7E0A1]">Équipes</a></div>
+          <div><a href="#" class="font-semibold text-white hover:text-[#F7E0A1]">Objectif</a></div>
+          <div><a href="#" class="font-semibold text-white hover:bg-[#F7E0A1] hover:rounded-lg hover:py-2 hover:px-3 hover:shadow-2xl hover:scale-105 transition hover:text-[#7F000F]">Sign in</a></div>
+        </div>
+      </div>
         <img src="img/p2.png" class="w-30 h-24 " alt="person ballon">
     </header>
 
@@ -773,7 +792,7 @@
 
                 <span class="block text-[#7F020F] text-2xl font-semibold p-4 bg-white opacity-50  "> les Joueurs en
                     Reserve </span>
-                <div class=" h-[530px] overflow-auto  bg-gray-200 bg-opacity-30">
+                <div class=" h-[620px] overflow-auto  bg-gray-200 bg-opacity-30">
                     <ul id="ulPlayers" class="ulPlayers  grid grid-cols-2  justify-items-center ">
 
                     </ul>
